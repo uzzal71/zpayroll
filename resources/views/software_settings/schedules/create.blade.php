@@ -6,59 +6,60 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Company Information</h5>
+                <h5 class="mb-0 h6">Schedule Create</h5>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" action="{{ route('schedules.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 	@csrf
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Full Name</label>
+                        <label class="col-md-3 col-form-label">Schedule Name</label>
                         <div class="col-md-9">
-                            <input type="text" placeholder="Company Full Name" id="company_full_name" name="company_full_name" class="form-control" required>
+                            <input type="text" placeholder="Schedule Name" id="schedule_name" name="schedule_name" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">short name</label>
+                        <label class="col-md-3 col-form-label">Office Start</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="company_short_name" id="company_short_name" placeholder="Company short name">
+                            <input type="text" class="form-control" name="office_start" id="office_start" placeholder="Office Start">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Owner name</label>
+                        <label class="col-md-3 col-form-label">Late Start</label>
                         <div class="col-md-9">
-                            <input type="text" name="owner_name" class="form-control" id="owner_name" placeholder="Owner name" required>
+                            <input type="text" name="office_late_start" class="form-control" id="office_late_start" placeholder="Late Start" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Phone</label>
+                        <label class="col-md-3 col-form-label">Late End</label>
                         <div class="col-md-9">
-                            <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" required>
+                            <input type="text" name="office_late_end" class="form-control" id="office_late_end" placeholder="Late End" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Email</label>
+                        <label class="col-md-3 col-form-label">Office End</label>
                         <div class="col-md-9">
-                            <input type="text" name="email" class="form-control" id="email" placeholder="Email" required>
+                            <input type="text" name="office_end" class="form-control" id="office_end" placeholder="Office End" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Website</label>
+                        <label class="col-md-3 col-form-label">OT Start</label>
                         <div class="col-md-9">
-                            <input type="text" name="website" class="form-control" id="website" placeholder="Website" required>
+                            <input type="text" name="office_over_time_start" class="form-control" id="office_over_time_start" placeholder="OT Start" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Address</label>
+                        <label class="col-md-3 col-form-label">OT End</label>
                         <div class="col-md-9">
-                            <textarea name="address" id="address" rows="5" class="form-control"></textarea>
+                            <input type="text" name="office_over_time_end" class="form-control" id="office_over_time_end" placeholder="OT End" required>
                         </div>
                     </div>
+
 
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Status</label>

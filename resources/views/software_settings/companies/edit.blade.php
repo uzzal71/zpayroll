@@ -50,7 +50,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Website</label>
                         <div class="col-md-9">
-                            <input type="text" name="website" value="{{ $company->website }}" class="form-control" id="website" placeholder="Wesite" required>
+                            <input type="text" name="website" value="{{ $company->website }}" class="form-control" id="website" placeholder="Website" required>
                         </div>
                     </div>
 

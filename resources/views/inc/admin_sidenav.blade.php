@@ -31,75 +31,40 @@
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Department</span>
+                            <a href="{{ route('departments.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Departments</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Sub Department</span>
+                            <a href="{{ route('designations.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Designations</span>
                             </a>
                         </li>
+                        
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Line</span>
+                            <a href="{{ route('schedules.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Schedules</span>
                             </a>
                         </li>
+
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Designation</span>
+                            <a href="{{ route('leaves.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Leaves Type</span>
                             </a>
                         </li>
+
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Position</span>
+                            <a href="{{ route('taxs.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Taxs Setup</span>
                             </a>
                         </li>
+
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Operation</span>
+                            <a href="{{ route('provident_founds.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Provident Founds Setup</span>
                             </a>
                         </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Attendance Bonus</span>
-                            </a>
-                        </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Salary Grade</span>
-                            </a>
-                        </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Shift Schedules</span>
-                            </a>
-                        </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Shift Manage</span>
-                            </a>
-                        </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Night Bill Setup</span>
-                            </a>
-                        </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Leave Setup</span>
-                            </a>
-                        </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Bonus Setup</span>
-                            </a>
-                        </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Allowance Setup</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
                 <!-- Software Settings End -->

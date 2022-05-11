@@ -22,6 +22,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('companies', 'CompanyController');
-Route::get('/companies/edit/{id}', 'CompanyController@edit')->name('companies.edit');
-Route::get('/companies/destroy/{id}', 'CompanyController@destroy')->name('companies.destroy');
-Route::post('/companies/update', 'CompanyController@update')->name('companies.udate');
+Route::resource('departments', 'DepartmentController');
+Route::resource('designations', 'DesignationController');
+Route::resource('schedules', 'ScheduleController');
+Route::resource('leaves', 'LeaveController');
+Route::resource('taxs', 'TaxController');
+Route::resource('provident_founds', 'ProvidentFundController');
