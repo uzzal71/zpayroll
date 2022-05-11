@@ -1,19 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Company;
 use Illuminate\Http\Request;
 
-class companyController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sort_search =null;
+        $companies = Company::orderBy('id', 'desc');
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $companies = $companies->where('company_full_name', 'like', '%'.$sort_search.'%');
+        }
+        $companies = $companies->paginate(1);
+        return view('software_settings.companies.index', compact('companies', 'sort_search'));
     }
 
     /**

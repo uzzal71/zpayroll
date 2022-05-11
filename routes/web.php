@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('companies', 'CompanyController');
+Route::get('/companies/edit/{id}', 'CompanyController@edit')->name('companies.edit');
+Route::get('/companies/destroy/{id}', 'CompanyController@destroy')->name('companies.destroy');
+Route::post('/companies/update', 'CompanyController@update')->name('companies.udate');

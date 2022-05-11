@@ -26,7 +26,7 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('companies.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Company Information</span>
                             </a>
                         </li>
@@ -265,7 +265,7 @@
                     </a>
                 </li>
                 <!-- Database Backup End -->
-                
+
             </ul><!-- .aiz-side-nav -->
         </div><!-- .aiz-side-nav-wrap -->
     </div><!-- .aiz-sidebar -->
