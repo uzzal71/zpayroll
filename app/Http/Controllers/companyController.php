@@ -30,7 +30,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('software_settings.companies.create');
     }
 
     /**
@@ -41,7 +41,22 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company = new Company;
+
+        $company->company_full_name = $request->company_full_name;
+        $company->company_short_name = $request->company_short_name;
+        $company->owner_name = $request->owner_name;
+        $company->phone = $request->phone;
+        $company->email = $request->email;
+        $company->website = $request->website;
+        $company->address	 = $request->address;
+        $company->status	 = $request->status;
+
+
+        $company->save();
+
+        flash('Company has been inserted successfully')->success();
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -63,7 +78,9 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = Company::findOrFail($id);
+
+        return view('software_settings.companies.edit', compact('company'));
     }
 
     /**
@@ -75,7 +92,21 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $company = Company::findOrFail($id);
+
+        $company->company_full_name = $request->company_full_name;
+        $company->company_short_name = $request->company_short_name;
+        $company->owner_name = $request->owner_name;
+        $company->phone = $request->phone;
+        $company->email = $request->email;
+        $company->website = $request->website;
+        $company->address	 = $request->address;
+        $company->status	 = $request->status;
+
+        $company->save();
+
+        flash('Company has been updated successfully')->success();
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -86,6 +117,9 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Company::find($id)->delete();
+        flash('Company has been deleted successfully')->success();
+
+        return redirect()->route('companies.index');
     }
 }

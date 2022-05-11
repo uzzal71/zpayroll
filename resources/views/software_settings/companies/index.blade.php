@@ -7,8 +7,7 @@
             <h1 class="h3">All Companies</h1>
         </div>
         <div class="col-md-6 text-md-right">
-            {{-- {{ route('categories.create') }} --}}
-            <a href="#" class="btn btn-primary">
+            <a href="{{ route('companies.create') }}" class="btn btn-primary">
                 <span>Add New Company</span>
             </a>
         </div>
@@ -50,10 +49,10 @@
                         <td>{{ $company->website }}</td>
                         <td>{{ $company->status }}</td>
                         <td class="text-right">
-                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="#" title="Edit">
+                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('companies.edit', $company->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="#" title="Delete">
+                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('companies.destroy', $company->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
                         </td>
@@ -70,7 +69,7 @@
 
 
 @section('modal')
-
+    @include('modals.delete_modal')
 @endsection
 
 
