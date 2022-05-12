@@ -28,3 +28,11 @@ Route::resource('schedules', 'ScheduleController');
 Route::resource('leaves', 'LeaveController');
 Route::resource('taxs', 'TaxController');
 Route::resource('provident_founds', 'ProvidentFundController');
+
+// Employee Management
+Route::resource('employees', 'EmployeeController');
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return redirect()->route('home');
+})->name('clear-cache');

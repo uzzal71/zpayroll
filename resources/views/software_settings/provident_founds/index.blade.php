@@ -30,7 +30,7 @@
                 <tr>
                     <th>#</th>
                     <th>Provident Fund Name</th>
-                    <th>Percentage</th>
+                    <th>Percentage(%)</th>
                     <th>Status</th>
                     <th class="text-right">Options</th>
                 </tr>
@@ -40,7 +40,7 @@
                     <tr>
                         <td>{{ ($key+1) + ($provident_founds->currentPage() - 1)*$provident_founds->perPage() }}</td>
                         <td>{{ $provident_found->provident_found_name }}</td>
-                        <td>{{ $provident_found->percentage }}</td>
+                        <td>{{ $provident_found->percentage }}%</td>
                         <td>{{ $provident_found->status }}</td>
                         <td class="text-right">
                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('provident_founds.edit', $provident_found->id)  }}" title="Edit">

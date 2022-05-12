@@ -61,7 +61,7 @@
 
                         <li class="aiz-side-nav-item">
                             <a href="{{ route('provident_founds.index') }}" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Provident Founds Setup</span>
+                                <span class="aiz-side-nav-text">Provident Found Setup</span>
                             </a>
                         </li>
 

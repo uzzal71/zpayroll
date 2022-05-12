@@ -16,7 +16,7 @@
             <div class="d-none d-md-flex justify-content-around align-items-center align-items-stretch">
                 <div class="aiz-topbar-item ml-2">
                     <div class="d-flex align-items-center">
-                        <a class="btn btn-soft-danger btn-sm d-flex align-items-center" href="https://demo.activeitzone.com/ecommerce/admin/clear-cache">
+                        <a class="btn btn-soft-danger btn-sm d-flex align-items-center" href="{{ route('clear-cache') }}">
                             <i class="las la-hdd fs-20"></i>
                             <span class="fw-500 ml-1 mr-0 d-none d-md-block">Clear Cache</span>
                         </a>
