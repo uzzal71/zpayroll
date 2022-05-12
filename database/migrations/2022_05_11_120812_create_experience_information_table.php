@@ -15,7 +15,15 @@ class CreateExperienceInformationTable extends Migration
     {
         Schema::create('experience_information', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->string('designation_name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('duration')->nullable();
+            $table->string('location')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 
