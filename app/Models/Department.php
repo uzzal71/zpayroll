@@ -13,4 +13,8 @@ class Department extends Model
         'department_name',
         'status',
     ];
+
+    public function employees() {
+        return $this->hasOne(Employee::class);
+    }
 }

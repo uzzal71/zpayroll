@@ -80,12 +80,12 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('employees.create') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Add New Employee</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Employee List</span>
                             </a>
                         </li>

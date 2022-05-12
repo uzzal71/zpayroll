@@ -20,4 +20,32 @@ class Employee extends Model
         'schedule_id',
         'status',
     ];
+
+    public function department() {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function designation() {
+        return $this->belongsTo(Designation::class);
+    }
+
+    public function schedule() {
+        return $this->belongsTo(Schedule::class);
+    }
+
+    public function salary() {
+        return $this->hasOne(SalaryInformation::class);
+    }
+
+    public function education() {
+        return $this->hasOne(EducationInformation::class);
+    }
+
+    public function bank() {
+        return $this->hasOne(BankInformation::class);
+    }
+
+    public function experience() {
+        return $this->hasOne(ExperienceInformation::class);
+    }
 }

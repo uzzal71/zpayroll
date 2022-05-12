@@ -18,7 +18,6 @@ class CreateSalaryInformationTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->double('gross_salary', 10, 2)->default(0.00);
             $table->double('basic_salary', 10, 2)->default(0.00);
-            $table->double('hourly_rate', 10, 2)->default(0.00);
             $table->double('house_rent', 10, 2)->default(0.00);
             $table->double('medical_allowance', 10, 0)->default(0.00);
             $table->double('transport_allowance', 10, 2)->default(0.00);

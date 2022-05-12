@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\SalaryInformation;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -15,13 +16,15 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $sort_search = null;
-        $leaves = Employee::orderBy('id', 'asc');
+        $employees = Employee::with(['department', 'designation', 'schedule'])->orderBy('id', 'asc');
         if ($request->has('search')){
             $sort_search = $request->search;
-            $leaves = $leaves->where('employee_id_card', 'like', '%'.$sort_search.'%');
+            $employees = $employees->where('employee_id_card', 'like', '%'.$sort_search.'%');
         }
-        $leaves = $leaves->paginate(10);
-        return view('employees.index', compact('leaves', 'sort_search'));
+
+        $employees = $employees->paginate(10);
+
+        return view('employees.index', compact('employees', 'sort_search'));
     }
 
     /**
@@ -73,7 +76,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::with(['salary', 'education', 'bank', 'experience'])->findOrFail($id);
 
         return view('employees.edit', compact('employee'));
     }

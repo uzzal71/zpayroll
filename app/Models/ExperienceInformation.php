@@ -12,4 +12,8 @@ class ExperienceInformation extends Model
     protected $fillable = [
         'employee_id',
     ];
+
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
 }
