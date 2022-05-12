@@ -15,7 +15,16 @@ class CreateEducationInformationTable extends Migration
     {
         Schema::create('education_information', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->string('degree_title')->nullable();
+            $table->string('faculty')->nullable();
+            $table->string('institute_name')->nullable();
+            $table->string('duration')->nullable();
+            $table->string('passing_year')->nullable();
+            $table->text('result')->nullable();
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 
