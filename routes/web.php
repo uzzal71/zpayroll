@@ -45,7 +45,7 @@ Route::get('/provident_founds/destroy/{id}', 'ProvidentFundController@destroy')-
 
 // Employee Management
 Route::resource('employees', 'EmployeeController');
-Route::post('employees/updated/{id}', 'EmployeeController@update')->name('employees.updated');
+//Route::post('employees/updated/{id}', 'EmployeeController@update')->name('employees.updated');
 Route::get('/employees/destroy/{id}', 'EmployeeController@destroy')->name('employees.destroy');
 
 // HR Management All Route

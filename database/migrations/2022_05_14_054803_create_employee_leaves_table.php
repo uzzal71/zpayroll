@@ -22,6 +22,7 @@ class CreateEmployeeLeavesTable extends Migration
             $table->integer('leave_days')->default(0);
             $table->string('leave_month');
             $table->year('leave_year');
+            $table->text('remarks');
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
 

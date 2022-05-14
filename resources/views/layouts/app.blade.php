@@ -79,7 +79,7 @@
     <script>
         var myCalendar;
         function doOnLoad() {
-            myCalendar = new dhtmlXCalendarObject(["calendar","calendar2","calendar3","calendar4","calendar5","calendar6","calendar7","calendar8","calendar9","calendar10", "form_date", "to_date"]);
+            myCalendar = new dhtmlXCalendarObject(["calendar","calendar2","calendar3","calendar4","calendar5","calendar6","calendar7","calendar8","calendar9","calendar10", "from_date", "to_date"]);
         }
     </script>
 </body>

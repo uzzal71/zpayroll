@@ -5,11 +5,11 @@
     <h5 class="mb-0 h6">Edit Employee</h5>
 </div>
 <div class="">
-    <form class="form form-horizontal mar-top" action="{{ route('employees.updated', $employee->id) }}" method="POST" enctype="multipart/form-data" id="choice_form" autocomplete="off">
+    <form class="form form-horizontal mar-top" action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data" id="choice_form" autocomplete="off">
         <div class="row gutters-5">
             <div class="col-lg-8">
+                <input name="_method" type="hidden" value="PATCH">
                 @csrf
-                <input type="hidden" name="added_by" value="admin">
 
                 <!-- Employee Information -->
                 <div class="card">

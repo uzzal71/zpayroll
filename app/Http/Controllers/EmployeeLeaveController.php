@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeLeave;
+use App\Models\EmployeeLeaveDetail;
 use Illuminate\Http\Request;
+use DateTime;
 
 class EmployeeLeaveController extends Controller
 {
@@ -44,10 +46,42 @@ class EmployeeLeaveController extends Controller
     {
         $employee_leave = new EmployeeLeave;
 
-        $employee_leave->department_name = $request->department_name;
-        $employee_leave->status	 = $request->status;
+        $begin = new DateTime( $request->from_date );
+        $end   = new DateTime( $request->to_date );
+        $year = $end->format('Y');
+        $month = $end->format('m');
+
+        $days = 0;
+        $dates =array();
+
+        for($i = $begin; $i <= $end; $i->modify('+1 day')) {
+            $days += 1;
+            $dates[] = $i->format('Y-m-d');
+        }
+
+        $employee_leave->employee_id = $request->employee_id;
+        $employee_leave->leave_id = $request->leave_id;
+        $employee_leave->form_date = $request->from_date;
+        $employee_leave->to_date = $request->to_date;
+        $employee_leave->leave_days = $days;
+        $employee_leave->leave_month = $month;
+        $employee_leave->leave_year = $year;
+        $employee_leave->remarks = $request->remarks;
+        $employee_leave->status	 = 'active';
 
         $employee_leave->save();
+
+        foreach ($dates as $value) {
+            $employee_leave_detail = new EmployeeLeaveDetail;
+
+            $employee_leave_detail->employee_leave_id  = $employee_leave->id;
+            $employee_leave_detail->employee_id = $request->employee_id;
+            $employee_leave_detail->leave_id = $request->leave_id;
+            $employee_leave_detail->leave_date = $value;
+            $employee_leave_detail->remarks = $request->remarks;
+
+            $employee_leave_detail->save();
+        }
 
         flash('Employee leave has been inserted successfully')->success();
         return redirect()->route('employee_leaves.index');
@@ -74,7 +108,7 @@ class EmployeeLeaveController extends Controller
     {
         $employee_leave = EmployeeLeave::findOrFail($id);
 
-        return view('hr_management.employee_leave.edit', compact('department'));
+        return view('hr_management.employee_leave.edit', compact('employee_leave'));
     }
 
     /**
@@ -87,11 +121,44 @@ class EmployeeLeaveController extends Controller
     public function update(Request $request, $id)
     {
         $employee_leave = EmployeeLeave::findOrFail($id);
+        EmployeeLeaveDetail::where('employee_leave_id', $id)->delete();
 
-        $employee_leave->department_name = $request->department_name;
-        $employee_leave->status	 = $request->status;
+        $begin = new DateTime( $request->from_date );
+        $end   = new DateTime( $request->to_date );
+        $year = $end->format('Y');
+        $month = $end->format('m');
+
+        $days = 0;
+        $dates =array();
+
+        for($i = $begin; $i <= $end; $i->modify('+1 day')) {
+            $days += 1;
+            $dates[] = $i->format('Y-m-d');
+        }
+
+        $employee_leave->employee_id = $request->employee_id;
+        $employee_leave->leave_id = $request->leave_id;
+        $employee_leave->form_date = $request->from_date;
+        $employee_leave->to_date = $request->to_date;
+        $employee_leave->leave_days = $days;
+        $employee_leave->leave_month = $month;
+        $employee_leave->leave_year = $year;
+        $employee_leave->remarks = $request->remarks;
+        $employee_leave->status	 = 'active';
 
         $employee_leave->save();
+
+        foreach ($dates as $value) {
+            $employee_leave_detail = new EmployeeLeaveDetail;
+
+            $employee_leave_detail->employee_leave_id  = $employee_leave->id;
+            $employee_leave_detail->employee_id = $request->employee_id;
+            $employee_leave_detail->leave_id = $request->leave_id;
+            $employee_leave_detail->leave_date = $value;
+            $employee_leave_detail->remarks = $request->remarks;
+
+            $employee_leave_detail->save();
+        }
 
         flash('Employee leave has been updated successfully')->success();
         return redirect()->route('employee_leaves.index');

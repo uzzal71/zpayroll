@@ -19,7 +19,7 @@ class CreateEmployeeLeaveDetailsTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('leave_id');
             $table->date('leave_date');
-            $table->string('remarks');
+            $table->text('remarks');
             $table->timestamps();
 
             $table->foreign('employee_leave_id')->references('id')->on('employee_leaves');
