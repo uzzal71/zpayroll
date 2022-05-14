@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HolidayEntry;
 use Illuminate\Http\Request;
 
 class HolidayEntryController extends Controller
@@ -11,9 +12,16 @@ class HolidayEntryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sort_search = null;
+        $holiday_entries = HolidayEntry::orderBy('id', 'asc');
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $holiday_entries = $holiday_entries->where('holiday_name', 'like', '%'.$sort_search.'%');
+        }
+        $holiday_entries = $holiday_entries->paginate(10);
+        return view('hr_management.holiday_entry.index', compact('holiday_entries', 'sort_search'));
     }
 
     /**
@@ -23,7 +31,7 @@ class HolidayEntryController extends Controller
      */
     public function create()
     {
-        //
+        return view('hr_management.holiday_entry.create');
     }
 
     /**
@@ -34,7 +42,20 @@ class HolidayEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $holiday_entry = new HolidayEntry();
+
+        $holiday_entry->form_date = $request->form_date;
+        $holiday_entry->to_date = $request->to_date;
+        $holiday_entry->holiday_days = $request->holiday_days;
+        $holiday_entry->holiday_month = $request->holiday_month;
+        $holiday_entry->holiday_year = $request->holiday_year;
+        $holiday_entry->remarks = $request->remarks;
+        $holiday_entry->status	 = $request->status;
+
+        $holiday_entry->save();
+
+        flash('Holiday Entries has been inserted successfully')->success();
+        return redirect()->route('holiday_entries.index');
     }
 
     /**
@@ -56,7 +77,9 @@ class HolidayEntryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = HolidayEntry::findOrFail($id);
+
+        return view('hr_management.holiday_entry.edit', compact('department'));
     }
 
     /**
@@ -68,7 +91,20 @@ class HolidayEntryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $holiday_entry = HolidayEntry::findOrFail($id);
+
+        $holiday_entry->form_date = $request->form_date;
+        $holiday_entry->to_date = $request->to_date;
+        $holiday_entry->holiday_days = $request->holiday_days;
+        $holiday_entry->holiday_month = $request->holiday_month;
+        $holiday_entry->holiday_year = $request->holiday_year;
+        $holiday_entry->remarks = $request->remarks;
+        $holiday_entry->status	 = $request->status;
+
+        $holiday_entry->save();
+
+        flash('Holiday Entries has been updated successfully')->success();
+        return redirect()->route('holiday_entries.index');
     }
 
     /**
@@ -79,6 +115,9 @@ class HolidayEntryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        HolidayEntry::find($id)->delete();
+        flash('Holiday entries has been deleted successfully')->success();
+
+        return redirect()->route('holiday_entries.index');
     }
 }

@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Software Settings
 Route::resource('companies', 'CompanyController');
 Route::get('/companies/destroy/{id}', 'CompanyController@destroy')->name('companies.destroy');
 
@@ -46,6 +47,22 @@ Route::get('/provident_founds/destroy/{id}', 'ProvidentFundController@destroy')-
 Route::resource('employees', 'EmployeeController');
 Route::post('employees/updated/{id}', 'EmployeeController@update')->name('employees.updated');
 Route::get('/employees/destroy/{id}', 'EmployeeController@destroy')->name('employees.destroy');
+
+// HR Management All Route
+Route::resource('employee_leaves', 'EmployeeLeaveController');
+Route::get('/employee_leaves/destroy/{id}', 'EmployeeLeaveController@destroy')->name('employee_leaves.destroy');
+
+Route::resource('holiday_entries', 'HolidayEntryController');
+Route::get('/holiday_entries/destroy/{id}', 'HolidayEntryController@destroy')->name('holiday_entries.destroy');
+
+Route::resource('weekend_entries', 'WeekendEntryController');
+Route::get('/weekend_entries/destroy/{id}', 'WeekendEntryController@destroy')->name('weekend_entries.destroy');
+
+Route::resource('employee_promotions', 'EmployeePromotionController');
+Route::get('/employee_promotions/destroy/{id}', 'EmployeePromotionController@destroy')->name('employee_promotions.destroy');
+
+Route::resource('salary_increments', 'SalaryIncrementController');
+Route::get('/salary_increments/destroy/{id}', 'SalaryIncrementController@destroy')->name('salary_increments.destroy');
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');

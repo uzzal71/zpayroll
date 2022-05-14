@@ -4,18 +4,18 @@
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <div class="row align-items-center">
         <div class="col-md-6">
-            <h1 class="h3">All Departments</h1>
+            <h1 class="h3">All Employee Promotion</h1>
         </div>
         <div class="col-md-6 text-md-right">
-            <a href="{{ route('departments.create') }}" class="btn btn-primary">
-                <span>Add New Department</span>
+            <a href="{{ route('employee_promotions.create') }}" class="btn btn-primary">
+                <span>Add New Promotion</span>
             </a>
         </div>
     </div>
 </div>
 <div class="card">
     <div class="card-header d-block d-md-flex">
-        <h5 class="mb-0 h6">Departments</h5>
+        <h5 class="mb-0 h6">Employee Promotions</h5>
         <form class="" id="sort_categories" action="" method="GET">
             <div class="box-inline pad-rgt pull-left">
                 <div class="" style="min-width: 200px;">
@@ -29,22 +29,30 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Employee Name</th>
+                    <th>New Department</th>
+                    <th>New Designation</th>
+                    <th>Effective Date</th>
+                    <th>remarks</th>
                     <th>Status</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($departments as $key => $department)
+                @foreach($employee_promotions as $key => $promotion)
                     <tr>
-                        <td>{{ ($key+1) + ($departments->currentPage() - 1)*$departments->perPage() }}</td>
-                        <td>{{ $department->department_name }}</td>
-                        <td>{{ $department->status }}</td>
+                        <td>{{ ($key+1) + ($employee_promotions->currentPage() - 1)*$employee_promotions->perPage() }}</td>
+                        <td>{{ $promotion->employee_id }}</td>
+                        <td>{{ $promotion->department_id }}</td>
+                        <td>{{ $promotion->designation_id }}</td>
+                        <td>{{ $promotion->effective_date }}</td>
+                        <td>{{ $promotion->remarks }}</td>
+                        <td>{{ $promotion->status }}</td>
                         <td class="text-right">
-                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('departments.edit', $department->id)  }}" title="Edit">
+                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('employee_promotions.edit', $promotion->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('departments.destroy', $department->id) }}" title="Delete">
+                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('employee_promotions.destroy', $promotion->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
                         </td>
@@ -53,7 +61,7 @@
             </tbody>
         </table>
         <div class="aiz-pagination">
-            {{ $departments->appends(request()->input())->links() }}
+            {{ $employee_promotions->appends(request()->input())->links() }}
         </div>
     </div>
 </div>

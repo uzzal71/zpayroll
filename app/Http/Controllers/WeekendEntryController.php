@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WeekendEntry;
 use Illuminate\Http\Request;
 
 class WeekendEntryController extends Controller
@@ -11,9 +12,16 @@ class WeekendEntryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sort_search = null;
+        $weekend_entries = WeekendEntry::orderBy('id', 'asc');
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $weekend_entries = $weekend_entries->where('remarks', 'like', '%'.$sort_search.'%');
+        }
+        $weekend_entries = $weekend_entries->paginate(10);
+        return view('hr_management.weekend_entry.index', compact('weekend_entries', 'sort_search'));
     }
 
     /**
@@ -23,7 +31,7 @@ class WeekendEntryController extends Controller
      */
     public function create()
     {
-        //
+        return view('hr_management.weekend_entry.create');
     }
 
     /**
@@ -34,7 +42,18 @@ class WeekendEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $weekend_entry = new WeekendEntry;
+
+        $weekend_entry->weekend_date = $request->weekend_date;
+        $weekend_entry->remarks = $request->remarks;
+        $weekend_entry->weekend_month = $request->weekend_month;
+        $weekend_entry->weekend_year = $request->weekend_year;
+        $weekend_entry->status	 = $request->status;
+
+        $weekend_entry->save();
+
+        flash('Weekend entries has been inserted successfully')->success();
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -56,7 +75,9 @@ class WeekendEntryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = WeekendEntry::findOrFail($id);
+
+        return view('hr_management.weekend_entry.edit', compact('department'));
     }
 
     /**
@@ -68,7 +89,18 @@ class WeekendEntryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $weekend_entry = WeekendEntry::findOrFail($id);
+
+        $weekend_entry->weekend_date = $request->weekend_date;
+        $weekend_entry->remarks = $request->remarks;
+        $weekend_entry->weekend_month = $request->weekend_month;
+        $weekend_entry->weekend_year = $request->weekend_year;
+        $weekend_entry->status	 = $request->status;
+
+        $weekend_entry->save();
+
+        flash('Weekend entries has been updated successfully')->success();
+        return redirect()->route('weekend_entries.index');
     }
 
     /**
@@ -79,6 +111,9 @@ class WeekendEntryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        WeekendEntry::find($id)->delete();
+        flash('Weekend entries has been deleted successfully')->success();
+
+        return redirect()->route('weekend_entries.index');
     }
 }

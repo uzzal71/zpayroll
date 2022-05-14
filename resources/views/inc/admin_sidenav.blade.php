@@ -103,27 +103,27 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('employees.create') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('employee_leaves.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Employee Leave</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('holiday_entries.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Holiday Entry</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('weekend_entries.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Weekend Entry</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('employee_promotions.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Employee Promotion</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('salary_increments.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Salary Increment</span>
                             </a>
                         </li>

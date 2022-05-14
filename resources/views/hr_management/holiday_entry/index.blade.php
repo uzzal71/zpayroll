@@ -4,18 +4,18 @@
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <div class="row align-items-center">
         <div class="col-md-6">
-            <h1 class="h3">All Departments</h1>
+            <h1 class="h3">All Holiday Entry</h1>
         </div>
         <div class="col-md-6 text-md-right">
-            <a href="{{ route('departments.create') }}" class="btn btn-primary">
-                <span>Add New Department</span>
+            <a href="{{ route('holiday_entries.create') }}" class="btn btn-primary">
+                <span>Add New Holiday</span>
             </a>
         </div>
     </div>
 </div>
 <div class="card">
     <div class="card-header d-block d-md-flex">
-        <h5 class="mb-0 h6">Departments</h5>
+        <h5 class="mb-0 h6">Holiday Entries</h5>
         <form class="" id="sort_categories" action="" method="GET">
             <div class="box-inline pad-rgt pull-left">
                 <div class="" style="min-width: 200px;">
@@ -29,22 +29,30 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Holiday name</th>
+                    <th>Form date</th>
+                    <th>To date</th>
+                    <th>Holiday days</th>
+                    <th>Remarks</th>
                     <th>Status</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($departments as $key => $department)
+                @foreach($holiday_entries as $key => $holiday_entry)
                     <tr>
-                        <td>{{ ($key+1) + ($departments->currentPage() - 1)*$departments->perPage() }}</td>
-                        <td>{{ $department->department_name }}</td>
-                        <td>{{ $department->status }}</td>
+                        <td>{{ ($key+1) + ($holiday_entries->currentPage() - 1)*$holiday_entries->perPage() }}</td>
+                        <td>{{ $holiday_entry->holiday_name }}</td>
+                        <td>{{ $holiday_entry->form_date }}</td>
+                        <td>{{ $holiday_entry->to_date }}</td>
+                        <td>{{ $holiday_entry->holiday_days }}</td>
+                        <td>{{ $holiday_entry->remarks }}</td>
+                        <td>{{ $holiday_entry->status }}</td>
                         <td class="text-right">
-                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('departments.edit', $department->id)  }}" title="Edit">
+                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('holiday_entries.edit', $holiday_entry->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('departments.destroy', $department->id) }}" title="Delete">
+                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('holiday_entries.destroy', $holiday_entry->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
                         </td>
@@ -53,7 +61,7 @@
             </tbody>
         </table>
         <div class="aiz-pagination">
-            {{ $departments->appends(request()->input())->links() }}
+            {{ $holiday_entries->appends(request()->input())->links() }}
         </div>
     </div>
 </div>

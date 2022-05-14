@@ -18,6 +18,7 @@
     <!-- aiz core css -->
     <link rel="stylesheet" href="{{ static_asset('assets/css/vendors.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/css/aiz-core.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('assets/css/dhtmlx.css') }}">
 
     <script>
         var AIZ = AIZ || {};
@@ -45,7 +46,7 @@
         }
     </script>
 </head>
-<body>
+<body onload="doOnLoad();">
 <div class="aiz-main-wrapper">
         @include('inc.admin_sidenav')
 		<div class="aiz-content-wrapper">
@@ -65,6 +66,7 @@
 
     <script src="{{ static_asset('assets/js/vendors.js') }}" ></script>
     <script src="{{ static_asset('assets/js/aiz-core.js') }}" ></script>
+    <script src="{{ static_asset('assets/js/dhtmlx.js') }}" ></script>
 
     @yield('script')
 
@@ -72,6 +74,13 @@
     @foreach (session('flash_notification', collect())->toArray() as $message)
         AIZ.plugins.notify('{{ $message['level'] }}', '{{ $message['message'] }}');
     @endforeach
+    </script>
+
+    <script>
+        var myCalendar;
+        function doOnLoad() {
+            myCalendar = new dhtmlXCalendarObject(["calendar","calendar2","calendar3","calendar4","calendar5","calendar6","calendar7","calendar8","calendar9","calendar10", "form_date", "to_date"]);
+        }
     </script>
 </body>
 </html>
