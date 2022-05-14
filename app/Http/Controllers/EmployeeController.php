@@ -155,7 +155,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with(['salary', 'education', 'bank', 'experience'])->findOrFail($id);
 
-        return view('employees.edit', compact('employee'));
+        return view('employees.show', compact('employee'));
     }
 
     /**
