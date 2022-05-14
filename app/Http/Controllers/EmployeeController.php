@@ -8,6 +8,9 @@ use App\Models\Employee;
 use App\Models\ExperienceInformation;
 use App\Models\SalaryInformation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Artisan;
+use Cache;
 
 class EmployeeController extends Controller
 {
@@ -25,7 +28,7 @@ class EmployeeController extends Controller
             $employees = $employees->where('employee_id_card', 'like', '%'.$sort_search.'%');
         }
 
-        $employees = $employees->paginate(10);
+        $employees = $employees->paginate(50);
 
         return view('employees.index', compact('employees', 'sort_search'));
     }
@@ -54,6 +57,14 @@ class EmployeeController extends Controller
         $bank = new BankInformation;
         $experience = new ExperienceInformation;
 
+        $filename = '';
+        if($request->file('employee_photo')){
+            $file = $request->employee_photo;
+            $destinationPath = public_path() .'\uploads\employees';
+            $filename = date('YmdHi') . '.'.$file->clientExtension();
+            $file->move($destinationPath, $filename);
+        }
+
         $employee->employee_name        = $request->employee_name;
         $employee->employee_id_card     = $request->employee_id_card;
         $employee->employee_punch_card  = $request->employee_punch_card;
@@ -81,7 +92,7 @@ class EmployeeController extends Controller
         $employee->transport_allowance_status       = $request->transport_allowance_status;
         $employee->commission_status                = $request->commission_status;
         $employee->salary_withdraw                  = $request->salary_withdraw;
-        $employee->employee_photo                   = $request->employee_photo;
+        $employee->employee_photo                   = $filename;
         $employee->status	                        = $request->status;
 
         $employee->save();
@@ -168,23 +179,20 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $employee = Employee::findOrFail($id);
+        $salary = SalaryInformation::where('employee_id', $id)->first();
+        $education = EducationInformation::where('employee_id', $id)->first();
+        $bank = BankInformation::where('employee_id', $id)->first();
+        $experience = ExperienceInformation::where('employee_id', $id)->first();
 
-        $salary = SalaryInformation::where(function ($query) use ($id) {
-            $query->where('employee_id', '=', $id);
-        });
-        echo json_encode($salary);exit();
-
-        $education = EducationInformation::where(function ($query) use ($id) {
-            $query->where('employee_id', '=', $id);
-        });
-
-        $bank = BankInformation::where(function ($query) use ($id) {
-            $query->where('employee_id', '=', $id);
-        });
-
-        $experience = ExperienceInformation::where(function ($query) use ($id) {
-            $query->where('employee_id', '=', $id);
-        });
+        $filename = '';
+        if($request->file('employee_photo')){
+            $file = $request->employee_photo;
+            $destinationPath = public_path() .'\uploads\employees';
+            $filename = date('YmdHi') . '.'.$file->clientExtension();
+            $file->move($destinationPath, $filename);
+        } else {
+            $filename = $request->old_employee_photo;
+        }
 
         $employee->employee_name        = $request->employee_name;
         $employee->employee_id_card     = $request->employee_id_card;
@@ -213,7 +221,7 @@ class EmployeeController extends Controller
         $employee->transport_allowance_status       = $request->transport_allowance_status;
         $employee->commission_status                = $request->commission_status;
         $employee->salary_withdraw                  = $request->salary_withdraw;
-        $employee->employee_photo                   = $request->employee_photo;
+        $employee->employee_photo                   = $filename;
         $employee->status	                        = $request->status;
 
         $employee->save();
@@ -274,8 +282,18 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        Employee::find($id)->delete();
-        flash('Employee has been deleted successfully')->success();
+        if(true) {
+            SalaryInformation::where('employee_id', $id)->delete();
+            ExperienceInformation::where('employee_id', $id)->delete();
+            BankInformation::where('employee_id', $id)->delete();
+            EducationInformation::where('employee_id', $id)->delete();
+            Employee::where('id', $id)->delete();
+
+            Artisan::call('view:clear');
+            Artisan::call('cache:clear');
+
+            flash('Employee has been deleted successfully')->success();
+        }
 
         return redirect()->route('employees.index');
     }

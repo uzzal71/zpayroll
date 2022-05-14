@@ -31,6 +31,8 @@ Route::resource('provident_founds', 'ProvidentFundController');
 
 // Employee Management
 Route::resource('employees', 'EmployeeController');
+Route::post('employees/updated/{id}', 'EmployeeController@update')->name('employees.updated');
+Route::get('/employees/destroy/{id}', 'EmployeeController@destroy')->name('employees.destroy');
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');

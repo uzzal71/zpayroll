@@ -121,12 +121,12 @@
 
 
                         <div class="form-group row" id="brand">
-                            <label class="col-md-3 col-from-label">Dmployee Status</label>
+                            <label class="col-md-3 col-from-label">Employee Status</label>
                             <div class="col-md-8">
                                 <select class="form-control aiz-selectpicker" name="employee_status" id="employee_status" data-live-search="true">
                                     <option value="N/A">Select Sex</option>
-                                    <option value="Mele">Mele</option>
-                                    <option value="Female">Female</option>
+                                    <option value="Regular">Regular</option>
+                                    <option value="New">New</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -462,7 +462,7 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <select class="form-control aiz-selectpicker" name="schedule" id="schedule" data-live-search="true" required>
+                            <select class="form-control aiz-selectpicker" name="schedule_id" id="schedule_id" data-live-search="true" required>
                                 <option value="">Select Schedule</option>
                                 @foreach (\App\Models\Schedule::all() as $schedule)
                                 <option value="{{ $schedule->id }}">{{ $schedule->schedule_name }}</option>

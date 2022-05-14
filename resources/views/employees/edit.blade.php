@@ -5,7 +5,7 @@
     <h5 class="mb-0 h6">Edit Employee</h5>
 </div>
 <div class="">
-    <form class="form form-horizontal mar-top" action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data" id="choice_form" autocomplete="off">
+    <form class="form form-horizontal mar-top" action="{{ route('employees.updated', $employee->id) }}" method="POST" enctype="multipart/form-data" id="choice_form" autocomplete="off">
         <div class="row gutters-5">
             <div class="col-lg-8">
                 @csrf
@@ -332,7 +332,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-from-label">Description </label>
                             <div class="col-md-8">
-                            <textarea class="aiz-text-editor" name="description"> value="{{ $employee->experience->description }}"</textarea>
+                            <textarea class="aiz-text-editor" name="description">{{ $employee->experience->description }}</textarea>
                             </div>
                         </div>
 
@@ -461,7 +461,7 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <select class="form-control aiz-selectpicker" name="schedule" id="schedule" data-live-search="true" required>
+                            <select class="form-control aiz-selectpicker" name="schedule_id" id="schedule_id" data-live-search="true" required>
                                 <option value="">Select Schedule</option>
                                 @foreach (\App\Models\Schedule::all() as $schedule)
                                 <option value="{{ $schedule->id }}" @if($schedule->id == $employee->schedule_id) selected @endif>{{ $schedule->schedule_name }}</option>
