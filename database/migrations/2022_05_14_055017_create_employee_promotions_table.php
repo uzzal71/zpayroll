@@ -22,6 +22,7 @@ class CreateEmployeePromotionsTable extends Migration
             $table->year('promotion_year');
             $table->date('effective_date');
             $table->string('remarks');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');

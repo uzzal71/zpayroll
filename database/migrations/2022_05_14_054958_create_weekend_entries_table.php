@@ -19,6 +19,7 @@ class CreateWeekendEntriesTable extends Migration
             $table->string('remarks')->default('Office Weekend');
             $table->string('weekend_month');
             $table->year('weekend_year');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }
