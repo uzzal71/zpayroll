@@ -15,7 +15,18 @@ class CreateEmployeeLeavesTable extends Migration
     {
         Schema::create('employee_leaves', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('leave_id');
+            $table->date('form_date');
+            $table->date('to_date');
+            $table->integer('leave_days')->default(0);
+            $table->string('leave_month');
+            $table->year('leave_year');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('leave_id')->references('id')->on('leaves');
         });
     }
 

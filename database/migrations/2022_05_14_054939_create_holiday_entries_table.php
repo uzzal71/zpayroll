@@ -15,6 +15,13 @@ class CreateHolidayEntriesTable extends Migration
     {
         Schema::create('holiday_entries', function (Blueprint $table) {
             $table->id();
+            $table->date('form_date');
+            $table->date('to_date');
+            $table->integer('holiday_days')->default(1);
+            $table->string('holiday_month');
+            $table->year('holiday_year');
+            $table->string('remarks');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }

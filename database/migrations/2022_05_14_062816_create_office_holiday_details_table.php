@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWeekendEntriesTable extends Migration
+class CreateOfficeHolidayDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateWeekendEntriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('weekend_entries', function (Blueprint $table) {
+        Schema::create('office_holiday_details', function (Blueprint $table) {
             $table->id();
-            $table->date('weekend_date');
-            $table->string('remarks')->default('Office Weekend');
-            $table->string('weekend_month');
-            $table->year('weekend_year');
+            $table->unsignedBigInteger('holiday_id');
+            $table->date('holiday_date');
+            $table->string('remarks');
             $table->timestamps();
+
+            $table->foreign('holiday_id')->references('id')->on('holiday_entries');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateWeekendEntriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weekend_entries');
+        Schema::dropIfExists('office_holiday_details');
     }
 }

@@ -15,7 +15,20 @@ class CreateSalaryIncrementsTable extends Migration
     {
         Schema::create('salary_increments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->double('gross_salary', 10, 2)->default(0.00);
+            $table->double('basic_salary', 10, 2)->default(0.00);
+            $table->double('house_rent', 10, 2)->default(0.00);
+            $table->double('medical_allowance', 10, 0)->default(0.00);
+            $table->double('transport_allowance', 10, 2)->default(0.00);
+            $table->double('food_allowance', 10, 2)->default(0.00);
+            $table->string('increment_month');
+            $table->year('increment_year');
+            $table->date('effective_date');
+            $table->string('remarks');
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 
