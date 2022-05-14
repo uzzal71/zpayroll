@@ -93,6 +93,43 @@
                 </li>
                 <!-- Employee Management End -->
 
+                <!-- HR Management Start -->
+                <li class="aiz-side-nav-item">
+                    <a href="#" class="aiz-side-nav-link">
+                        <i class="las la-user-tie aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">HR Management</span>
+                        <span class="aiz-side-nav-arrow"></span>
+                    </a>
+                    <!--Submenu-->
+                    <ul class="aiz-side-nav-list level-2">
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('employees.create') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Employee Leave</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Holiday Entry</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Weekend Entry</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Employee Promotion</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('employees.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Salary Increment</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- HR Management End -->
 
                 <!-- Payroll & Attendance Start -->
                 <li class="aiz-side-nav-item">
