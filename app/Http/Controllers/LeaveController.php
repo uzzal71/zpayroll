@@ -20,7 +20,7 @@ class LeaveController extends Controller
             $sort_search = $request->search;
             $leaves = $leaves->where('leave_name', 'like', '%'.$sort_search.'%');
         }
-        $leaves = $leaves->paginate(10);
+        $leaves = $leaves->paginate(100);
         return view('software_settings.leaves.index', compact('leaves', 'sort_search'));
     }
 

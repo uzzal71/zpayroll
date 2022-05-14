@@ -20,7 +20,7 @@ class TaxController extends Controller
             $sort_search = $request->search;
             $taxs = $taxs->where('tax_name', 'like', '%'.$sort_search.'%');
         }
-        $taxs = $taxs->paginate(10);
+        $taxs = $taxs->paginate(100);
         return view('software_settings.taxs.index', compact('taxs', 'sort_search'));
     }
 

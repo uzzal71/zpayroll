@@ -21,7 +21,7 @@ class DesignationController extends Controller
             $designations = $designations->where('designation_name', 'like', '%'.$sort_search.'%');
         }
 
-        $designations = $designations->paginate(10);
+        $designations = $designations->paginate(50);
 
         return view('software_settings.designations.index', compact('designations', 'sort_search'));
     }

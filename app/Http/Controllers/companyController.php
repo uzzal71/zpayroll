@@ -19,7 +19,7 @@ class CompanyController extends Controller
             $sort_search = $request->search;
             $companies = $companies->where('company_full_name', 'like', '%'.$sort_search.'%');
         }
-        $companies = $companies->paginate(1);
+        $companies = $companies->paginate(50);
         return view('software_settings.companies.index', compact('companies', 'sort_search'));
     }
 

@@ -20,7 +20,7 @@ class ProvidentFundController extends Controller
             $sort_search = $request->search;
             $provident_founds = $provident_founds->where('provident_fund_name', 'like', '%'.$sort_search.'%');
         }
-        $provident_founds = $provident_founds->paginate(10);
+        $provident_founds = $provident_founds->paginate(100);
         return view('software_settings.provident_founds.index', compact('provident_founds', 'sort_search'));
     }
 

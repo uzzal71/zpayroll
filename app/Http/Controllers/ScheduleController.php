@@ -20,7 +20,7 @@ class ScheduleController extends Controller
             $sort_search = $request->search;
             $schedules = $schedules->where('schedule_name', 'like', '%'.$sort_search.'%');
         }
-        $schedules = $schedules->paginate(10);
+        $schedules = $schedules->paginate(100);
         return view('software_settings.schedules.index', compact('schedules', 'sort_search'));
     }
 
