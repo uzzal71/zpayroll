@@ -172,6 +172,7 @@ class EmployeeLeaveController extends Controller
      */
     public function destroy($id)
     {
+        EmployeeLeaveDetail::where('employee_leave_id', $id)->delete();
         EmployeeLeave::find($id)->delete();
         flash('Employee leave has been deleted successfully')->success();
 
