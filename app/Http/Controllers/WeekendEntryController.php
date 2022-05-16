@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WeekendEntry;
 use Illuminate\Http\Request;
+use DateTime;
 
 class WeekendEntryController extends Controller
 {
@@ -44,16 +45,20 @@ class WeekendEntryController extends Controller
     {
         $weekend_entry = new WeekendEntry;
 
+        $weekend_date= new DateTime( $request->weekend_date );
+        $year = $weekend_date->format('Y');
+        $month = $weekend_date->format('m');
+
         $weekend_entry->weekend_date = $request->weekend_date;
         $weekend_entry->remarks = $request->remarks;
-        $weekend_entry->weekend_month = $request->weekend_month;
-        $weekend_entry->weekend_year = $request->weekend_year;
-        $weekend_entry->status	 = $request->status;
+        $weekend_entry->weekend_month = $month;
+        $weekend_entry->weekend_year = $year;
+        $weekend_entry->status	 = 'active';
 
         $weekend_entry->save();
 
         flash('Weekend entries has been inserted successfully')->success();
-        return redirect()->route('departments.index');
+        return redirect()->route('weekend_entries.index');
     }
 
     /**
@@ -75,9 +80,9 @@ class WeekendEntryController extends Controller
      */
     public function edit($id)
     {
-        $department = WeekendEntry::findOrFail($id);
+        $weekend = WeekendEntry::findOrFail($id);
 
-        return view('hr_management.weekend_entry.edit', compact('department'));
+        return view('hr_management.weekend_entry.edit', compact('weekend'));
     }
 
     /**
@@ -91,11 +96,15 @@ class WeekendEntryController extends Controller
     {
         $weekend_entry = WeekendEntry::findOrFail($id);
 
+        $weekend_date= new DateTime( $request->weekend_date );
+        $year = $weekend_date->format('Y');
+        $month = $weekend_date->format('m');
+
         $weekend_entry->weekend_date = $request->weekend_date;
         $weekend_entry->remarks = $request->remarks;
-        $weekend_entry->weekend_month = $request->weekend_month;
-        $weekend_entry->weekend_year = $request->weekend_year;
-        $weekend_entry->status	 = $request->status;
+        $weekend_entry->weekend_month = $month;
+        $weekend_entry->weekend_year = $year;
+        $weekend_entry->status	 = 'active';
 
         $weekend_entry->save();
 

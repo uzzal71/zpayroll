@@ -40,7 +40,7 @@
                 @foreach($weekend_entries as $key => $weekend_entry)
                     <tr>
                         <td>{{ ($key+1) + ($weekend_entries->currentPage() - 1)*$weekend_entries->perPage() }}</td>
-                        <td>{{ $weekend_entry->weekend_date }}</td>
+                        <td>{{ Carbon::parse($weekend_entry->weekend_date)->format('l') }}</td>
                         <td>{{ $weekend_entry->weekend_date }}</td>
                         <td>{{ $weekend_entry->remarks }}</td>
                         <td>{{ $weekend_entry->status }}</td>

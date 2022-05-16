@@ -19,4 +19,16 @@ class EmployeePromotion extends Model
         'remarks',
         'status'
     ];
+
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function department() {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function designation() {
+        return $this->belongsTo(Designation::class);
+    }
 }

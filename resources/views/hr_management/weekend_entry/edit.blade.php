@@ -6,29 +6,25 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Department Edit</h5>
+                <h5 class="mb-0 h6">Weekend Edit</h5>
             </div>
             <div class="card-body p-0">
-                <form class="p-4" action="{{ route('departments.update', $department->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="p-4" action="{{ route('weekend_entries.update', $weekend->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <input name="_method" type="hidden" value="PATCH">
                 	@csrf
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Department Name</label>
+                        <label class="col-md-3 col-form-label">Weekend Date</label>
                         <div class="col-md-9">
-                            <input type="text" name="department_name" value="{{ $department->department_name }}" class="form-control" id="department_name" placeholder="Department Name" required>
+                            <input type="text" placeholder="xxxx-xx-xx" id="weekend_date" name="weekend_date" class="form-control" value="{{ $weekend->weekend_date }}" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Status</label>
+                        <label class="col-md-3 col-form-label">Remarks</label>
                         <div class="col-md-9">
-                            <select name="status" required class="form-control aiz-selectpicker mb-2 mb-md-0">
-                                <option value="active" @if ($department->status == 'active') selected @endif>Active</option>
-                                <option value="inactive" @if ($department->digital == 'inactive') selected @endif>Inactive</option>
-                            </select>
+                            <textarea class="form-control" name="remarks" placeholder="Remarks" required>{{ $weekend->remarks }}</textarea>
                         </div>
                     </div>
-
 
 
                     <div class="form-group mb-0 text-right">
