@@ -65,7 +65,8 @@ Route::resource('salary_increments', 'SalaryIncrementController');
 Route::get('/salary_increments/destroy/{id}', 'SalaryIncrementController@destroy')->name('salary_increments.destroy');
 
 // Payroll
-Route::resource('upload/file', 'UploadController');
+Route::resource('upload', 'UploadController');
+Route::get('/upload/destroy/{id}', 'UploadController@destroy')->name('upload.destroy');
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');

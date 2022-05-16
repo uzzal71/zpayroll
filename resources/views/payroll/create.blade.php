@@ -9,7 +9,7 @@
                 <h5 class="mb-0 h6">Upload File</h5>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="form-horizontal" action="{{ route('upload.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 	@csrf
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Select Upload Excel</label>

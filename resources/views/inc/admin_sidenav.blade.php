@@ -141,7 +141,7 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('file.index') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('upload.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Excel Sheet Upload</span>
                             </a>
                         </li>

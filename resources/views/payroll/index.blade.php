@@ -7,7 +7,7 @@
             <h1 class="h3">All Uplaod</h1>
         </div>
         <div class="col-md-6 text-md-right">
-            <a href="{{ route('file.create') }}" class="btn btn-primary">
+            <a href="{{ route('upload.create') }}" class="btn btn-primary">
                 <span>Add New Upload</span>
             </a>
         </div>
@@ -43,12 +43,12 @@
                         <td>{{ $upload->attendance_month }}</td>
                         <td>{{ $upload->attendance_year }}</td>
                         <td>{{ $upload->upload_path }}</td>
-                        <td>{{ $upload->process_status }}</td>
+                        <td>{{ $upload->process_status == 1 ? 'Please Waiting, Your file is processing' : 'File process complete' }}</td>
                         <td class="text-right">
-                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('file.edit', $upload->id)  }}" title="Edit">
+                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('upload.edit', $upload->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('file.destroy', $upload->id) }}" title="Delete">
+                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('upload.destroy', $upload->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
                         </td>

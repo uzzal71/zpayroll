@@ -9,7 +9,7 @@
                 <h5 class="mb-0 h6">Upload File Edit</h5>
             </div>
             <div class="card-body p-0">
-                <form class="p-4" action="{{ route('file.update', $upload->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="p-4" action="{{ route('upload.update', $upload->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <input name="_method" type="hidden" value="PATCH">
                 	@csrf
                     <div class="form-group row">

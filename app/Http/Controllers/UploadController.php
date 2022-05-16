@@ -79,23 +79,12 @@ class UploadController extends Controller
         // check file already exist
         if ($exists) {
             flash('Attendance file already exists! Please update file.')->success();
-            return redirect()->route('file.create');
+            return redirect()->route('upload.create');
         } else {
             $upload->save();
             flash('Attendance file has been inserted successfully')->success();
-            return redirect()->route('file.index');
+            return redirect()->route('upload.index');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -157,8 +146,9 @@ class UploadController extends Controller
         $upload->process_status	               = 1;
 
         $upload->save();
+
         flash('Attendance file has been updated successfully')->success();
-        return redirect()->route('file.index');
+        return redirect()->route('upload.index');
     }
 
     /**
@@ -169,6 +159,13 @@ class UploadController extends Controller
      */
     public function destroy($id)
     {
+        $upload = Upload::where('id', $id)->first();
+        $file_path = public_path().'/uploads/attendance_files/'.$upload->upload_path;
+        unlink($file_path);
 
+        Upload::where('id', $id)->delete();
+
+        flash('Attendance file has been deleted successfully')->success();
+        return redirect()->route('upload.index');
     }
 }
