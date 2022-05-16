@@ -4,9 +4,6 @@
 if (!function_exists('uploaded_asset')) {
     function uploaded_asset($id)
     {
-        if (($asset = \App\Upload::find($id)) != null) {
-            return my_asset($asset->file_name);
-        }
         return null;
     }
 }
