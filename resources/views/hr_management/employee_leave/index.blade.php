@@ -44,7 +44,7 @@
                         <td>{{ ($key+1) + ($employee_leaves->currentPage() - 1)*$employee_leaves->perPage() }}</td>
                         <td>{{ $employee_leave->employee_id  }}</td>
                         <td>{{ $employee_leave->leave_id  }}</td>
-                        <td>{{ $employee_leave->form_date  }}</td>
+                        <td>{{ $employee_leave->from_date  }}</td>
                         <td>{{ $employee_leave->to_date  }}</td>
                         <td>{{ $employee_leave->leave_days  }}</td>
                         <td>{{ $employee_leave->status  }}</td>

@@ -16,7 +16,7 @@ class CreateHolidayEntriesTable extends Migration
         Schema::create('holiday_entries', function (Blueprint $table) {
             $table->id();
             $table->string('holiday_name');
-            $table->date('form_date');
+            $table->date('from_date');
             $table->date('to_date');
             $table->integer('holiday_days')->default(1);
             $table->string('holiday_month');

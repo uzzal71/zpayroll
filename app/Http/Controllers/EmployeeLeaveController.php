@@ -61,7 +61,7 @@ class EmployeeLeaveController extends Controller
 
         $employee_leave->employee_id = $request->employee_id;
         $employee_leave->leave_id = $request->leave_id;
-        $employee_leave->form_date = $request->from_date;
+        $employee_leave->from_date = $request->from_date;
         $employee_leave->to_date = $request->to_date;
         $employee_leave->leave_days = $days;
         $employee_leave->leave_month = $month;
@@ -138,7 +138,7 @@ class EmployeeLeaveController extends Controller
 
         $employee_leave->employee_id = $request->employee_id;
         $employee_leave->leave_id = $request->leave_id;
-        $employee_leave->form_date = $request->from_date;
+        $employee_leave->from_date = $request->from_date;
         $employee_leave->to_date = $request->to_date;
         $employee_leave->leave_days = $days;
         $employee_leave->leave_month = $month;

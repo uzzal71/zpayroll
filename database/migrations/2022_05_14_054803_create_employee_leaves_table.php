@@ -17,7 +17,7 @@ class CreateEmployeeLeavesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('leave_id');
-            $table->date('form_date');
+            $table->date('from_date');
             $table->date('to_date');
             $table->integer('leave_days')->default(0);
             $table->string('leave_month');

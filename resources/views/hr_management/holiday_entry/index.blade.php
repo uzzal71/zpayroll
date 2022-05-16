@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{ ($key+1) + ($holiday_entries->currentPage() - 1)*$holiday_entries->perPage() }}</td>
                         <td>{{ $holiday_entry->holiday_name }}</td>
-                        <td>{{ $holiday_entry->form_date }}</td>
+                        <td>{{ $holiday_entry->from_date }}</td>
                         <td>{{ $holiday_entry->to_date }}</td>
                         <td>{{ $holiday_entry->holiday_days }}</td>
                         <td>{{ $holiday_entry->remarks }}</td>

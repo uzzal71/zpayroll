@@ -6,25 +6,36 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Department Create</h5>
+                <h5 class="mb-0 h6">Holiday Create</h5>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('departments.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="form-horizontal" action="{{ route('holiday_entries.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 	@csrf
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Department Name</label>
+                        <label class="col-md-3 col-form-label">Holiday Name</label>
                         <div class="col-md-9">
-                            <input type="text" placeholder="Department Name" id="department_name" name="department_name" class="form-control" required>
+                            <input type="text" placeholder="Holiday Name" id="holiday_name" name="holiday_name" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Status</label>
+                        <label class="col-md-3 col-form-label">Form Date</label>
                         <div class="col-md-9">
-                            <select name="status" required class="form-control aiz-selectpicker mb-2 mb-md-0">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
+                            <input type="text" placeholder="xxxx-xx-xx" id="from_date" name="from_date" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">To Date</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="xxxx-xx-xx" id="to_date" name="to_date" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Remarks</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="remarks" placeholder="Remarks" required></textarea>
                         </div>
                     </div>
 

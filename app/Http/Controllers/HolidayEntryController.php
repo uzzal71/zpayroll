@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OfficeHolidayDetail;
 use App\Models\HolidayEntry;
 use Illuminate\Http\Request;
+use DateTime;
 
 class HolidayEntryController extends Controller
 {
@@ -44,15 +46,39 @@ class HolidayEntryController extends Controller
     {
         $holiday_entry = new HolidayEntry();
 
-        $holiday_entry->form_date = $request->form_date;
+        $begin = new DateTime( $request->from_date );
+        $end   = new DateTime( $request->to_date );
+        $year = $end->format('Y');
+        $month = $end->format('m');
+
+        $days = 0;
+        $dates =array();
+
+        for($i = $begin; $i <= $end; $i->modify('+1 day')) {
+            $days += 1;
+            $dates[] = $i->format('Y-m-d');
+        }
+
+        $holiday_entry->holiday_name = $request->holiday_name;
+        $holiday_entry->from_date = $request->from_date;
         $holiday_entry->to_date = $request->to_date;
-        $holiday_entry->holiday_days = $request->holiday_days;
-        $holiday_entry->holiday_month = $request->holiday_month;
-        $holiday_entry->holiday_year = $request->holiday_year;
+        $holiday_entry->holiday_days = $days;
+        $holiday_entry->holiday_month = $month;
+        $holiday_entry->holiday_year = $year;
         $holiday_entry->remarks = $request->remarks;
-        $holiday_entry->status	 = $request->status;
+        $holiday_entry->status	 = 'active';
 
         $holiday_entry->save();
+
+        foreach ($dates as $value) {
+            $holiday_detail = new OfficeHolidayDetail;
+
+            $holiday_detail->holiday_id  = $holiday_entry->id ;
+            $holiday_detail->holiday_date = $value;
+            $holiday_detail->remarks = $request->remarks;
+
+            $holiday_detail->save();
+        }
 
         flash('Holiday Entries has been inserted successfully')->success();
         return redirect()->route('holiday_entries.index');
@@ -77,9 +103,9 @@ class HolidayEntryController extends Controller
      */
     public function edit($id)
     {
-        $department = HolidayEntry::findOrFail($id);
+        $holiday = HolidayEntry::findOrFail($id);
 
-        return view('hr_management.holiday_entry.edit', compact('department'));
+        return view('hr_management.holiday_entry.edit', compact('holiday'));
     }
 
     /**
@@ -92,16 +118,41 @@ class HolidayEntryController extends Controller
     public function update(Request $request, $id)
     {
         $holiday_entry = HolidayEntry::findOrFail($id);
+        OfficeHolidayDetail::where('holiday_id', $id)->delete();
 
-        $holiday_entry->form_date = $request->form_date;
+        $begin = new DateTime( $request->from_date );
+        $end   = new DateTime( $request->to_date );
+        $year = $end->format('Y');
+        $month = $end->format('m');
+
+        $days = 0;
+        $dates =array();
+
+        for($i = $begin; $i <= $end; $i->modify('+1 day')) {
+            $days += 1;
+            $dates[] = $i->format('Y-m-d');
+        }
+
+        $holiday_entry->holiday_name = $request->holiday_name;
+        $holiday_entry->from_date = $request->from_date;
         $holiday_entry->to_date = $request->to_date;
-        $holiday_entry->holiday_days = $request->holiday_days;
-        $holiday_entry->holiday_month = $request->holiday_month;
-        $holiday_entry->holiday_year = $request->holiday_year;
+        $holiday_entry->holiday_days = $days;
+        $holiday_entry->holiday_month = $month;
+        $holiday_entry->holiday_year = $year;
         $holiday_entry->remarks = $request->remarks;
-        $holiday_entry->status	 = $request->status;
+        $holiday_entry->status	 = 'active';
 
         $holiday_entry->save();
+
+        foreach ($dates as $value) {
+            $holiday_detail = new OfficeHolidayDetail;
+
+            $holiday_detail->holiday_id  = $holiday_entry->id ;
+            $holiday_detail->holiday_date = $value;
+            $holiday_detail->remarks = $request->remarks;
+
+            $holiday_detail->save();
+        }
 
         flash('Holiday Entries has been updated successfully')->success();
         return redirect()->route('holiday_entries.index');
@@ -115,7 +166,9 @@ class HolidayEntryController extends Controller
      */
     public function destroy($id)
     {
+        OfficeHolidayDetail::where('holiday_id', $id)->delete();
         HolidayEntry::find($id)->delete();
+
         flash('Holiday entries has been deleted successfully')->success();
 
         return redirect()->route('holiday_entries.index');
