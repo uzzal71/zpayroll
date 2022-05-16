@@ -23,4 +23,8 @@ class SalaryIncrement extends Model
         'remarks',
         'status'
     ];
+
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
 }

@@ -67,7 +67,7 @@
     <script src="{{ static_asset('assets/js/vendors.js') }}" ></script>
     <script src="{{ static_asset('assets/js/aiz-core.js') }}" ></script>
     <script src="{{ static_asset('assets/js/dhtmlx.js') }}" ></script>
-
+    
     @yield('script')
 
     <script type="text/javascript">
@@ -92,7 +92,8 @@
                 "calendar10", 
                 "from_date", 
                 "to_date",
-                "weekend_date"
+                "weekend_date",
+                "effective_date"
             ]);
         }
     </script>

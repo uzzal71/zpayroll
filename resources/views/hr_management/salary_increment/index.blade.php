@@ -16,7 +16,7 @@
 <div class="card">
     <div class="card-header d-block d-md-flex">
         <h5 class="mb-0 h6">Salary Increments</h5>
-        <form class="" id="sort_categories" action="" method="GET">
+        <form class="" id="sort_categories" action="" method="GET" autocomplete="off">
             <div class="box-inline pad-rgt pull-left">
                 <div class="" style="min-width: 200px;">
                     <input type="text" class="form-control" id="search" name="search"@isset($sort_search) value="{{ $sort_search }}" @endisset placeholder="Type name & Enter">
@@ -38,7 +38,6 @@
                     <th>Food</th>
                     <th>Effective</th>
                     <th>Remarks</th>
-                    <th>Status</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
@@ -46,7 +45,10 @@
                 @foreach($salary_increments as $key => $increment)
                     <tr>
                         <td>{{ ($key+1) + ($salary_increments->currentPage() - 1)*$salary_increments->perPage() }}</td>
-                        <td>{{ $increment->employee_id }}</td>
+                        <td>
+                            {{ $increment->employee->employee_name  }}
+                            ({{ $increment->employee->employee_punch_card  }})
+                        </td>
                         <td>{{ $increment->gross_salary }}</td>
                         <td>{{ $increment->basic_salary }}</td>
                         <td>{{ $increment->house_rent }}</td>
@@ -54,8 +56,7 @@
                         <td>{{ $increment->transport_allowance }}</td>
                         <td>{{ $increment->food_allowance }}</td>
                         <td>{{ $increment->effective_date }}</td>
-                        <td>{{ $increment->remarks }}</td>
-                        <td>{{ $increment->status }}</td>
+                        <td><?php echo $increment->remarks; ?></td>
                         <td class="text-right">
                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('salary_increments.edit', $increment->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>

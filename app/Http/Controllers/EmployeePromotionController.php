@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmployeePromotion;
 use Illuminate\Http\Request;
+use DateTime;
 
 class EmployeePromotionController extends Controller
 {
@@ -15,12 +16,13 @@ class EmployeePromotionController extends Controller
     public function index(Request $request)
     {
         $sort_search = null;
-        $employee_promotions  = EmployeePromotion::orderBy('id', 'asc');
+        $employee_promotions  = EmployeePromotion::with(['employee', 'department', 'designation'])->orderBy('id', 'asc');
         if ($request->has('search')){
             $sort_search = $request->search;
             $employee_promotions  = $employee_promotions ->where('employee_id', 'like', '%'.$sort_search.'%');
         }
         $employee_promotions  = $employee_promotions ->paginate(10);
+
         return view('hr_management.employee_promotion.index', compact('employee_promotions', 'sort_search'));
     }
 
@@ -44,9 +46,15 @@ class EmployeePromotionController extends Controller
     {
         $employee_promotion = new EmployeePromotion;
 
+        $effective_date   = new DateTime( $request->effective_date );
+        $year = $effective_date->format('Y');
+        $month = $effective_date->format('m');
+
         $employee_promotion->employee_id  = $request->employee_id;
         $employee_promotion->department_id   = $request->department_id ;
         $employee_promotion->designation_id   = $request->designation_id ;
+        $employee_promotion->promotion_month   = $month ;
+        $employee_promotion->promotion_year   = $year;
         $employee_promotion->effective_date  = $request->effective_date;
         $employee_promotion->remarks  = $request->remarks;
         $employee_promotion->status	 = "active";
@@ -54,7 +62,7 @@ class EmployeePromotionController extends Controller
         $employee_promotion->save();
 
         flash('Employee promotion has been inserted successfully')->success();
-        return redirect()->route('departments.index');
+        return redirect()->route('employee_promotions.index');
     }
 
     /**
@@ -76,9 +84,9 @@ class EmployeePromotionController extends Controller
      */
     public function edit($id)
     {
-        $department = EmployeePromotion::findOrFail($id);
+        $employee_promotion = EmployeePromotion::findOrFail($id);
 
-        return view('hr_management.employee_promotion.edit', compact('department'));
+        return view('hr_management.employee_promotion.edit', compact('employee_promotion'));
     }
 
     /**
@@ -92,9 +100,15 @@ class EmployeePromotionController extends Controller
     {
         $employee_promotion = EmployeePromotion::findOrFail($id);
 
+        $effective_date   = new DateTime( $request->effective_date );
+        $year = $effective_date->format('Y');
+        $month = $effective_date->format('m');
+
         $employee_promotion->employee_id  = $request->employee_id;
-        $employee_promotion->department_id   = $request->department_id ;
-        $employee_promotion->designation_id   = $request->designation_id ;
+        $employee_promotion->department_id   = $request->department_id;
+        $employee_promotion->designation_id   = $request->designation_id;
+        $employee_promotion->promotion_month   = $month ;
+        $employee_promotion->promotion_year   = $year;
         $employee_promotion->effective_date  = $request->effective_date;
         $employee_promotion->remarks  = $request->remarks;
         $employee_promotion->status	 = "active";

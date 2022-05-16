@@ -40,7 +40,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Form Date</label>
                         <div class="col-md-9">
-                            <input type="text" placeholder="xxxx-xx-xx" id="form_date" name="from_date" class="form-control" value="{{ $employee_leave->form_date }}" required>
+                            <input type="text" placeholder="xxxx-xx-xx" id="from_date" name="from_date" class="form-control" value="{{ $employee_leave->from_date }}" required>
                         </div>
                     </div>
 
@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Remarks</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="remarks" placeholder="Remarks" required>{{ $employee_leave->remarks }}</textarea>
+                            <textarea class="aiz-text-editor" name="remarks" placeholder="Remarks" required>{{ $employee_leave->remarks }}</textarea>
                         </div>
                     </div>
 

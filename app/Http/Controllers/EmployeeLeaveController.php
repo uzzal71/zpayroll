@@ -17,7 +17,7 @@ class EmployeeLeaveController extends Controller
     public function index(Request $request)
     {
         $sort_search = null;
-        $employee_leaves = EmployeeLeave::orderBy('id', 'asc');
+        $employee_leaves = EmployeeLeave::with(['employee', 'leave'])->orderBy('id', 'asc');
         if ($request->has('search')){
             $sort_search = $request->search;
             $employee_leaves = $employee_leaves->where('employee_id', 'like', '%'.$sort_search.'%');

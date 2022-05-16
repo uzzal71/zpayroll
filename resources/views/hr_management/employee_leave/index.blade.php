@@ -42,8 +42,11 @@
                 @foreach($employee_leaves as $key => $employee_leave)
                     <tr>
                         <td>{{ ($key+1) + ($employee_leaves->currentPage() - 1)*$employee_leaves->perPage() }}</td>
-                        <td>{{ $employee_leave->employee_id  }}</td>
-                        <td>{{ $employee_leave->leave_id  }}</td>
+                        <td>
+                            {{ $employee_leave->employee->employee_name  }}
+                            ({{ $employee_leave->employee->employee_punch_card  }})
+                        </td>
+                        <td>{{ $employee_leave->leave->leave_name  }}</td>
                         <td>{{ $employee_leave->from_date  }}</td>
                         <td>{{ $employee_leave->to_date  }}</td>
                         <td>{{ $employee_leave->leave_days  }}</td>

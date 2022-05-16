@@ -36,7 +36,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Remarks</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="remarks" placeholder="Remarks" required>{{ $holiday->remarks }}</textarea>
+                            <textarea class="aiz-text-editor" name="remarks" placeholder="Remarks" required>{{ $holiday->remarks }}</textarea>
                         </div>
                     </div>
 

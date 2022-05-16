@@ -34,7 +34,6 @@
                     <th>New Designation</th>
                     <th>Effective Date</th>
                     <th>remarks</th>
-                    <th>Status</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
@@ -42,12 +41,14 @@
                 @foreach($employee_promotions as $key => $promotion)
                     <tr>
                         <td>{{ ($key+1) + ($employee_promotions->currentPage() - 1)*$employee_promotions->perPage() }}</td>
-                        <td>{{ $promotion->employee_id }}</td>
-                        <td>{{ $promotion->department_id }}</td>
-                        <td>{{ $promotion->designation_id }}</td>
+                        <td>
+                            {{ $promotion->employee->employee_name  }}
+                            ({{ $promotion->employee->employee_punch_card  }})
+                        </td>
+                        <td>{{ $promotion->department->department_name }}</td>
+                        <td>{{ $promotion->designation->designation_name }}</td>
                         <td>{{ $promotion->effective_date }}</td>
-                        <td>{{ $promotion->remarks }}</td>
-                        <td>{{ $promotion->status }}</td>
+                        <td><?php echo $promotion->remarks; ?></td>
                         <td class="text-right">
                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('employee_promotions.edit', $promotion->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>

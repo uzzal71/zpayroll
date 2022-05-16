@@ -19,4 +19,12 @@ class EmployeeLeave extends Model
         'leave_year',
         'active'
     ];
+
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function leave() {
+        return $this->belongsTo(Leave::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SalaryIncrement;
 use Illuminate\Http\Request;
+use DateTime;
 
 class SalaryIncrementController extends Controller
 {
@@ -15,7 +16,7 @@ class SalaryIncrementController extends Controller
     public function index(Request $request)
     {
         $sort_search = null;
-        $salary_increments = SalaryIncrement::orderBy('id', 'asc');
+        $salary_increments = SalaryIncrement::with(['employee'])->orderBy('id', 'asc');
         if ($request->has('search')){
             $sort_search = $request->search;
             $salary_increments = $salary_increments->where('employee_id', 'like', '%'.$sort_search.'%');
@@ -44,6 +45,10 @@ class SalaryIncrementController extends Controller
     {
         $salary_increment = new SalaryIncrement;
 
+        $effective_date   = new DateTime( $request->effective_date );
+        $year = $effective_date->format('Y');
+        $month = $effective_date->format('m');
+
         $salary_increment->employee_id = $request->employee_id;
         $salary_increment->gross_salary = $request->gross_salary;
         $salary_increment->basic_salary = $request->basic_salary;
@@ -51,11 +56,11 @@ class SalaryIncrementController extends Controller
         $salary_increment->medical_allowance = $request->medical_allowance;
         $salary_increment->transport_allowance = $request->transport_allowance;
         $salary_increment->food_allowance = $request->food_allowance;
-        $salary_increment->increment_month = $request->increment_month;
-        $salary_increment->increment_year = $request->increment_year;
+        $salary_increment->increment_month = $month;
+        $salary_increment->increment_year = $year;
         $salary_increment->effective_date = $request->effective_date;
         $salary_increment->remarks	 = $request->remarks;
-        $salary_increment->status	 = $request->status;
+        $salary_increment->status	 = 'active';
 
         $salary_increment->save();
 
@@ -82,9 +87,9 @@ class SalaryIncrementController extends Controller
      */
     public function edit($id)
     {
-        $department = SalaryIncrement::findOrFail($id);
+        $salary_increment = SalaryIncrement::findOrFail($id);
 
-        return view('hr_management.salary_increment.edit', compact('department'));
+        return view('hr_management.salary_increment.edit', compact('salary_increment'));
     }
 
     /**
@@ -98,6 +103,10 @@ class SalaryIncrementController extends Controller
     {
         $salary_increment = SalaryIncrement::findOrFail($id);
 
+        $effective_date   = new DateTime( $request->effective_date );
+        $year = $effective_date->format('Y');
+        $month = $effective_date->format('m');
+
         $salary_increment->employee_id = $request->employee_id;
         $salary_increment->gross_salary = $request->gross_salary;
         $salary_increment->basic_salary = $request->basic_salary;
@@ -105,11 +114,11 @@ class SalaryIncrementController extends Controller
         $salary_increment->medical_allowance = $request->medical_allowance;
         $salary_increment->transport_allowance = $request->transport_allowance;
         $salary_increment->food_allowance = $request->food_allowance;
-        $salary_increment->increment_month = $request->increment_month;
-        $salary_increment->increment_year = $request->increment_year;
+        $salary_increment->increment_month = $month;
+        $salary_increment->increment_year = $year;
         $salary_increment->effective_date = $request->effective_date;
         $salary_increment->remarks	 = $request->remarks;
-        $salary_increment->status	 = $request->status;
+        $salary_increment->status	 = 'active';
 
         $salary_increment->save();
 
