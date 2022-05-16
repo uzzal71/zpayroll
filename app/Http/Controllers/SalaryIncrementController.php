@@ -43,11 +43,6 @@ class SalaryIncrementController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'employee_id' => 'required|max:255',
-            'gross_salary' => 'required|max:255',
-        ]);
-
         $salary_increment = new SalaryIncrement;
 
         $effective_date   = new DateTime( $request->effective_date );
