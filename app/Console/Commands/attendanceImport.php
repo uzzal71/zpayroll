@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\EmployeeLeaveDetail;
 use App\Models\Leave;
 use App\Models\OfficeHolidayDetail;
+use App\Models\Schedule;
 use Illuminate\Console\Command;
 
 class attendanceImport extends Command
@@ -68,16 +69,16 @@ class attendanceImport extends Command
                         }
 
                         foreach ($dates as $value) {
-                            $attendance = new Attendance;
-                            $attendance_log = AttendanceLog::where([
-                                'employee_id' => $employee->employee_punch_card,
-                                'attendance_date' => $value,
-                            ])->first();
+
+
+                            $status = 'P';
+                            $remarks = '';
 
                             $leave_info = EmployeeLeaveDetail::where([
                                 'employee_id' => $employee->id,
                                 'leave_date' => $value
                             ])->first();
+
 
                             $holiday_info = OfficeHolidayDetail::where([
                                 'holiday_date' => $value
@@ -85,9 +86,6 @@ class attendanceImport extends Command
 
                             $timestamp = strtotime($value);
                             $day_name = date('l', $timestamp);
-
-                            $status = '';
-                            $remarks = '';
 
                             if ($day_name == 'Friday') {
                                 $status = 'W';
@@ -106,33 +104,91 @@ class attendanceImport extends Command
                                 $remarks = $holiday_info->remarks;
                             }
 
-                            $attendance->employee_id = $employee->id;
-                            $attendance->attendance_month = $month;
-                            $attendance->attendance_year = $year;
-                            $attendance->attendance_date = $value;
+                            // Get Employee Shift Schedule
+                            $schedule = Schedule::where('id', $employee->schedule_id)->first();
 
-                            if ($attendance_log) {
-                                if ($attendance_log->attendance_in) {
-                                    $attendance->in_time = $attendance_log->attendance_in;
+                            $exists = Attendance::where([
+                                'employee_id' => $employee->id,
+                                'attendance_date' => $value
+                            ])->first();
+
+                            // Check Attendance already process start
+                            if (!$exists) {
+                                $attendance = new Attendance;
+
+                                $attendance_log = AttendanceLog::where([
+                                    'employee_id' => $employee->employee_punch_card,
+                                    'attendance_date' => $value,
+                                ])->first();
+
+                                $attendance->employee_id = $employee->id;
+                                $attendance->attendance_month = $month;
+                                $attendance->attendance_year = $year;
+                                $attendance->attendance_date = $value;
+
+                                if ($attendance_log) {
+                                    if ($attendance_log->attendance_in) {
+                                        $attendance->in_time = $attendance_log->attendance_in;
+                                    } else {
+                                        $attendance->in_time = '--:--';
+                                    }
+
+                                    if ($attendance_log->attendance_out) {
+                                        $attendance->out_time = $attendance_log->attendance_out;
+                                    } else {
+                                        $attendance->out_time = '--:--';
+                                    }
+                                    $attendance->late_time = '--:--';
                                 } else {
                                     $attendance->in_time = '--:--';
-                                }
-
-                                if ($attendance_log->attendance_out) {
-                                    $attendance->out_time = $attendance_log->attendance_out;
-                                } else {
                                     $attendance->out_time = '--:--';
+                                    $attendance->late_time = '--:--';
                                 }
-                                $attendance->late_time = '--:--';
+
+                                $attendance->over_time = 0;
+                                $attendance->remarks = $remarks;
+                                $attendance->attendance_status = $status;
+
+                                $attendance->save();
                             } else {
-                                $attendance->in_time = '--:--';
-                                $attendance->out_time = '--:--';
-                                $attendance->late_time = '--:--';
+                                $attendance = Attendance::findOrFail($exists->id);
+
+                                $attendance_log = AttendanceLog::where([
+                                    'employee_id' => $employee->employee_punch_card,
+                                    'attendance_date' => $value,
+                                ])->first();
+
+                                $attendance->employee_id = $employee->id;
+                                $attendance->attendance_month = $month;
+                                $attendance->attendance_year = $year;
+                                $attendance->attendance_date = $value;
+
+                                if ($attendance_log) {
+                                    if ($attendance_log->attendance_in) {
+                                        $attendance->in_time = $attendance_log->attendance_in;
+                                    } else {
+                                        $attendance->in_time = '--:--';
+                                    }
+
+                                    if ($attendance_log->attendance_out) {
+                                        $attendance->out_time = $attendance_log->attendance_out;
+                                    } else {
+                                        $attendance->out_time = '--:--';
+                                    }
+                                    $attendance->late_time = '--:--';
+                                } else {
+                                    $attendance->in_time = '--:--';
+                                    $attendance->out_time = '--:--';
+                                    $attendance->late_time = '--:--';
+                                }
+
+                                $attendance->over_time = 0;
+                                $attendance->remarks = $remarks;
+                                $attendance->attendance_status = $status;
+
+                                $attendance->save();
                             }
-
-                            $attendance->attendance_status = $status;
-
-                            $attendance->save();
+                            // Check Attendance already process end
                         }
                     }
                 }

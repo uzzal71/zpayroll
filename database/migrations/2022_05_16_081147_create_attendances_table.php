@@ -22,7 +22,9 @@ class CreateAttendancesTable extends Migration
             $table->string('in_time');
             $table->string('out_time');
             $table->string('late_time');
-            $table->enum('attendance_status', ['P', 'A', 'W', 'H', 'L', 'S', 'AL', 'CL', 'MT', 'MA', 'PT']);
+            $table->string('over_time');
+            $table->string('remarks');
+            $table->enum('attendance_status', ['P', 'A', 'W', 'H', 'SL', 'AL', 'CL', 'MAT', 'ML', 'PAT']);
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');
