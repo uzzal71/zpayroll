@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Excel;
+use App\Imports\AttendanceImport;
 
 class AttendanceController extends Controller
 {
@@ -80,5 +82,20 @@ class AttendanceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    function import(Request $request)
+    {
+        $attendance_files = Update::where('process_status', 1)->get();
+        
+        echo public_path(). 'uploads/attendance_files/';exit();
+
+        Excel::import(new AttendanceImport, 'C:\xampp\htdocs\zpayroll\public\uploads\attendance_files\April-2022.xls');
     }
 }

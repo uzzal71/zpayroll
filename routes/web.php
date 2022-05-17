@@ -68,6 +68,10 @@ Route::get('/salary_increments/destroy/{id}', 'SalaryIncrementController@destroy
 Route::resource('upload', 'UploadController');
 Route::get('/upload/destroy/{id}', 'UploadController@destroy')->name('upload.destroy');
 
+// Upload File Insert Attendance Logs
+Route::get('/import_excel/import', 'AttendanceController@import');
+
+
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
     return redirect()->route('home');

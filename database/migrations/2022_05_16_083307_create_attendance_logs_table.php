@@ -15,13 +15,11 @@ class CreateAttendanceLogsTable extends Migration
     {
         Schema::create('attendance_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employee_id');
+            $table->integer('employee_id');
             $table->date('attendance_date');
             $table->string('attendance_in');
             $table->string('attendance_out');
             $table->timestamps();
-
-            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 
