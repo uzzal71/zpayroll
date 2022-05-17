@@ -146,7 +146,7 @@
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('attendances.create') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Manual Entry</span>
                             </a>
                         </li>

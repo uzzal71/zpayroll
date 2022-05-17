@@ -70,6 +70,7 @@ Route::get('/upload/destroy/{id}', 'UploadController@destroy')->name('upload.des
 
 // Upload File Insert Attendance Logs
 Route::get('/import_excel/import', 'AttendanceController@import');
+Route::resource('attendances', 'AttendanceController');
 
 
 Route::get('/clear-cache', function() {

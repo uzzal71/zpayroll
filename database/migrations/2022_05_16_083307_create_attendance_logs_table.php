@@ -17,8 +17,8 @@ class CreateAttendanceLogsTable extends Migration
             $table->id();
             $table->integer('employee_id');
             $table->date('attendance_date');
-            $table->string('attendance_in');
-            $table->string('attendance_out');
+            $table->string('attendance_in')->nullable();
+            $table->string('attendance_out')->nullable();
             $table->timestamps();
         });
     }

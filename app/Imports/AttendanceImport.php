@@ -15,24 +15,6 @@ class AttendanceImport implements ToCollection
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    /*
-    public function model(array $row)
-    {
-        $exists = AttendanceLog::where()->first();
-        if ($exists) {
-
-        } else {
-
-        }
-        return new AttendanceLog([
-            'employee_id'     => $row[0],
-            'attendance_date'    => date('Y-m-d', strtotime($row[1])), 
-            'attendance_in' => $row[2],
-            'attendance_out' => $row[3],
-        ]);
-    }
-    */
-
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) 
@@ -44,13 +26,13 @@ class AttendanceImport implements ToCollection
 
             if ($exists) {
                 AttendanceLog::where('employee_id', $row[0])
-                      ->where('attendance_date', date('Y-m-d', strtotime($row[1])))
-                      ->update([
-                        'employee_id'     => $row[0],
-                        'attendance_date'    => date('Y-m-d', strtotime($row[1])), 
-                        'attendance_in' => $row[2],
-                        'attendance_out' => $row[3],
-                    ]);
+                  ->where('attendance_date', date('Y-m-d', strtotime($row[1])))
+                  ->update([
+                    'employee_id'     => $row[0],
+                    'attendance_date'    => date('Y-m-d', strtotime($row[1])), 
+                    'attendance_in' => $row[2],
+                    'attendance_out' => $row[3],
+                ]);
 
             } else {
                 AttendanceLog::create([

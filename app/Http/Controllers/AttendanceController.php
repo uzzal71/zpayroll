@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AttendanceLog;
+use App\Models\Employee;
+use App\Models\EmployeeLeaveDetail;
+use App\Models\Leave;
+use App\Models\OfficeHolidayDetail;
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use Excel;
 use App\Imports\AttendanceImport;
+use DateTime;
 
 class AttendanceController extends Controller
 {
@@ -23,9 +30,90 @@ class AttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if ($request->has('punch_card')){
+            $punch_card = $request->punch_card;
+            $from_date = $request->from_date;
+            $to_date = $request->to_date;
+
+            $begin = new DateTime( $from_date );
+            $end   = new DateTime( $to_date );
+            $attendances = [];
+
+            $emp_info = Employee::where([
+                    'employee_punch_card' => $punch_card
+                ])->first();
+
+            if ($emp_info) {
+
+                for($i = $begin; $i <= $end; $i->modify('+1 day')){
+
+                    $att_info = AttendanceLog::where([
+                        'employee_id' => $punch_card,
+                        'attendance_date' => $i->format("Y-m-d")
+                    ])->first();
+
+                    $leave_info = EmployeeLeaveDetail::where([
+                        'employee_id' => $emp_info->id,
+                        'leave_date' => $i->format("Y-m-d")
+                    ])->first();
+
+                    $holiday_info = OfficeHolidayDetail::where([
+                        'holiday_date' => $i->format("Y-m-d")
+                    ])->first();
+
+                    $day_name = $i->format('l');
+
+                    $status = '';
+                    $remarks = '';
+
+                    if ($day_name == 'Friday') {
+                        $status = 'W';
+                        $remarks = 'Weekend';
+                    } elseif ($leave_info) {
+
+                        $leave = Leave::where([
+                            'id' => $leave_info->leave_id
+                        ])->first();
+
+                        $status = $leave->short_name;
+                        $remarks = $leave->leave_name;
+
+                    } elseif ($holiday_info) {
+                        $status = 'H';
+                        $remarks = $holiday_info->remarks;
+                    }
+
+                    if ($att_info) {
+                        $object = [
+                            "punch_card" => $punch_card,
+                            "attendance_date" => $i->format("Y-m-d"),
+                            "attendance_in" => $att_info->attendance_in,
+                            "attendance_out" => $att_info->attendance_out,
+                            "status" => $status,
+                            "remarks" => $remarks,
+                        ];
+                    } else {
+                        $object = [
+                            "punch_card" => $punch_card,
+                            "attendance_date" => $i->format("Y-m-d"),
+                            "attendance_in" => '00:00',
+                            "attendance_out" => '00:00',
+                            "status" => $status,
+                            "remarks" => $remarks,
+                        ];
+                    }
+
+                    $attendances[] = $object;
+                }
+            }
+
+            return view('payroll.manual_entry', compact(
+                'attendances', 'punch_card', 'from_date', 'to_date'));
+        }
+
+        return view('payroll.manual_entry');
     }
 
     /**
@@ -36,7 +124,48 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $array_length = count($data["attendance_date"]);
+
+        for($i=0; $i < $array_length; $i++){
+
+            $att_info = AttendanceLog::where([
+                'employee_id' => $data['employee_id'][$i],
+                'attendance_date' => $data['attendance_date'][$i]
+            ])->first();
+
+            
+            if ($att_info) {
+                $log_info = AttendanceLog::where([
+                    'employee_id' => $data['employee_id'][$i],
+                    'attendance_date' => $data['attendance_date'][$i]
+                ])->first();
+
+                $log_info->employee_id = $data['employee_id'][$i];
+                $log_info->attendance_date = $data['attendance_date'][$i];
+                $log_info->attendance_in = $data['attendance_in'][$i];
+                $log_info->attendance_out = $data['attendance_out'][$i];
+
+                $log_info->save();
+
+            } else {
+                
+                $attendance = new AttendanceLog;
+
+                $attendance->employee_id = $data['employee_id'][$i];
+                $attendance->attendance_date = $data['attendance_date'][$i];
+                $attendance->attendance_in = $data['attendance_in'][$i];
+                $attendance->attendance_out = $data['attendance_out'][$i];
+
+                $attendance->save();
+                
+            }
+            
+       }
+
+       flash('Attendance log has been updated successfully')->success();
+       return redirect()->route('attendances.create');
+
     }
 
     /**
@@ -92,9 +221,9 @@ class AttendanceController extends Controller
      */
     function import(Request $request)
     {
-        $attendance_files = Update::where('process_status', 1)->get();
-        
-        echo public_path(). 'uploads/attendance_files/';exit();
+        $attendance_files = Upload::where('process_status', 1)->get();
+
+        // echo public_path(). 'uploads/attendance_files/';exit();
 
         Excel::import(new AttendanceImport, 'C:\xampp\htdocs\zpayroll\public\uploads\attendance_files\April-2022.xls');
     }
