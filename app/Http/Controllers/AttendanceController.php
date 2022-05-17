@@ -134,7 +134,7 @@ class AttendanceController extends Controller
                 'attendance_date' => $data['attendance_date'][$i]
             ])->first();
 
-            
+
             if ($att_info) {
                 $log_info = AttendanceLog::where([
                     'employee_id' => $data['employee_id'][$i],
@@ -149,7 +149,7 @@ class AttendanceController extends Controller
                 $log_info->save();
 
             } else {
-                
+
                 $attendance = new AttendanceLog;
 
                 $attendance->employee_id = $data['employee_id'][$i];
@@ -158,9 +158,9 @@ class AttendanceController extends Controller
                 $attendance->attendance_out = $data['attendance_out'][$i];
 
                 $attendance->save();
-                
+
             }
-            
+
        }
 
        flash('Attendance log has been updated successfully')->success();
@@ -211,20 +211,5 @@ class AttendanceController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    function import(Request $request)
-    {
-        $attendance_files = Upload::where('process_status', 1)->get();
-
-        // echo public_path(). 'uploads/attendance_files/';exit();
-
-        Excel::import(new AttendanceImport, 'C:\xampp\htdocs\zpayroll\public\uploads\attendance_files\April-2022.xls');
     }
 }

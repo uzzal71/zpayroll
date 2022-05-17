@@ -68,8 +68,7 @@ Route::get('/salary_increments/destroy/{id}', 'SalaryIncrementController@destroy
 Route::resource('upload', 'UploadController');
 Route::get('/upload/destroy/{id}', 'UploadController@destroy')->name('upload.destroy');
 
-// Upload File Insert Attendance Logs
-Route::get('/import_excel/import', 'AttendanceController@import');
+//Manual Attendance Logs
 Route::resource('attendances', 'AttendanceController');
 
 // Cron Jobs
