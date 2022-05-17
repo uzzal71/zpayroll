@@ -150,6 +150,12 @@
                                 <span class="aiz-side-nav-text">Manual Entry</span>
                             </a>
                         </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('cronjobs.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Cron Jobs</span>
+                            </a>
+                        </li>
+                        
                     </ul>
                 </li>
                 <!-- Payroll & Attendance End -->

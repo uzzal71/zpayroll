@@ -72,6 +72,11 @@ Route::get('/upload/destroy/{id}', 'UploadController@destroy')->name('upload.des
 Route::get('/import_excel/import', 'AttendanceController@import');
 Route::resource('attendances', 'AttendanceController');
 
+// Cron Jobs
+Route::resource('cronjobs', 'CronJobController');
+Route::get('/cronjobs/destroy/{id}', 'CronJobController@destroy')->name('cronjobs.destroy');
+
+
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
