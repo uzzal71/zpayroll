@@ -94,6 +94,9 @@ Route::get('/tax-report', 'SalaryReportController@tax_report')->name('tax.report
 Route::resource('/users', 'UserController');
 Route::get('/system-information', 'SystemController@system_information')->name('system.information');
 
+// Ajax Route
+Route::post('/ajax-get-employee', 'AjaxController@get_employee')->name('ajax.get_employee');
+
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
     return redirect()->route('home');
