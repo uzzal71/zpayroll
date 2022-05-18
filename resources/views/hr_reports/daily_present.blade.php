@@ -60,7 +60,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Status</label>
                         <div class="col-md-9">
-                            <select name="status" required class="form-control aiz-selectpicker mb-2 mb-md-0">
+                            <select name="status" id="status" required class="form-control aiz-selectpicker mb-2 mb-md-0">
                                 <option value="">Select Status</option>
                                 <option value="all">All</option>
                                 <option value="active">Active</option>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
 
-               
+
             </div>
         </div>
     </div>
@@ -82,11 +82,67 @@
                 <h5 class="mb-0 h6">Employee List</h5>
             </div>
             <div class="card-body">
-                
+                <div id="result">
+                    {{-- Get filter employee data --}}
+                </div>
             </div>
         </div>
     </div>
     <!-- Employee Box -->
 </div>
 
+@endsection
+
+
+@section('script')\
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $( "#department_id" ).change(function() {
+            var department_id = document.getElementById('department_id').value;
+            var designation_id = document.getElementById('designation_id').value;
+            var schedule_id = document.getElementById('schedule_id').value;
+            var status = document.getElementById('status').value;
+
+            $.ajax({
+                type:"POST",
+                url:'{{ route('ajax.get_employee') }}',
+                data: {
+                    'department_id': department_id,
+                    'designation_id': designation_id,
+                    'schedule_id': schedule_id,
+                    'status': status
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        $( "#designation_id" ).change(function() {
+            var department_id = document.getElementById('department_id').value;
+            var designation_id = document.getElementById('designation_id').value;
+            var schedule_id = document.getElementById('schedule_id').value;
+            var status = document.getElementById('status').value;
+            alert(designation_id);
+        });
+
+        $( "#schedule_id" ).change(function() {
+            var department_id = document.getElementById('department_id').value;
+            var designation_id = document.getElementById('designation_id').value;
+            var schedule_id = document.getElementById('schedule_id').value;
+            var status = document.getElementById('status').value;
+            alert(schedule_id);
+        });
+
+        $( "#status" ).change(function() {
+            var department_id = document.getElementById('department_id').value;
+            var designation_id = document.getElementById('designation_id').value;
+            var schedule_id = document.getElementById('schedule_id').value;
+            var status = document.getElementById('status').value;
+            alert(status);
+        });
+
+    });
+</script>
 @endsection

@@ -92,7 +92,6 @@ Route::get('/tax-report', 'SalaryReportController@tax_report')->name('tax.report
 
 // Systems Route
 Route::resource('/users', 'UserController');
-Route::get('/user-management', 'SystemController@user_management')->name('user.management');
 Route::get('/system-information', 'SystemController@system_information')->name('system.information');
 
 Route::get('/clear-cache', function() {
