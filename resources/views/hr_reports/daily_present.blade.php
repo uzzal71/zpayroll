@@ -96,7 +96,7 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <button type="button" class="btn btn-success mt-2">Submit</button>
+        <button type="button" class="btn btn-success mt-2" id="daily_present_report">Submit</button>
     </div>
 </div>
 
@@ -232,6 +232,11 @@
                 this.checked = false;
             });
         }
+    });
+    $(document).ready(function() {
+        $( "#daily_present_report" ).onclick(function() {
+            alert('submitted');
+        });
     });
 </script>
 
