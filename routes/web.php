@@ -75,6 +75,15 @@ Route::resource('attendances', 'AttendanceController');
 Route::resource('cronjobs', 'CronJobController');
 Route::get('/cronjobs/destroy/{id}', 'CronJobController@destroy')->name('cronjobs.destroy');
 
+// HR Report Route
+Route::get('/daily-present', 'HRReportController@daily_present');
+Route::get('/daily-absent', 'HRReportController@daily_absent');
+Route::get('/daily-late', 'HRReportController@daily_late');
+Route::get('/daily-leave', 'HRReportController@daily_leave');
+Route::get('/daily-overtime', 'HRReportController@daily_overtime');
+Route::get('/range-attendance', 'HRReportController@range_attendance');
+Route::get('/monthly-attendance', 'HRReportController@monthly_attendance');
+Route::get('/monthly-overtime', 'HRReportController@monthly_overtime');
 
 
 Route::get('/clear-cache', function() {
