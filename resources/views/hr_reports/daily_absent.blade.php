@@ -60,7 +60,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Status</label>
                         <div class="col-md-9">
-                            <select name="status" required class="form-control aiz-selectpicker mb-2 mb-md-0">
+                            <select name="status" id="status" required class="form-control aiz-selectpicker mb-2 mb-md-0">
                                 <option value="">Select Status</option>
                                 <option value="all">All</option>
                                 <option value="active">Active</option>
@@ -82,11 +82,21 @@
                 <h5 class="mb-0 h6">Employee List <span class="badge badge-warning" id="select-box"></span></h5>
             </div>
             <div class="card-body">
-                
+                <div class="FixedHeightContainer">
+                <div id="result" class="Content">
+                    {{-- Get filter employee data --}}
+                </div>
+                </div>
             </div>
         </div>
     </div>
     <!-- Employee Box -->
+</div>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <button type="button" class="btn btn-success mt-2">Submit</button>
+    </div>
 </div>
 
 @endsection

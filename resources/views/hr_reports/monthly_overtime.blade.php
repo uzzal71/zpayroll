@@ -120,6 +120,12 @@
     <!-- Employee Box -->
 </div>
 
+<div class="row">
+    <div class="col-12 text-center">
+        <button type="button" class="btn btn-success mt-2">Submit</button>
+    </div>
+</div>
+
 @endsection
 
 

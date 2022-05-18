@@ -109,15 +109,30 @@
                 <h5 class="mb-0 h6">Employee List <span class="badge badge-warning" id="select-box"></span></h5>
             </div>
             <div class="card-body">
-                <div class="FixedHeightContainer">
-                <div id="result" class="Content">
-                    {{-- Get filter employee data --}}
-                </div>
-                </div>
+                <form action="#" method="POST" id="choice_form">
+                    @csrf
+                    <div class="FixedHeightContainer">
+                        <div id="result" class="Content">
+                            {{-- Get filter employee data --}}
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <div class="col-12 text-center">
+                        <button type="submit" name="button" class="btn btn-success mt-2">Submit</button>
+                    </div>
+                    <!-- Button -->
+                </form>
             </div>
         </div>
     </div>
     <!-- Employee Box -->
+</div>
+
+
+<div class="row">
+    <div class="col-12 text-center">
+        <button type="button" class="btn btn-success mt-2">Submit</button>
+    </div>
 </div>
 
 @endsection

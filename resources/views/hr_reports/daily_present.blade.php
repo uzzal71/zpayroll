@@ -83,14 +83,21 @@
             </div>
             <div class="card-body">
                 <div class="FixedHeightContainer">
-                <div id="result" class="Content">
-                    {{-- Get filter employee data --}}
+                    <div id="result" class="Content">
+                        {{-- Get filter employee data --}}
+                    </div>
                 </div>
-                </div>
+
             </div>
         </div>
     </div>
     <!-- Employee Box -->
+</div>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <button type="button" class="btn btn-success mt-2">Submit</button>
+    </div>
 </div>
 
 @endsection
@@ -174,6 +181,7 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function() {
+
         $( "#department_id" ).change(function() {get_update_employee_list()});
         $( "#designation_id" ).change(function() {get_update_employee_list()});
         $( "#schedule_id" ).change(function() {get_update_employee_list()});
