@@ -24,7 +24,7 @@ class CreateAttendancesTable extends Migration
             $table->string('late_time');
             $table->string('over_time');
             $table->string('remarks');
-            $table->enum('attendance_status', ['P', 'A', 'W', 'H', 'SL', 'AL', 'CL', 'MAT', 'ML', 'PAT']);
+            $table->enum('attendance_status', ['P', 'A', 'W', 'H', 'SL', 'AL', 'CL', 'MAT', 'ML', 'PAT', 'L']);
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');

@@ -11,6 +11,7 @@ use App\Models\Leave;
 use App\Models\OfficeHolidayDetail;
 use App\Models\Schedule;
 use Illuminate\Console\Command;
+use DateTime;
 
 class attendanceImport extends Command
 {
@@ -61,11 +62,13 @@ class attendanceImport extends Command
                         $start_time = strtotime($start_date);
                         $end_time = strtotime("+1 month", $start_time);
 
+                        echo $employee->employee_name;
+
                         $dates = array();
 
                         for($i=$start_time; $i<$end_time; $i+=86400)
                         {
-                            $dates[] = date('Y-m-d', $i);
+                            $dates[] = trim(date('Y-m-d', $i));
                         }
 
                         foreach ($dates as $value) {
@@ -126,6 +129,8 @@ class attendanceImport extends Command
                                 $attendance->attendance_year = $year;
                                 $attendance->attendance_date = $value;
 
+                                $late = '--:--';
+
                                 if ($attendance_log) {
                                     if ($attendance_log->attendance_in) {
                                         $attendance->in_time = $attendance_log->attendance_in;
@@ -138,11 +143,11 @@ class attendanceImport extends Command
                                     } else {
                                         $attendance->out_time = '--:--';
                                     }
-                                    $attendance->late_time = '--:--';
+                                    $attendance->late_time = $late;
                                 } else {
                                     $attendance->in_time = '--:--';
                                     $attendance->out_time = '--:--';
-                                    $attendance->late_time = '--:--';
+                                    $attendance->late_time = $late;
                                 }
 
                                 $attendance->over_time = 0;
@@ -151,6 +156,7 @@ class attendanceImport extends Command
 
                                 $attendance->save();
                             } else {
+
                                 $attendance = Attendance::findOrFail($exists->id);
 
                                 $attendance_log = AttendanceLog::where([
@@ -163,6 +169,28 @@ class attendanceImport extends Command
                                 $attendance->attendance_year = $year;
                                 $attendance->attendance_date = $value;
 
+                                $late = '--:--';
+
+                                // Late calculation start
+                                if ($attendance->in_time) {
+
+                                    $emp_in_datetime = $value.' '. $attendance->in_time;
+                                    $late_datetime = $value.' '. $schedule->office_late_start;
+
+                                    $date1    = strtotime($emp_in_datetime);
+                                    $date2    = strtotime($late_datetime);
+
+                                    if ($date1 > $date2) {
+                                        $status = 'L';
+                                        $difference = $date1 - $date2;
+                                        $late = date('H:i', $difference);
+                                        $remarks = 'Late in';
+                                    }
+
+                                    echo $attendance->attendance_in;
+                                }
+                                // Late calculation end
+
                                 if ($attendance_log) {
                                     if ($attendance_log->attendance_in) {
                                         $attendance->in_time = $attendance_log->attendance_in;
@@ -175,11 +203,11 @@ class attendanceImport extends Command
                                     } else {
                                         $attendance->out_time = '--:--';
                                     }
-                                    $attendance->late_time = '--:--';
+                                    $attendance->late_time = $late;
                                 } else {
                                     $attendance->in_time = '--:--';
                                     $attendance->out_time = '--:--';
-                                    $attendance->late_time = '--:--';
+                                    $attendance->late_time = $late;
                                 }
 
                                 $attendance->over_time = 0;
@@ -189,10 +217,10 @@ class attendanceImport extends Command
                                 $attendance->save();
                             }
                             // Check Attendance already process end
-                        }
-                    }
-                }
-            }
+                        } // Dattes foreach end
+                    } // Employee foreach end
+                } // Cronjobs foreach end
+            } // Cronjobs end
         } catch (\Exception $e) {
 
             return $e->getMessage();
