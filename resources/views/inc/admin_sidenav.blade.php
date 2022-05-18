@@ -171,42 +171,42 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('daily-present') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('daily.present') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Daily Present</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('daily-absent') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('daily.absent') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Daily Absent</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('daily-late') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('daily.late') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Daily Late</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('daily-leave') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('daily.leave') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Daily Leave</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('daily-overtime') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('daily.overtime') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Daily OverTime</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('range-attendance') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('range.attendance') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Range Attendance</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('monthly-attendance') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('monthly.attendance') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Monthly Attendance</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('monthly-overtime') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('monthly.overtime') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Monthly OverTime</span>
                             </a>
                         </li>
