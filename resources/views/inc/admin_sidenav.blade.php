@@ -224,17 +224,17 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('salary.sheet') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Monthly Salary Sheet</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('monthly.payslip') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Monthly Payslip</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('tax.report') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Tax Report</span>
                             </a>
                         </li>
@@ -252,12 +252,12 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('user.management') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">User Management</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="#" class="aiz-side-nav-link">
+                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">System Information</span>
                             </a>
                         </li>

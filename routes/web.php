@@ -77,14 +77,22 @@ Route::get('/cronjobs/destroy/{id}', 'CronJobController@destroy')->name('cronjob
 
 // HR Report Route
 Route::get('/daily-present', 'HRReportController@daily_present')->name('daily.present');
-Route::get('/daily-absent', 'HRReportController@daily_absent')->name('daily.absent');;
-Route::get('/daily-late', 'HRReportController@daily_late')->name('daily.late');;
-Route::get('/daily-leave', 'HRReportController@daily_leave')->name('daily.leave');;
-Route::get('/daily-overtime', 'HRReportController@daily_overtime')->name('daily.overtime');;
-Route::get('/range-attendance', 'HRReportController@range_attendance')->name('range.attendance');;
-Route::get('/monthly-attendance', 'HRReportController@monthly_attendance')->name('monthly.attendance');;
-Route::get('/monthly-overtime', 'HRReportController@monthly_overtime')->name('monthly.overtime');;
+Route::get('/daily-absent', 'HRReportController@daily_absent')->name('daily.absent');
+Route::get('/daily-late', 'HRReportController@daily_late')->name('daily.late');
+Route::get('/daily-leave', 'HRReportController@daily_leave')->name('daily.leave');
+Route::get('/daily-overtime', 'HRReportController@daily_overtime')->name('daily.overtime');
+Route::get('/range-attendance', 'HRReportController@range_attendance')->name('range.attendance');
+Route::get('/monthly-attendance', 'HRReportController@monthly_attendance')->name('monthly.attendance');
+Route::get('/monthly-overtime', 'HRReportController@monthly_overtime')->name('monthly.overtime');
 
+// Salary Reports Route
+Route::get('/salary-sheet', 'SalaryReportController@salary_sheet')->name('salary.sheet');
+Route::get('/monthly-payslip', 'SalaryReportController@monthly_payslip')->name('monthly.payslip');
+Route::get('/tax-report', 'SalaryReportController@tax_report')->name('tax.report');
+
+// Systems Route
+Route::get('/user-management', 'SystemController@user_management')->name('user.management');
+Route::get('/system-information', 'SystemController@system_information')->name('system.information');
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
