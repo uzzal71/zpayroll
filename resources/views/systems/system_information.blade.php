@@ -6,32 +6,31 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Department Create</h5>
+                <h5 class="mb-0 h6">System Information</h5>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('departments.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
-                	@csrf
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Department Name</label>
-                        <div class="col-md-9">
-                            <input type="text" placeholder="Department Name" id="department_name" name="department_name" class="form-control" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Status</label>
-                        <div class="col-md-9">
-                            <select name="status" required class="form-control aiz-selectpicker mb-2 mb-md-0">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group mb-0 text-right">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
+                <table class="table table-bordered">
+                    <tr>
+                        <td>OS</td>
+                        <td>Windows, Linux</td>
+                    </tr>
+                    <tr>
+                        <td>PHP</td>
+                        <td>Version ^7.4</td>
+                    </tr>
+                    <tr>
+                        <td>Framework</td>
+                        <td>Laravel ^8.0</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>MySql</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>HTML, CSS, Bootstrap 4, JavaScript, Jquery, Ajax</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
