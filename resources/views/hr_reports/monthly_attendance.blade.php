@@ -109,19 +109,11 @@
                 <h5 class="mb-0 h6">Employee List <span class="badge badge-warning" id="select-box"></span></h5>
             </div>
             <div class="card-body">
-                <form action="#" method="POST" id="choice_form">
-                    @csrf
-                    <div class="FixedHeightContainer">
-                        <div id="result" class="Content">
-                            {{-- Get filter employee data --}}
-                        </div>
+                <div class="FixedHeightContainer">
+                    <div id="result" class="Content">
+                        {{-- Get filter employee data --}}
                     </div>
-                    <!-- Button -->
-                    <div class="col-12 text-center">
-                        <button type="submit" name="button" class="btn btn-success mt-2">Submit</button>
-                    </div>
-                    <!-- Button -->
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -131,7 +123,7 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <button type="button" class="btn btn-success mt-2">Submit</button>
+        <button type="button" class="btn btn-success mt-2 mb-4" id="monthly_attendance_report">Submit</button>
     </div>
 </div>
 
@@ -191,6 +183,60 @@
                 this.checked = false;
             });
         }
+    });
+
+    $(document).ready(function() {
+        $('#monthly_attendance_report').click(function() {
+            var month = document.getElementById('month').value;
+            var year = document.getElementById('year').value;
+            var employee_id = [];
+            $.each($("input[type=checkbox].check-one:checked"), function(){
+                employee_id.push($(this).val());
+            });
+
+            // validation
+            if (month == '') {
+                AIZ.plugins.notify('danger', 'Please select month');
+                return false;
+            }
+
+            if (year == '') {
+                AIZ.plugins.notify('danger', 'Please select year');
+                return false;
+            }
+
+            if (employee_id.length == 0) {
+                AIZ.plugins.notify('danger', 'Please select employees');
+                return false;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type:"POST",
+                url:'{{ route('monthly.attendance.report') }}',
+                data: {
+                    'month': month,
+                    'year': year,
+                    'employee_id': employee_id
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(data) {
+                    var blob=new Blob([data]);
+                    var link=document.createElement('a');
+                    link.href=window.URL.createObjectURL(blob);
+                    var currentdate = new Date();
+                    link.download="monthly_attendance_report.pdf";
+                    link.click();
+                },
+                error: function(blob){
+                    console.log(blob);
+                }
+            });
+        });
     });
 </script>
 
