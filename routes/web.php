@@ -97,6 +97,7 @@ Route::post('/daily-overtime-preport', 'HRReportController@daily_overtime_report
 
 // Range Attendance
 Route::get('/range-attendance', 'HRReportController@range_attendance')->name('range.attendance');
+Route::post('/range-attendance-report', 'HRReportController@range_attendance_report')->name('range.attendance.report');
 
 // Monthly Attendance Reports
 Route::get('/monthly-attendance', 'HRReportController@monthly_attendance')->name('monthly.attendance');
