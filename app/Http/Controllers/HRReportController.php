@@ -253,8 +253,10 @@ class HRReportController extends Controller
 
         $output = '';
         $month_name = date("F", mktime(0, 0, 0, $month, 10));
+        $emp_length = count($employees);
 
         foreach ($employees as $key => $employee) { 
+            $emp_length = $emp_length - 1;
 
             $results = Attendance::where('attendance_month', $month)
                 ->where('attendance_year', $year)
@@ -311,21 +313,46 @@ class HRReportController extends Controller
                 <div>
                     <table class="padding text-left small">
                         <tr>
-                            <td width="20%">Name: </td>
-                            <td width="30%">'.$employee->employee_name.'</td>
-                            <td width="20%">Department: </td>
-                            <td width="30%">'.$employee->department->department_name.'</td>
-                        </tr>
-                        <tr>
-                            <td width="20%">Card: </td>
-                            <td width="30%">'.$employee->employee_punch_card.'</td>
-                            <td width="20%">Designation: </td>
-                            <td width="30%">'.$employee->designation->designation_name.'</td>
+                            <td width="50%">
+                                <table>
+                                    <tr>
+                                        <td width="50%">P = Present</td>
+                                        <td width="50%">A = Absent</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">L = Late</td>
+                                        <td width="50%">W = Weekend</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">H = Holiday</td>
+                                        <td width="50%">SL, ML = Leave</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width="50%">
+                                <table>
+                                    <tr>
+                                        <td width="50%">Present = </td>
+                                        <td width="50%">Absent = </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">Late = </td>
+                                        <td width="50%">Weekend = </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">Holiday = </td>
+                                        <td width="50%">Leave = </td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
                     </table>
                 </div>
-            </div>
-            <pagebreak></pagebreak>';
+            </div>';
+
+            if ($emp_length != 0) {
+                $output .= '<pagebreak></pagebreak>';
+            }
         }
 
         $pdf = PDF::loadView('reports.monthly_attendance_report', ['output' => $output]);
