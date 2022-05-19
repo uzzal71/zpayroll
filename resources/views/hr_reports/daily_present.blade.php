@@ -187,8 +187,18 @@
                     'from_date': from_date,
                     'employee_id': employee_id
                 },
+                xhrFields: {
+                    responseType: 'blob'
+                },
                 success: function(data) {
-                    console.log(data);
+                    var blob=new Blob([data]);
+                    var link=document.createElement('a');
+                    link.href=window.URL.createObjectURL(blob);
+                    link.download="daily_present_report.pdf";
+                    link.click();
+                },
+                error: function(blob){
+                    console.log(blob);
                 }
             });
         });
