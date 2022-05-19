@@ -195,7 +195,7 @@
                     var link=document.createElement('a');
                     link.href=window.URL.createObjectURL(blob);
                     var currentdate = new Date();
-                    link.download="daily_present_report"+ currentdate.getDate() +".pdf";
+                    link.download="daily_present_report_"+ currentdate.getDate() +".pdf";
                     link.click();
                 },
                 error: function(blob){

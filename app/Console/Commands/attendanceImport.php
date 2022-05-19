@@ -210,6 +210,21 @@ class attendanceImport extends Command
                                     $attendance->late_time = $late;
                                 }
 
+                                if ($attendance->in_time == '--:--' && $attendance->out_time == '--:--')
+                                {
+                                    if ($status != 'H' &&
+                                        $status != 'W' &&
+                                        $status != 'SL' &&
+                                        $status != 'AL' &&
+                                        $status != 'CL' &&
+                                        $status != 'MAT' &&
+                                        $status != 'PAT' &&
+                                        $status != 'L'
+                                    ){
+                                    $status = 'A';
+                                }
+                                }
+
                                 $attendance->over_time = 0;
                                 $attendance->remarks = $remarks;
                                 $attendance->attendance_status = $status;

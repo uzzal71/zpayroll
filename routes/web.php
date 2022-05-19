@@ -80,6 +80,8 @@ Route::get('/daily-present', 'HRReportController@daily_present')->name('daily.pr
 Route::post('/daily-present-preport', 'HRReportController@daily_present_report')->name('daily.present.report');
 
 Route::get('/daily-absent', 'HRReportController@daily_absent')->name('daily.absent');
+Route::post('/daily-absent-preport', 'HRReportController@daily_absent_report')->name('daily.absent.report');
+
 Route::get('/daily-late', 'HRReportController@daily_late')->name('daily.late');
 Route::get('/daily-leave', 'HRReportController@daily_leave')->name('daily.leave');
 Route::get('/daily-overtime', 'HRReportController@daily_overtime')->name('daily.overtime');
