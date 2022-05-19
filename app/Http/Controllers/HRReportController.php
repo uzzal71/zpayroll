@@ -79,7 +79,7 @@ class HRReportController extends Controller
         ];
 
         $pdf = PDF::loadView('reports.daily_absent_report', $data);
-        $pdf->save('pdf/daily_present_report.pdf');
+        $pdf->save('pdf/daily_absent_report.pdf');
         return response()->download('pdf/daily_absent_report.pdf');
     }
 
@@ -115,7 +115,7 @@ class HRReportController extends Controller
         ];
 
         $pdf = PDF::loadView('reports.daily_late_report', $data);
-        $pdf->save('pdf/daily_present_report.pdf');
+        $pdf->save('pdf/daily_late_report.pdf');
         return response()->download('pdf/daily_late_report.pdf');
     }
 
@@ -140,7 +140,7 @@ class HRReportController extends Controller
         $employee_id = $request->employee_id;
         $results = Attendance::with(['employee'])
             ->where('attendance_date', $from_date)
-            ->where('attendance_status', 'P')
+            ->whereIn('attendance_status', ['SL','AL','CL','MAT','ML','PAT'])
             ->whereIn('employee_id', $employee_id)
             ->get();
         $company = DB::table('companies')->find(1);
@@ -151,7 +151,7 @@ class HRReportController extends Controller
         ];
 
         $pdf = PDF::loadView('reports.daily_leave_report', $data);
-        $pdf->save('pdf/daily_present_report.pdf');
+        $pdf->save('pdf/daily_leave_report.pdf');
         return response()->download('pdf/daily_leave_report.pdf');
     }
 

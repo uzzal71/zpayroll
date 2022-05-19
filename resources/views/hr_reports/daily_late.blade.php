@@ -95,7 +95,7 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <button type="button" class="btn btn-success mt-2">Submit</button>
+        <button type="button" class="btn btn-success mt-2 mb-b" id="daily_late_report">Submit</button>
     </div>
 </div>
 
@@ -155,6 +155,53 @@
                 this.checked = false;
             });
         }
+    });
+
+    $(document).ready(function() {
+        $('#daily_late_report').click(function() {
+            var from_date = document.getElementById('from_date').value;
+            var employee_id = [];
+            $.each($("input[type=checkbox].check-one:checked"), function(){
+                employee_id.push($(this).val());
+            });
+
+            // validation
+            if (from_date == '') {
+                AIZ.plugins.notify('danger', 'Please input date');
+                return false;
+            }
+
+            if (employee_id.length == 0) {
+                AIZ.plugins.notify('danger', 'Please select employees');
+                return false;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type:"POST",
+                url:'{{ route('daily.late.report') }}',
+                data: {
+                    'from_date': from_date,
+                    'employee_id': employee_id
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(data) {
+                    var blob=new Blob([data]);
+                    var link=document.createElement('a');
+                    link.href=window.URL.createObjectURL(blob);
+                    var currentdate = new Date();
+                    link.download="daily_late_report.pdf";
+                    link.click();
+                },
+                error: function(blob){
+                    console.log(blob);
+                }
+            });
+        });
     });
 </script>
 

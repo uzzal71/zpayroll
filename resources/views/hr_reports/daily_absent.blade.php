@@ -95,7 +95,7 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <button type="button" class="btn btn-success mt-2" id="daily_absent_report">Submit</button>
+        <button type="button" class="btn btn-success mt-2 mb-4" id="daily_absent_report">Submit</button>
     </div>
 </div>
 
@@ -194,7 +194,7 @@
                     var link=document.createElement('a');
                     link.href=window.URL.createObjectURL(blob);
                     var currentdate = new Date();
-                    link.download="daily_absent_report_"+ currentdate.getDate() +".pdf";
+                    link.download="daily_absent_report.pdf";
                     link.click();
                 },
                 error: function(blob){

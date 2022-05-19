@@ -83,7 +83,11 @@ Route::get('/daily-absent', 'HRReportController@daily_absent')->name('daily.abse
 Route::post('/daily-absent-preport', 'HRReportController@daily_absent_report')->name('daily.absent.report');
 
 Route::get('/daily-late', 'HRReportController@daily_late')->name('daily.late');
+Route::post('/daily-late-preport', 'HRReportController@daily_late_report')->name('daily.late.report');
+
 Route::get('/daily-leave', 'HRReportController@daily_leave')->name('daily.leave');
+Route::post('/daily-leave-preport', 'HRReportController@daily_leave_report')->name('daily.leave.report');
+
 Route::get('/daily-overtime', 'HRReportController@daily_overtime')->name('daily.overtime');
 Route::get('/range-attendance', 'HRReportController@range_attendance')->name('range.attendance');
 Route::get('/monthly-attendance', 'HRReportController@monthly_attendance')->name('monthly.attendance');
