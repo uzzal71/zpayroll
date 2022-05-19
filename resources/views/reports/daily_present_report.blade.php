@@ -52,6 +52,9 @@
 <body>
 	<div>
 
+		<div style="padding: 1rem;">
+			<h3 class="text-center">{{ $company->company_full_name }}</h3>
+		</div>
 
 	    <div style="padding: 1rem;">
 			<table class="padding text-left small border-bottom">
@@ -69,7 +72,7 @@
 				<tbody class="strong">
 					@foreach ($results as $key => $row)
 	                <tr>
-		                <td>{{ $row->employee_id }}</td>
+		                <td>{{ $row->employee->employee_name }}({{ $row->employee->employee_punch_card }})</td>
 						<td>{{ $row->attendance_date }}</td>
 						<td>{{ $row->in_time }}</td>
 						<td>{{ $row->out_time }}</td>

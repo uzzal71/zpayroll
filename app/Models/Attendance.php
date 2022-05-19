@@ -19,4 +19,8 @@ class Attendance extends Model
         'late_time',
         'attendance_status'
     ];
+
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
 }
