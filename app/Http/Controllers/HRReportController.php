@@ -21,6 +21,16 @@ class HRReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function daily_present_report(Request $request)
+    {
+        return "Hello World";
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function daily_absent(Request $request)
     {
     	return view('hr_reports.daily_absent');

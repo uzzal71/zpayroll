@@ -96,7 +96,7 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <button type="button" class="btn btn-success mt-2" id="daily_present_report">Submit</button>
+        <button type="button" class="btn btn-success mt-2 mb-4" id="daily_present_report">Submit</button>
     </div>
 </div>
 
@@ -157,87 +157,43 @@
             });
         }
     });
-</script>
 
-<style>
-    .FixedHeightContainer
-    {
-        float:right;
-        height: 292px;
-        width:100%;
-        padding:3px;
-        background:#ef4f2d;
-    }
-    .Content
-    {
-        height:286px;
-        overflow:auto;
-        background:#fff;
-    }
-</style>
-@endsection
-
-
-@section('script')
-<script type="text/javascript">
     $(document).ready(function() {
+        $('#daily_present_report').click(function() {
+            var from_date = document.getElementById('from_date').value;
+            var employee_id = [];
+            $.each($("input[type=checkbox].check-one:checked"), function(){
+                employee_id.push($(this).val());
+            });
 
-        $( "#department_id" ).change(function() {get_update_employee_list()});
-        $( "#designation_id" ).change(function() {get_update_employee_list()});
-        $( "#schedule_id" ).change(function() {get_update_employee_list()});
-        $( "#status" ).change(function() {get_update_employee_list()});
+            // validation
+            if (from_date == '') {
+                AIZ.plugins.notify('danger', 'Please input date');
+                return false;
+            }
 
-        function get_update_employee_list() {
-            var department_id = document.getElementById('department_id').value;
-            var designation_id = document.getElementById('designation_id').value;
-            var schedule_id = document.getElementById('schedule_id').value;
-            var status = document.getElementById('status').value;
+            if (employee_id.length == 0) {
+                AIZ.plugins.notify('danger', 'Please select employees');
+                return false;
+            }
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type:"POST",
-                url:'{{ route('ajax.get_employee') }}',
+                url:'{{ route('daily.present.report') }}',
                 data: {
-                    'department_id': department_id,
-                    'designation_id': designation_id,
-                    'schedule_id': schedule_id,
-                    'status': status
+                    'from_date': from_date,
+                    'employee_id': employee_id
                 },
                 success: function(data) {
-                    $('#result').html(data.output);
+                    console.log(data);
                 }
             });
-        }
-
-        for(var i = 0; i < 1000; i++) {
-            (function(index) {
-                setTimeout(function() {
-                    var check = $('#result').find('input[type=checkbox]:checked').length;
-                    $('#select-box').html(check);
-                }, index*1000);
-            })(i);
-        }
-    });
-
-    $(document).on("change", ".check-all", function() {
-        if(this.checked) {
-            // Iterate each checkbox
-            $('.check-one:checkbox').each(function() {
-                this.checked = true;
-            });
-        } else {
-            $('.check-one:checkbox').each(function() {
-                this.checked = false;
-            });
-        }
-    });
-    $(document).ready(function() {
-        $( "#daily_present_report" ).onclick(function() {
-            alert('submitted');
         });
     });
+
 </script>
 
 <style>

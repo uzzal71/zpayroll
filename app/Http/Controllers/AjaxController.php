@@ -56,7 +56,7 @@ class AjaxController extends Controller
     		<tr>
     			<th>
     				<label class="aiz-checkbox">
-                        <input type="checkbox" class="check-one" name="id[]" value=" '.$employee->id.' ">
+                        <input type="checkbox" class="check-one" id="employee_id[]" name="employee_id[]" value=" '.$employee->id.' ">
                          <span class="aiz-square-check"></span>
                     </label>
     			</th>
