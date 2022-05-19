@@ -47,13 +47,24 @@
 		.text-right{
 			text-align: '';
 		}
+		.text-center {
+			text-align: center;
+		}
+		.p-0 {
+			padding: 0px;
+		}
+		.m-0 {
+			margin: 0px;
+		}
 	</style>
 </head>
 <body>
 	<div>
 
 		<div style="padding: 1rem;">
-			<h3 class="text-center">{{ $company->company_full_name }}</h3>
+			<h2 class="text-center p-0 m-0">ZAMAN-IT</h2>
+			<p class="text-center">House 63, Road 13, Sector 10, Uttara, Dhaka-1230</p>
+			<h3 class="text-center">Daily Present</h3>
 		</div>
 
 	    <div style="padding: 1rem;">
