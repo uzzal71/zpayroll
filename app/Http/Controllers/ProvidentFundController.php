@@ -74,9 +74,9 @@ class ProvidentFundController extends Controller
      */
     public function edit($id)
     {
-        $provident_fund = ProvidentFund::findOrFail($id);
+        $provident_found = ProvidentFund::findOrFail($id);
 
-        return view('software_settings.provident_founds.edit', compact('provident_fund'));
+        return view('software_settings.provident_founds.edit', compact('provident_found'));
     }
 
     /**

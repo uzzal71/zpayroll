@@ -7,6 +7,12 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0 h6">Weekend Create</h5>
+                <div class="col-md-6 text-md-right">
+                    <a href="{{ route('weekend_entries.index') }}" class="btn btn-primary">
+                        <i class="las la-chevron-left"></i>
+                         Back
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 <form class="form-horizontal" action="{{ route('weekend_entries.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">

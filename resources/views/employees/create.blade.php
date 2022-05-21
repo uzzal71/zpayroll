@@ -2,8 +2,20 @@
 
 @section('content')
 <div class="aiz-titlebar text-left mt-2 mb-3">
-    <h5 class="mb-0 h6">Add New Employee</h5>
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="h3">Add New Employee</h1>
+        </div>
+        <div class="col-md-6 text-md-right">
+            <a href="{{ route('employees.index') }}" class="btn btn-primary">
+                <i class="las la-chevron-left"></i>
+                 Back
+            </a>
+        </div>
+    </div>
 </div>
+
+
 <div class="">
     <form class="form form-horizontal mar-top" action="{{route('employees.store')}}" method="POST" enctype="multipart/form-data" id="choice_form" autocomplete="off">
         <div class="row gutters-5">

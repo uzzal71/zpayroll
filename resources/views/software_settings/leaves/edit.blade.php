@@ -7,6 +7,12 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0 h6">Leave Edit</h5>
+                <div class="col text-right">
+                    <a href="{{ route('leaves.index') }}" class="btn btn-circle btn-info">
+                        <i class="las la-chevron-left"></i>
+                        Back
+                    </a>
+                </div>
             </div>
             <div class="card-body p-0">
                 <form class="p-4" action="{{ route('leaves.update', $leave->id) }}" method="POST" enctype="multipart/form-data">

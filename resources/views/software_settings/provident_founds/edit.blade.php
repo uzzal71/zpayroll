@@ -6,7 +6,13 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Company Information</h5>
+                <h5 class="mb-0 h6">Provident Found Edit</h5>
+                <div class="col text-right">
+                    <a href="{{ route('provident_founds.index') }}" class="btn btn-circle btn-info">
+                        <i class="las la-chevron-left"></i>
+                        Back
+                    </a>
+                </div>
             </div>
             <div class="card-body p-0">
                 <form class="p-4" action="{{ route('provident_founds.update', $provident_found->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">

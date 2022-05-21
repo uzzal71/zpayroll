@@ -7,6 +7,12 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0 h6">Salary Increment Create</h5>
+                <div class="col-md-6 text-md-right">
+                    <a href="{{ route('salary_increments.index') }}" class="btn btn-primary">
+                        <i class="las la-chevron-left"></i>
+                         Back
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 <form class="form-horizontal" action="{{ route('salary_increments.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">

@@ -6,7 +6,13 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Department Create</h5>
+                <h5 class="mb-0 h6">User Create</h5>
+                <div class="col text-right">
+                    <a href="{{ route('users.index') }}" class="btn btn-circle btn-info">
+                        <i class="las la-chevron-left"></i>
+                        Back
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 <form class="form-horizontal" action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
