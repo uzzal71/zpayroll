@@ -15,7 +15,40 @@ class CreateSalarySheetsTable extends Migration
     {
         Schema::create('salary_sheets', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->string('salary_month');
+            $table->year('salary_year');
+            $table->string('employee_name');
+            $table->string('designation');
+            $table->string('department');
+            $table->date('joining_date');
+            $table->double('gross_salary', 10, 2)->nullable()->default(0.00);
+            $table->double('basic_salary', 10, 2)->nullable()->default(0.00);
+            $table->double('house_rent', 10, 2)->nullable()->default(0.00);
+            $table->double('medical_allowance', 10, 2)->nullable()->default(0.00);
+            $table->double('transport_allowance', 10, 2)->nullable()->default(0.00);
+            $table->double('food_allowance', 10, 2)->nullable()->default(0.00);
+            $table->integer('need_to_work')->nullable()->default(0);
+            $table->integer('present')->nullable()->default(0);
+            $table->integer('absent')->nullable()->default(0);
+            $table->integer('unpaid_leave')->nullable()->default(0);
+            $table->integer('paid_leave')->nullable()->default(0);
+            $table->integer('need_to_pay')->nullable()->default(0);
+            $table->double('late_deduction', 10, 2)->nullable()->default(0.00);
+            $table->double('absent_deduction', 10, 2)->nullable()->default(0.00);
+            $table->double('tax_deduction', 10, 2)->nullable()->default(0.00);
+            $table->double('provident_found_deduction', 10, 2)->nullable()->default(0.00);
+            $table->double('total_deduction', 10, 2)->nullable()->default(0.00);
+            $table->double('commission_addition', 10, 2)->nullable()->default(0.00);
+            $table->double('transport_bill_addition', 10, 2)->nullable()->default(0.00);
+            $table->double('paid_leave_addition', 10, 2)->nullable()->default(0.00);
+            $table->double('overtime_addition', 10, 2)->nullable()->default(0.00);
+            $table->double('other_addition', 10, 2)->nullable()->default(0.00);
+            $table->double('total_addition', 10, 2)->nullable()->default(0.00);
+            $table->double('net_salary')->nullable()->default(0.00);
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 
