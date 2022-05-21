@@ -223,11 +223,13 @@ class AttendanceController extends Controller
     {
         $sort_search =null;
         $attendances = AttendanceLog::orderBy('id', 'desc');
+        $attendances->where('status', 'N');
+
         if ($request->has('search')){
             $sort_search = $request->search;
-            $attendances = $attendances->where('company_full_name', 'like', '%'.$sort_search.'%');
+            $attendances = $attendances->where('employee_id', $sort_search);
         }
-        $attendances = $attendances->paginate(50);
+
         return view('payroll.approval_attendance', compact('attendances', 'sort_search'));
     }
 }
