@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SalarySetting;
 use Illuminate\Http\Request;
 
 class SalarySettingController extends Controller
@@ -11,9 +12,11 @@ class SalarySettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sort_search = null;
+        $salary_settings = SalarySetting::orderBy('id', 'desc')->get();
+        return view('software_settings.salary_settings.index', compact('salary_settings'));
     }
 
     /**
@@ -23,7 +26,7 @@ class SalarySettingController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +37,7 @@ class SalarySettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -56,7 +59,9 @@ class SalarySettingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $salary_setting = SalarySetting::findOrFail($id);
+
+        return view('software_settings.salary_settings.edit', compact('salary_setting'));
     }
 
     /**
@@ -68,7 +73,19 @@ class SalarySettingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $salary_setting = SalarySetting::findOrFail($id);
+
+        $salary_setting->gross_salary = $request->gross_salary;
+        $salary_setting->basic_salary = $request->basic_salary;
+        $salary_setting->house_rent   = $request->house_rent;
+        $salary_setting->medical_allowance   = $request->medical_allowance;
+        $salary_setting->transport_allowance = $request->transport_allowance;
+        $salary_setting->food_allowance     = $request->food_allowance;
+
+        $salary_setting->save();
+
+        flash('Salary Setting has been updated successfully')->success();
+        return redirect()->route('salary_settings.index');
     }
 
     /**
@@ -79,6 +96,6 @@ class SalarySettingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

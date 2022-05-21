@@ -40,6 +40,9 @@ Route::get('/leaves/destroy/{id}', 'LeaveController@destroy')->name('leaves.dest
 Route::resource('taxs', 'TaxController');
 Route::get('/taxs/destroy/{id}', 'TaxController@destroy')->name('taxs.destroy');
 
+// salary settings
+Route::resource('salary_settings', 'SalarySettingController');
+
 Route::resource('provident_founds', 'ProvidentFundController');
 Route::get('/provident_founds/destroy/{id}', 'ProvidentFundController@destroy')->name('provident_founds.destroy');
 
