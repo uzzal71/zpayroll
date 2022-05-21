@@ -15,7 +15,18 @@ class CreateAttendanceSummariesTable extends Migration
     {
         Schema::create('attendance_summaries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->string('attendance_month');
+            $table->year('attendance_year');
+            $table->integer('need_to_work');
+            $table->integer('present');
+            $table->integer('absent');
+            $table->integer('unpaid_leave');
+            $table->integer('paid_leave');
+            $table->integer('need_to_pay');
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 
