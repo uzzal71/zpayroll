@@ -18,12 +18,16 @@ class CreateAttendanceSummariesTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->string('attendance_month');
             $table->year('attendance_year');
-            $table->integer('need_to_work');
-            $table->integer('present');
-            $table->integer('absent');
-            $table->integer('unpaid_leave');
-            $table->integer('paid_leave');
-            $table->integer('need_to_pay');
+            $table->integer('number_of_days')->default(0);
+            $table->integer('weekend')->default(0);
+            $table->integer('holiday')->default(0);
+            $table->integer('need_to_work')->default(0);
+            $table->integer('present')->default(0);
+            $table->integer('late')->default(0);
+            $table->integer('absent')->default(0);
+            $table->integer('unpaid_leave')->default(0);
+            $table->integer('paid_leave')->default(0);
+            $table->integer('need_to_pay')->default(0);
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');
