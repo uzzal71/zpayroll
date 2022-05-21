@@ -14,7 +14,7 @@ class CreateSalarySheetsTable extends Migration
     public function up()
     {
         Schema::create('salary_sheets', function (Blueprint $table) {
-            $table->id();
+           $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->string('salary_month');
             $table->year('salary_year');
@@ -28,8 +28,12 @@ class CreateSalarySheetsTable extends Migration
             $table->double('medical_allowance', 10, 2)->nullable()->default(0.00);
             $table->double('transport_allowance', 10, 2)->nullable()->default(0.00);
             $table->double('food_allowance', 10, 2)->nullable()->default(0.00);
+            $table->integer('number_of_days')->nullable()->default(0);
+            $table->integer('weekend')->nullable()->default(0);
+            $table->integer('holiday')->nullable()->default(0);
             $table->integer('need_to_work')->nullable()->default(0);
             $table->integer('present')->nullable()->default(0);
+            $table->integer('late')->nullable()->default(0);
             $table->integer('absent')->nullable()->default(0);
             $table->integer('unpaid_leave')->nullable()->default(0);
             $table->integer('paid_leave')->nullable()->default(0);

@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('attendance:name')->everyMinute();
         $schedule->command('import:name')->everyMinute();
         $schedule->command('attendance_summary:name')->everyMinute();
+        $schedule->command('salary_sheet:name')->everyMinute();
     }
 
     /**
