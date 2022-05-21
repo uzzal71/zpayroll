@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class salary_sheet extends Command
+class SalarySheet extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'salary_sheet:name';
+    protected $signature = 'command:name';
 
     /**
      * The console command description.
@@ -37,6 +37,6 @@ class salary_sheet extends Command
      */
     public function handle()
     {
-        echo "salary sheet";
+        return 0;
     }
 }
