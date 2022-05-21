@@ -55,6 +55,12 @@
 
                         <li class="aiz-side-nav-item">
                             <a href="{{ route('taxs.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Salary Setup</span>
+                            </a>
+                        </li>
+
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('taxs.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Taxs Setup</span>
                             </a>
                         </li>
