@@ -39,7 +39,6 @@ class import extends Command
      */
     public function handle()
     {
-        echo public_path(). 'uploads/attendance_files/';exit();
         Excel::import(new AttendanceImport, 'C:\xampp\htdocs\zpayroll\public\uploads\attendance_files\April-2022.xls');
     }
 }

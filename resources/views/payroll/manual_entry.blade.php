@@ -45,7 +45,18 @@
     <div class="col-lg-10 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Save Munual Entry</h5>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5 class="card-title">Save Munual Entry</h5>
+                        </div>
+                        <div class="col-sm-6">
+                            @if ($emp_info)
+                                <h5 class="mb-0 h6">{{ $emp_info->employee_name }}({{ $emp_info->employee_punch_card }})</h5>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <form class="form-horizontal" action="{{ route('attendances.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">

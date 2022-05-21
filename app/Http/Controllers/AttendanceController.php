@@ -110,7 +110,7 @@ class AttendanceController extends Controller
             }
 
             return view('payroll.manual_entry', compact(
-                'attendances', 'punch_card', 'from_date', 'to_date'));
+                'attendances', 'punch_card', 'from_date', 'to_date', 'emp_info'));
         }
 
         return view('payroll.manual_entry');
@@ -141,6 +141,10 @@ class AttendanceController extends Controller
                     'attendance_date' => $data['attendance_date'][$i]
                 ])->first();
 
+                if (($log_info->attendance_in != $data['attendance_in'][$i]) || ($log_info->attendance_out != $data['attendance_out'][$i])) {
+                    $log_info->status = 'N';
+                }
+
                 $log_info->employee_id = $data['employee_id'][$i];
                 $log_info->attendance_date = $data['attendance_date'][$i];
                 $log_info->attendance_in = $data['attendance_in'][$i];
@@ -156,6 +160,7 @@ class AttendanceController extends Controller
                 $attendance->attendance_date = $data['attendance_date'][$i];
                 $attendance->attendance_in = $data['attendance_in'][$i];
                 $attendance->attendance_out = $data['attendance_out'][$i];
+                $attendance->status = 'N';
 
                 $attendance->save();
 
@@ -221,9 +226,8 @@ class AttendanceController extends Controller
      */
     public function approval_attendance(Request $request)
     {
-        $sort_search =null;
-        $attendances = AttendanceLog::orderBy('id', 'desc');
-        $attendances->where('status', 'N');
+        $sort_search = null;
+        $attendances = AttendanceLog::where('status', 'N')->get();
 
         if ($request->has('search')){
             $sort_search = $request->search;
