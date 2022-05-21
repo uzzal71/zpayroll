@@ -71,6 +71,7 @@ Route::get('/upload/destroy/{id}', 'UploadController@destroy')->name('upload.des
 //Manual Attendance Logs
 Route::resource('attendances', 'AttendanceController');
 Route::get('/approval/attendance', 'AttendanceController@approval_attendance')->name('approval.attendance');
+Route::post('/approval/attendance/save', 'AttendanceController@approval_attendance_save')->name('approval.attendance.save');
 
 // Cron Jobs
 Route::resource('cronjobs', 'CronJobController');

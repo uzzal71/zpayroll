@@ -122,6 +122,7 @@ class attendanceImport extends Command
                                 $attendance_log = AttendanceLog::where([
                                     'employee_id' => $employee->employee_punch_card,
                                     'attendance_date' => $value,
+                                    'status' => 'Y',
                                 ])->first();
 
                                 $attendance->employee_id = $employee->id;
@@ -162,6 +163,7 @@ class attendanceImport extends Command
                                 $attendance_log = AttendanceLog::where([
                                     'employee_id' => $employee->employee_punch_card,
                                     'attendance_date' => $value,
+                                    'status' => 'Y',
                                 ])->first();
 
                                 $attendance->employee_id = $employee->id;

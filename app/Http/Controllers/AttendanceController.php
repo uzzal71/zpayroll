@@ -227,7 +227,7 @@ class AttendanceController extends Controller
     public function approval_attendance(Request $request)
     {
         $sort_search = null;
-        $attendances = AttendanceLog::where('status', 'N')->get();
+        $attendances = AttendanceLog::where('status', 'N')->orderBy('employee_id', 'asc')->get();
 
         if ($request->has('search')){
             $sort_search = $request->search;
@@ -235,5 +235,39 @@ class AttendanceController extends Controller
         }
 
         return view('payroll.approval_attendance', compact('attendances', 'sort_search'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function approval_attendance_save(Request $request)
+    {
+        $data = $request->all();
+        $array_length = count($data["attendance_date"]);
+
+        for($i=0; $i < $array_length; $i++){
+
+            $attendance = explode(":", $data['attendance_date'][$i]);
+
+            $attendance_date = $attendance[0];
+            $employee_id = $attendance[1];
+
+            $att_info = AttendanceLog::where([
+                'employee_id'       => $employee_id,
+                'attendance_date'   => $attendance_date,
+            ])->first();
+
+            if ($att_info) {
+                $att_info->status = 'Y';
+                $att_info->save();
+            }
+       }
+
+        return response()->json(
+            ['status' => true, "redirect_url" => route('approval.attendance')]
+        );
     }
 }

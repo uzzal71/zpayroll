@@ -23,40 +23,38 @@
                 </div>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('attendances.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
-                    @csrf
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <input type="checkbox" name="">
-                                </th>
-                                <th>Card Id</th>
-                                <th>Date</th>
-                                <th>In</th>
-                                <th>Out</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($attendances as $key => $attendance)
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="employee_id[]">
-                                </td>
-                                <td>{{ $attendance->employee_id }}</td>
-                                <td>{{ $attendance->attendance_date }}</td>
-                                <td>{{ $attendance->attendance_in }}</td>
-                                <td>{{ $attendance->attendance_out }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    
-
-                    <div class="form-group mb-0 text-right">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="check-all">
+                            </th>
+                            <th>Card Id</th>
+                            <th>Date</th>
+                            <th>In</th>
+                            <th>Out</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($attendances as $key => $attendance)
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="check-one" name="attendance_date[]" value="{{ $attendance->attendance_date }}:{{ $attendance->employee_id }}" id="attendance_date[]">
+                            </td>
+                            <td>{{ $attendance->employee_id }}</td>
+                            <td>{{ $attendance->attendance_date }}</td>
+                            <td>{{ $attendance->attendance_in }}</td>
+                            <td>{{ $attendance->attendance_out }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                
+                <!-- Button start -->
+                <div class="form-group mb-0 text-right">
+                    <button type="button" class="btn btn-primary" id="attendance_approval_save">Save</button>
+                </div>
+                <!-- Button start -->
             </div>
         </div>
     </div>
@@ -67,12 +65,53 @@
 
 @section('script')
 <script>
-var input = document.getElementById("punch_card");
-input.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("myBtn").click();
-  }
+$(document).on("change", ".check-all", function() {
+    if(this.checked) {
+        // Iterate each checkbox
+        $('.check-one:checkbox').each(function() {
+            this.checked = true;
+        });
+    } else {
+        $('.check-one:checkbox').each(function() {
+            this.checked = false;
+        });
+    }
+});
+
+$(document).ready(function() {
+    $('#attendance_approval_save').click(function() {
+
+        var attendance_date = [];
+
+        $.each($("input[type=checkbox].check-one:checked"), function(){
+            attendance_date.push($(this).val());
+        });
+
+        if (attendance_date.length == 0) {
+            AIZ.plugins.notify('danger', 'Please select employees');
+            return false;
+        }
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:"POST",
+            url:'{{ route('approval.attendance.save') }}',
+            data: {
+                'attendance_date': attendance_date
+            },
+            success: function(data) {
+                AIZ.plugins.notify('success', 'Attendance approval');
+
+                setTimeout(() => {
+                    if(data.redirect_url){
+                       window.location = data.redirect_url;
+                    }
+                }, 1000);
+            }
+        });
+    });
 });
 </script>
 
