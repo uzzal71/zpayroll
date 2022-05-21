@@ -153,7 +153,11 @@ class attendanceImport extends Command
 
                                 $attendance->over_time = 0;
                                 $attendance->remarks = $remarks;
-                                $attendance->attendance_status = $status;
+                                if ($attendance_log->status == 'N') {
+                                    $attendance->attendance_status = 'A';
+                                } else {
+                                    $attendance->attendance_status = $status;
+                                }
 
                                 $attendance->save();
                             } else {

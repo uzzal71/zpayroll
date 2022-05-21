@@ -20,6 +20,57 @@
     <link rel="stylesheet" href="{{ static_asset('assets/css/aiz-core.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/css/dhtmlx.css') }}">
 
+    <style type="text/css">
+        body {
+        background: #ececec;
+    }
+    /*Hidden class for adding and removing*/
+    .lds-dual-ring.hidden {
+        display: none;
+    }
+
+    /*Add an overlay to the entire page blocking any further presses to buttons or other elements.*/
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,.8);
+        z-index: 999;
+        opacity: 1;
+        transition: all 0.5s;
+    }
+    
+    /*Spinner Styles*/
+    .lds-dual-ring {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        margin: 100px auto;
+
+    }
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 5% auto;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    </style>
+
     <script>
         var AIZ = AIZ || {};
         AIZ.local = {
@@ -62,6 +113,9 @@
 		</div><!-- .aiz-content-wrapper -->
 	</div><!-- .aiz-main-wrapper -->
 
+    <!-- Loading -->
+    <div id="loading" class="lds-dual-ring hidden overlay"></div>
+
     @yield('modal')
 
     <script src="{{ static_asset('assets/js/vendors.js') }}" ></script>
@@ -76,7 +130,7 @@
     @endforeach
     </script>
 
-    <script>
+    <script type="text/javascript">
         var myCalendar;
         function doOnLoad() {
             myCalendar = new dhtmlXCalendarObject([
@@ -96,6 +150,16 @@
                 "effective_date"
             ]);
         }
+    </script>
+    <script type="text/javascript">
+        // Binds to the global ajax scope
+         $( document ).ajaxStart(function() {
+            $( "#loading" ).show();
+         });
+
+         $( document ).ajaxComplete(function() {
+            $( "#loading" ).hide();
+         });
     </script>
 </body>
 </html>
