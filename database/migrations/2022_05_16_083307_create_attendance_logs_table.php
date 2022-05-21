@@ -19,6 +19,7 @@ class CreateAttendanceLogsTable extends Migration
             $table->date('attendance_date');
             $table->string('attendance_in')->nullable();
             $table->string('attendance_out')->nullable();
+            $table->enum('status', ['Y', 'N'])->default('Y');
             $table->timestamps();
         });
     }

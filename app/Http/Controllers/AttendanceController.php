@@ -212,4 +212,22 @@ class AttendanceController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function approval_attendance(Request $request)
+    {
+        $sort_search =null;
+        $attendances = AttendanceLog::orderBy('id', 'desc');
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $attendances = $attendances->where('company_full_name', 'like', '%'.$sort_search.'%');
+        }
+        $attendances = $attendances->paginate(50);
+        return view('payroll.approval_attendance', compact('attendances', 'sort_search'));
+    }
 }
