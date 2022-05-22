@@ -150,7 +150,7 @@ class salary_sheet extends Command
                                 $paid_leave_addition = $per_day_salary * $paid_leave;
 
                                 // Total addition
-                                $total_addition = $transport_bill_addition + $commission_addition + $paid_leave_addition
+                                $total_addition = $transport_bill_addition + $commission_addition + $paid_leave_addition;
 
                                 $net_salary = ($total_addition + ($need_to_pay * $per_day_salary)) - $total_deduction;
                             }
