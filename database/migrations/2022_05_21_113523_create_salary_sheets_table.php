@@ -47,6 +47,7 @@ class CreateSalarySheetsTable extends Migration
             $table->double('transport_bill_addition', 10, 2)->nullable()->default(0.00);
             $table->double('paid_leave_addition', 10, 2)->nullable()->default(0.00);
             $table->double('overtime_addition', 10, 2)->nullable()->default(0.00);
+            $table->double('advance_salary_addition', 10, 2)->nullable()->default(0.00);
             $table->double('other_addition', 10, 2)->nullable()->default(0.00);
             $table->double('total_addition', 10, 2)->nullable()->default(0.00);
             $table->double('net_salary')->nullable()->default(0.00);

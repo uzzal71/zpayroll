@@ -66,7 +66,7 @@
                         <span class="d-flex align-items-center">
                             <span class="avatar avatar-sm mr-md-2">
                                 <img
-                                    src="{{ uploaded_asset(Auth::user()->avatar_original) }}"
+                                    src="{{ static_asset('assets/img/avatar-place.png') }}"
                                     onerror="this.onerror=null;this.src='{{ static_asset('assets/img/avatar-place.png') }}';"
                                 >
                             </span>
