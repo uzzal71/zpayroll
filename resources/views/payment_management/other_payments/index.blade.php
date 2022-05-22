@@ -4,18 +4,18 @@
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <div class="row align-items-center">
         <div class="col-md-6">
-            <h1 class="h3">All Advance Salary</h1>
+            <h1 class="h3">All Other Payment</h1>
         </div>
         <div class="col-md-6 text-md-right">
-            <a href="{{ route('advance_salaries.create') }}" class="btn btn-primary">
-                <span>Add Advance Salary</span>
+            <a href="{{ route('other_payments.create') }}" class="btn btn-primary">
+                <span>Add Other Payment</span>
             </a>
         </div>
     </div>
 </div>
 <div class="card">
     <div class="card-header d-block d-md-flex">
-        <h5 class="mb-0 h6">Advance Salaries</h5>
+        <h5 class="mb-0 h6">Other Payments</h5>
         <form class="" id="sort_categories" action="" method="GET">
             <div class="box-inline pad-rgt pull-left">
                 <div class="" style="min-width: 200px;">
@@ -33,24 +33,26 @@
                     <th>Payment Month</th>
                     <th>Payment Year</th>
                     <th>Amount</th>
+                    <th>Status</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($advance_salaries as $key => $row)
+                @foreach($other_payments as $key => $row)
                     <tr>
-                        <td>{{ ($key+1) + ($advance_salaries->currentPage() - 1)*$advance_salaries->perPage() }}</td>
+                        <td>{{ ($key+1) + ($other_payments->currentPage() - 1)*$other_payments->perPage() }}</td>
                         <td>
                             {{ $row->employee->employee_name  }}
                         </td>
                         <td>{{ $row->payment_month  }}</td>
                         <td>{{ $row->payment_year  }}</td>
                         <td>{{ $row->amount  }}</td>
+                        <td>{{ $row->status  }}</td>
                         <td class="text-right">
-                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('advance_salaries.edit', $row->id)  }}" title="Edit">
+                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('other_payments.edit', $row->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('advance_salaries.destroy', $row->id) }}" title="Delete">
+                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('other_payments.destroy', $row->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
                         </td>
@@ -59,7 +61,7 @@
             </tbody>
         </table>
         <div class="aiz-pagination">
-            {{ $advance_salaries->appends(request()->input())->links() }}
+            {{ $other_payments->appends(request()->input())->links() }}
         </div>
     </div>
 </div>

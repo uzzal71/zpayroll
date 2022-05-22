@@ -33,6 +33,7 @@
                     <th>Payment Month</th>
                     <th>Payment Year</th>
                     <th>Amount</th>
+                    <th>Remarks</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
@@ -46,6 +47,7 @@
                         <td>{{ $row->payment_month  }}</td>
                         <td>{{ $row->payment_year  }}</td>
                         <td>{{ $row->amount  }}</td>
+                        <td>{{ $row->remarks  }}</td>
                         <td class="text-right">
                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('advance_salaries.edit', $row->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>

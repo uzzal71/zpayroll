@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h5 class="mb-0 h6">Employee Advance Salary</h5>
                 <div class="col-md-6 text-md-right">
-                    <a href="{{ route('advance_salaries.index') }}" class="btn btn-primary">
+                    <a href="{{ route('transport_payments.index') }}" class="btn btn-primary">
                         <i class="las la-chevron-left"></i>
                          Back
                     </a>
@@ -30,7 +30,7 @@
         @if(!empty($employee))
         <div class="card">
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('advance_salaries.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="form-horizontal" action="{{ route('transport_payments.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     
                     <div class="form-group row">
@@ -79,6 +79,14 @@
                         <label class="col-md-3 col-form-label">Amount</label>
                         <div class="col-md-9">
                             <input type="number" class="form-control" name="amount" id="amount" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Remarks</label>
+                        <div class="col-md-9">
+                            <textarea name="remarks" id="remarks" class="form-control"></textarea>
                         </div>
                     </div>
 

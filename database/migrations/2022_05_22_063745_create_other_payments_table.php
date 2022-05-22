@@ -19,6 +19,8 @@ class CreateOtherPaymentsTable extends Migration
             $table->string('payment_month');
             $table->year('payment_year');
             $table->double('amount')->nullable()->default(0.00);
+            $table->enum('status', ['Plus', 'Minus']);
+            $table->text('remarks')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');

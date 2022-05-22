@@ -119,12 +119,12 @@
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('transport_bills.index') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('transport_payments.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Transport Bill Payment</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('others_payment.index') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('other_payments.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Others Payment</span>
                             </a>
                         </li>

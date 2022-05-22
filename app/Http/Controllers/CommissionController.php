@@ -51,15 +51,16 @@ class CommissionController extends Controller
      */
     public function store(Request $request)
     {
-        $advance_salary = new CommissionPayment;
+        $commission_payment = new CommissionPayment;
 
-        $advance_salary->employee_id = $request->employee_id;
-        $advance_salary->payment_month = $request->payment_month;
-        $advance_salary->payment_year = $request->payment_year;
-        $advance_salary->amount = $request->amount;
+        $commission_payment->employee_id = $request->employee_id;
+        $commission_payment->payment_month = $request->payment_month;
+        $commission_payment->payment_year = $request->payment_year;
+        $commission_payment->amount = $request->amount;
+        $commission_payment->remarks = $request->remarks;
 
 
-        $advance_salary->save();
+        $commission_payment->save();
 
         flash('Commission payments has been inserted successfully')->success();
         return redirect()->route('commissions.index');
@@ -98,15 +99,16 @@ class CommissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $advance_salary = CommissionPayment::findOrFail($id);
+        $commission_payment = CommissionPayment::findOrFail($id);
 
-        $advance_salary->employee_id = $request->employee_id;
-        $advance_salary->payment_month = $request->payment_month;
-        $advance_salary->payment_year = $request->payment_year;
-        $advance_salary->amount = $request->amount;
+        $commission_payment->employee_id = $request->employee_id;
+        $commission_payment->payment_month = $request->payment_month;
+        $commission_payment->payment_year = $request->payment_year;
+        $commission_payment->amount = $request->amount;
+        $commission_payment->remarks = $request->remarks;
 
 
-        $advance_salary->save();
+        $commission_payment->save();
 
         flash('Commission payments has been updated successfully')->success();
         return redirect()->route('commissions.index');

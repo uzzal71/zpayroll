@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\TransportPayment;
 use Illuminate\Http\Request;
+
 
 class TransportBillController extends Controller
 {
@@ -11,9 +14,16 @@ class TransportBillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sort_search = null;
+        $transport_payments = TransportPayment::with(['employee'])->orderBy('id', 'desc');
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $transport_payments = $transport_payments->where('payment_month', 'like', '%'.$sort_search.'%');
+        }
+        $transport_payments = $transport_payments->paginate(50);
+        return view('payment_management.transport_payments.index', compact('transport_payments', 'sort_search'));
     }
 
     /**
@@ -21,9 +31,17 @@ class TransportBillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $sort_search = null;
+        $employee = [];
+
+        if ($request->has('search'))
+        {
+            $sort_search = $request->search;
+            $employee = Employee::where('employee_punch_card', $sort_search)->first();
+        }
+        return view('payment_management.transport_payments.create', compact('employee', 'sort_search'));
     }
 
     /**
@@ -34,7 +52,19 @@ class TransportBillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $transport_payment = new TransportPayment;
+
+        $transport_payment->employee_id = $request->employee_id;
+        $transport_payment->payment_month = $request->payment_month;
+        $transport_payment->payment_year = $request->payment_year;
+        $transport_payment->amount = $request->amount;
+        $transport_payment->remarks = $request->remarks;
+
+
+        $transport_payment->save();
+
+        flash('Transport payments has been inserted successfully')->success();
+        return redirect()->route('transport_payments.index');
     }
 
     /**
@@ -56,7 +86,9 @@ class TransportBillController extends Controller
      */
     public function edit($id)
     {
-        //
+        $transport_payment = TransportPayment::with(['employee'])->findOrFail($id);
+
+        return view('payment_management.transport_payments.edit', compact('transport_payment'));
     }
 
     /**
@@ -68,7 +100,19 @@ class TransportBillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $transport_payment = TransportPayment::findOrFail($id);
+
+        $transport_payment->employee_id = $request->employee_id;
+        $transport_payment->payment_month = $request->payment_month;
+        $transport_payment->payment_year = $request->payment_year;
+        $transport_payment->amount = $request->amount;
+        $transport_payment->remarks = $request->remarks;
+
+
+        $transport_payment->save();
+
+        flash('Transport payments has been updated successfully')->success();
+        return redirect()->route('transport_payments.index');
     }
 
     /**
@@ -79,6 +123,9 @@ class TransportBillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TransportPayment::find($id)->delete();
+        flash('Transport payments has been deleted successfully')->success();
+
+        return redirect()->route('transport_payments.index');
     }
 }

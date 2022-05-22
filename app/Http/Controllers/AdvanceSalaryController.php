@@ -57,6 +57,7 @@ class AdvanceSalaryController extends Controller
         $advance_salary->payment_month = $request->payment_month;
         $advance_salary->payment_year = $request->payment_year;
         $advance_salary->amount = $request->amount;
+        $advance_salary->remarks = $request->remarks;
 
 
         $advance_salary->save();
@@ -104,6 +105,7 @@ class AdvanceSalaryController extends Controller
         $advance_salary->payment_month = $request->payment_month;
         $advance_salary->payment_year = $request->payment_year;
         $advance_salary->amount = $request->amount;
+        $advance_salary->remarks = $request->remarks;
 
 
         $advance_salary->save();

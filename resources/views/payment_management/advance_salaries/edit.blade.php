@@ -66,6 +66,13 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Remarks</label>
+                        <div class="col-md-9">
+                            <textarea name="remarks" id="remarks">{{ $advance_salary->remarks }}</textarea>
+                        </div> 
+                    </div>
+
 
                     <div class="form-group mb-0 text-right">
                         <button type="submit" class="btn btn-primary">Save</button>

@@ -14,6 +14,7 @@ class CommissionPayment extends Model
         'payment_month',
         'payment_year',
         'amount',
+        'remarks',
     ];
 
     public function employee() {

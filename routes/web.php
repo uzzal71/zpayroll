@@ -58,11 +58,11 @@ Route::get('/advance_salaries/destroy/{id}', 'AdvanceSalaryController@destroy')-
 Route::resource('commissions', 'CommissionController');
 Route::get('/commissions/destroy/{id}', 'CommissionController@destroy')->name('commissions.destroy');
 
-Route::resource('transport_bills', 'TransportBillController');
-Route::get('/transport_bills/destroy/{id}', 'TransportBillController@destroy')->name('transport_bills.destroy');
+Route::resource('transport_payments', 'TransportBillController');
+Route::get('/transport_payments/destroy/{id}', 'TransportBillController@destroy')->name('transport_payments.destroy');
 
-Route::resource('others_payment', 'OtherPaymentController');
-Route::get('/others_payment/destroy/{id}', 'OtherPaymentController@destroy')->name('others_payment.destroy');
+Route::resource('other_payments', 'OtherPaymentController');
+Route::get('/other_payments/destroy/{id}', 'OtherPaymentController@destroy')->name('other_payments.destroy');
 
 
 // HR Management All Route

@@ -19,6 +19,7 @@ class CreateAdvanceSalariesTable extends Migration
             $table->string('payment_month');
             $table->year('payment_year');
             $table->double('amount')->nullable()->default(0.00);
+            $table->text('remarks')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');
