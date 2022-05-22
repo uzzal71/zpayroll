@@ -7,6 +7,11 @@ use App\Models\Employee;
 use App\Models\SalaryInformation;
 use App\Models\SalarySheet;
 use App\Models\AttendanceSummary;
+use App\Models\Tax;
+use App\Models\ProvidentFund;
+use App\Models\AdvanceSalary;
+use App\Models\OtherPayment;
+use App\Models\TransportPayment;
 use Illuminate\Console\Command;
 
 class salary_sheet extends Command
@@ -119,31 +124,63 @@ class salary_sheet extends Command
 
                                 // Tas Deduction
                                 if ($employee->tax_status == 1) {
-                                    $tax_deduction = ($salary_info->basic_salary * 5) / 100;
+                                    $tax_info = Tax::where('id', $employee->tax_id)->first();
+
+                                    if ($tax_info) {
+                                        $tax_deduction = ($salary_info->basic_salary * $tax_info->percentage) / 100;
+                                    }
                                 }
 
                                 // Provident Found Deduction
-                                if ($employee->provident_found_status == 1) {
-                                    $provident_found_deduction = ($salary_info->basic_salary * 5) / 100;
+                                if ($employee->provident_fund_status == 1) {
+                                    $provident_fund_info = ProvidentFund::where('id', $employee->provident_fund_id )->first();
+
+                                    if ($provident_fund_info) {
+                                        $provident_found_deduction = ($salary_info->basic_salary * $provident_fund_info->percentage) / 100;
+                                    }
                                 }
 
                                 // Advance Salary
-                                $advance_salary_addition = 0;
+                                $advance_salary_addition = AdvanceSalary::where([
+                                    'employee_id' => $employee->id,
+                                    'payment_month' => $month,
+                                    'payment_year' => $year,
+                                ])->sum('amount');
 
                                 // $other Addition
-                                $other_addition = 0;
+                                $other_deduction = OtherPayment::where([
+                                    'employee_id' => $employee->id,
+                                    'payment_month' => $month,
+                                    'payment_year' => $year,
+                                    'status' => 'Minus',
+                                ])->sum('amount');
+
+                                $other_addition = OtherPayment::where([
+                                    'employee_id' => $employee->id,
+                                    'payment_month' => $month,
+                                    'payment_year' => $year,
+                                    'status' => 'Plus',
+                                ])->sum('amount');
 
                                 // Total Deduction
                                 $total_deduction = $late_deduction + $absent_deduction + $tax_deduction + $provident_found_deduction + $advance_salary_addition;
 
                                 // Transport Allowance Added
                                 if ($employee->transport_allowance_status == 1) {
-                                    $transport_bill_addition = 0;
+                                    $transport_bill_addition = TransportPayment::where([
+                                        'employee_id' => $employee->id,
+                                        'payment_month' => $month,
+                                        'payment_year' => $year,
+                                    ])->sum('amount');
                                 }
 
                                 // Commission Added
                                 if ($employee->commission_status == 1) {
-                                    $commission_addition = 0;
+                                    $commission_addition = CommissionPayment::where([
+                                        'employee_id' => $employee->id,
+                                        'payment_month' => $month,
+                                        'payment_year' => $year,
+                                    ])->sum('amount');
                                 }
 
                                 // Paid Leave Addition

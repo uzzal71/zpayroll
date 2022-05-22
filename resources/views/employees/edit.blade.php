@@ -506,9 +506,9 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <select class="form-control aiz-selectpicker" name="provident_found_status" id="provident_found_status" data-live-search="true" required>
-                                <option value="0" @if($employee->provident_found_status == 0) selected @endif>No</option>
-                                <option value="1" @if($employee->provident_found_status == 1) selected @endif>Yes</option>
+                            <select class="form-control aiz-selectpicker" name="provident_fund_status" id="provident_fund_status" data-live-search="true" required>
+                                <option value="0" @if($employee->provident_fund_status == 0) selected @endif>No</option>
+                                <option value="1" @if($employee->provident_fund_status == 1) selected @endif>Yes</option>
                             </select>
                         </div>
                     </div>
