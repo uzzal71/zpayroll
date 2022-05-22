@@ -6,90 +6,65 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Salary Increment Edit</h5>
+                <h5 class="mb-0 h6">Advance Salary Edit</h5>
                 <div class="col-md-6 text-md-right">
-                    <a href="{{ route('salary_increments.index') }}" class="btn btn-primary">
+                    <a href="{{ route('advance_salaries.index') }}" class="btn btn-primary">
                         <i class="las la-chevron-left"></i>
                          Back
                     </a>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <form class="p-4" action="{{ route('salary_increments.update', $salary_increment->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <div class="card-body">
+                <form class="form-horizontal" action="{{ route('advance_salaries.update', $advance_salary->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <input name="_method" type="hidden" value="PATCH">
-                	@csrf
+                    @csrf
                     
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Employee Name</label>
                         <div class="col-md-9">
-                           <select class="form-control aiz-selectpicker" name="employee_id" id="employee_id" data-live-search="true" required>
-                                <option value="">Select Employee</option>
-                                @foreach (\App\Models\Employee::all() as $employee)
-                                <option value="{{ $employee->id }}" @if($employee->id == $salary_increment->employee_id) selected @endif>
-                                    {{ $employee->employee_name }}
-                                    ({{ $employee->employee_punch_card }})
-                                </option>
-                                @endforeach
+                            <input type="text" name="employee_name" id="employee_name" class="form-control" value="{{ $advance_salary->employee->employee_name }}" required>
+                            <input type="hidden" name="employee_id" id="employee_id" value="{{ $advance_salary->employee_id }}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Month</label>
+                        <div class="col-md-9">
+                            <select name="payment_month" id="payment_month" required class="form-control aiz-selectpicker mb-2 mb-md-0">
+                                <option value="January" @if("January" == $advance_salary->payment_month) selected @endif>January</option>
+                                <option value="February" @if("February" == $advance_salary->payment_month) selected @endif>February</option>
+                                <option value="March" @if("March" == $advance_salary->payment_month) selected @endif>March</option>
+                                <option value="April" @if("April" == $advance_salary->payment_month) selected @endif>April</option>
+                                <option value="May" @if("May" == $advance_salary->payment_month) selected @endif>May</option>
+                                <option value="June" @if("June" == $advance_salary->payment_month) selected @endif>June</option>
+                                <option value="July" @if("July" == $advance_salary->payment_month) selected @endif>July</option>
+                                <option value="August" @if("August" == $advance_salary->payment_month) selected @endif>August</option>
+                                <option value="September" @if("September" == $advance_salary->payment_month) selected @endif>September</option>
+                                <option value="October" @if("October" == $advance_salary->payment_month) selected @endif>October</option>
+                                <option value="November" @if("November" == $advance_salary->payment_month) selected @endif>November</option>
+                                <option value="December" @if("December" == $advance_salary->payment_month) selected @endif>December</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Gross Salary</label>
+                        <label class="col-md-3 col-form-label">Year</label>
                         <div class="col-md-9">
-                            <input type="number" placeholder="Gross Salary" id="gross_salary" name="gross_salary" class="form-control" value="{{ $salary_increment->gross_salary }}" required>
+                            <select name="payment_year" id="payment_year" required class="form-control aiz-selectpicker mb-2 mb-md-0">
+                                 <option value="2021" @if(2021 == $advance_salary->payment_year) selected @endif>2021</option>
+                                <option value="2022" @if(2022 == $advance_salary->payment_year) selected @endif>2022</option>
+                                <option value="2023" @if(2023 == $advance_salary->payment_year) selected @endif>2023</option>
+                                <option value="2024" @if(2024 == $advance_salary->payment_year) selected @endif>2024</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Basic Salary</label>
+                        <label class="col-md-3 col-form-label">Amount</label>
                         <div class="col-md-9">
-                            <input type="number" placeholder="Basic Salary" id="basic_salary" name="basic_salary" class="form-control" value="{{ $salary_increment->basic_salary }}" required>
+                            <input type="number" class="form-control" name="amount" id="amount" value="{{ $advance_salary->amount }}" required>
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">House Rent</label>
-                        <div class="col-md-9">
-                            <input type="number" placeholder="House Rent" id="house_rent" name="house_rent" class="form-control" value="{{ $salary_increment->house_rent }}" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Medical Allowance</label>
-                        <div class="col-md-9">
-                            <input type="number" placeholder="Medical Allowance" id="medical_allowance" name="medical_allowance" class="form-control" value="{{ $salary_increment->medical_allowance }}" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Transport Allowance</label>
-                        <div class="col-md-9">
-                            <input type="number" placeholder="Transport Allowance" id="transport_allowance" name="transport_allowance" class="form-control" value="{{ $salary_increment->transport_allowance }}" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Food Allowance</label>
-                        <div class="col-md-9">
-                            <input type="number" placeholder="Food Allowance" id="food_allowance" name="food_allowance" class="form-control" value="{{ $salary_increment->food_allowance }}" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Effective Date</label>
-                        <div class="col-md-9">
-                            <input type="text" placeholder="xxxx-xx-xx" id="effective_date" name="effective_date" class="form-control" value="{{ $salary_increment->effective_date }}" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Remarks</label>
-                        <div class="col-md-9">
-                            <textarea class="aiz-text-editor" name="remarks" placeholder="Remarks" required>{{ $salary_increment->remarks }}</textarea>
-                        </div>
-                    </div>
-
 
 
                     <div class="form-group mb-0 text-right">

@@ -4,18 +4,18 @@
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <div class="row align-items-center">
         <div class="col-md-6">
-            <h1 class="h3">All Holiday Entry</h1>
+            <h1 class="h3">All Advance Salary</h1>
         </div>
         <div class="col-md-6 text-md-right">
-            <a href="{{ route('holiday_entries.create') }}" class="btn btn-primary">
-                <span>Add New Holiday</span>
+            <a href="{{ route('advance_salaries.create') }}" class="btn btn-primary">
+                <span>Add Advance Salary</span>
             </a>
         </div>
     </div>
 </div>
 <div class="card">
     <div class="card-header d-block d-md-flex">
-        <h5 class="mb-0 h6">Holiday Entries</h5>
+        <h5 class="mb-0 h6">Advance Salaries</h5>
         <form class="" id="sort_categories" action="" method="GET">
             <div class="box-inline pad-rgt pull-left">
                 <div class="" style="min-width: 200px;">
@@ -29,30 +29,28 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Holiday name</th>
-                    <th>Form date</th>
-                    <th>To date</th>
-                    <th>Holiday days</th>
-                    <th>Remarks</th>
-                    <th>Status</th>
+                    <th>Employee Name</th>
+                    <th>Payment Month</th>
+                    <th>Payment Year</th>
+                    <th>Amount</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($holiday_entries as $key => $holiday_entry)
+                @foreach($advance_salaries as $key => $row)
                     <tr>
-                        <td>{{ ($key+1) + ($holiday_entries->currentPage() - 1)*$holiday_entries->perPage() }}</td>
-                        <td>{{ $holiday_entry->holiday_name }}</td>
-                        <td>{{ $holiday_entry->from_date }}</td>
-                        <td>{{ $holiday_entry->to_date }}</td>
-                        <td>{{ $holiday_entry->holiday_days }}</td>
-                        <td>{{ $holiday_entry->remarks }}</td>
-                        <td>{{ $holiday_entry->status }}</td>
+                        <td>{{ ($key+1) + ($advance_salaries->currentPage() - 1)*$advance_salaries->perPage() }}</td>
+                        <td>
+                            {{ $row->employee->employee_name  }}
+                        </td>
+                        <td>{{ $row->payment_month  }}</td>
+                        <td>{{ $row->payment_year  }}</td>
+                        <td>{{ $row->amount  }}</td>
                         <td class="text-right">
-                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('holiday_entries.edit', $holiday_entry->id)  }}" title="Edit">
+                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('advance_salaries.edit', $row->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('holiday_entries.destroy', $holiday_entry->id) }}" title="Delete">
+                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('advance_salaries.destroy', $row->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
                         </td>
@@ -61,7 +59,7 @@
             </tbody>
         </table>
         <div class="aiz-pagination">
-            {{ $holiday_entries->appends(request()->input())->links() }}
+            {{ $advance_salaries->appends(request()->input())->links() }}
         </div>
     </div>
 </div>

@@ -6,9 +6,9 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Company Information</h5>
+                <h5 class="mb-0 h6">Advance Salry Edit</h5>
                 <div class="col text-right">
-                    <a href="{{ route('companies.index') }}" class="btn btn-circle btn-info">
+                    <a href="{{ route('advance_salaries.index') }}" class="btn btn-circle btn-info">
                         <i class="las la-chevron-left"></i>
                         Back
                     </a>

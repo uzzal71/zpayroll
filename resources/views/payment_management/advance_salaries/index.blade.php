@@ -19,7 +19,7 @@
         <form class="" id="sort_categories" action="" method="GET">
             <div class="box-inline pad-rgt pull-left">
                 <div class="" style="min-width: 200px;">
-                    <input type="text" class="form-control" id="search" name="search"@isset($sort_search) value="{{ $sort_search }}" @endisset placeholder="Type name & Enter">
+                    <input type="text" class="form-control" id="search" name="search"@isset($sort_search) value="{{ $sort_search }}" @endisset placeholder="Type Payment Month & Enter">
                 </div>
             </div>
         </form>
@@ -30,11 +30,9 @@
                 <tr>
                     <th>#</th>
                     <th>Employee Name</th>
-                    <th>Leave Type</th>
-                    <th>Form Date</th>
-                    <th>To Date</th>
-                    <th>Leave Days</th>
-                    <th>Status</th>
+                    <th>Payment Month</th>
+                    <th>Payment Year</th>
+                    <th>Amount</th>
                     <th class="text-right">Options</th>
                 </tr>
             </thead>
@@ -44,13 +42,10 @@
                         <td>{{ ($key+1) + ($advance_salaries->currentPage() - 1)*$advance_salaries->perPage() }}</td>
                         <td>
                             {{ $row->employee->employee_name  }}
-                            ({{ $row->employee->employee_punch_card  }})
                         </td>
-                        <td>{{ $row->leave->leave_name  }}</td>
-                        <td>{{ $row->from_date  }}</td>
-                        <td>{{ $row->to_date  }}</td>
-                        <td>{{ $row->leave_days  }}</td>
-                        <td>{{ $row->status  }}</td>
+                        <td>{{ $row->payment_month  }}</td>
+                        <td>{{ $row->payment_year  }}</td>
+                        <td>{{ $row->amount  }}</td>
                         <td class="text-right">
                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('advance_salaries.edit', $row->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>

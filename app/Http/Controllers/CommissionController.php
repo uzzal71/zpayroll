@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\CommissionPayment;
 use Illuminate\Http\Request;
 
 class CommissionController extends Controller
@@ -11,9 +13,16 @@ class CommissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sort_search = null;
+        $commission_payments = CommissionPayment::with(['employee'])->orderBy('id', 'desc');
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $commission_payments = $commission_payments->where('payment_month', 'like', '%'.$sort_search.'%');
+        }
+        $commission_payments = $commission_payments->paginate(50);
+        return view('payment_management.commission_payments.index', compact('commission_payments', 'sort_search'));
     }
 
     /**
@@ -21,9 +30,17 @@ class CommissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $sort_search = null;
+        $employee = [];
+
+        if ($request->has('search'))
+        {
+            $sort_search = $request->search;
+            $employee = Employee::where('employee_punch_card', $sort_search)->first();
+        }
+        return view('payment_management.commission_payments.create', compact('employee', 'sort_search'));
     }
 
     /**
@@ -34,7 +51,18 @@ class CommissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $advance_salary = new CommissionPayment;
+
+        $advance_salary->employee_id = $request->employee_id;
+        $advance_salary->payment_month = $request->payment_month;
+        $advance_salary->payment_year = $request->payment_year;
+        $advance_salary->amount = $request->amount;
+
+
+        $advance_salary->save();
+
+        flash('Commission payments has been inserted successfully')->success();
+        return redirect()->route('commissions.index');
     }
 
     /**
@@ -56,7 +84,9 @@ class CommissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $advance_salary = CommissionPayment::with(['employee'])->findOrFail($id);
+
+        return view('payment_management.commission_payments.edit', compact('advance_salary'));
     }
 
     /**
@@ -68,7 +98,18 @@ class CommissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $advance_salary = CommissionPayment::findOrFail($id);
+
+        $advance_salary->employee_id = $request->employee_id;
+        $advance_salary->payment_month = $request->payment_month;
+        $advance_salary->payment_year = $request->payment_year;
+        $advance_salary->amount = $request->amount;
+
+
+        $advance_salary->save();
+
+        flash('Commission payments has been updated successfully')->success();
+        return redirect()->route('commissions.index');
     }
 
     /**
@@ -79,6 +120,9 @@ class CommissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CommissionPayment::find($id)->delete();
+        flash('Commission payments has been deleted successfully')->success();
+
+        return redirect()->route('commissions.index');
     }
 }

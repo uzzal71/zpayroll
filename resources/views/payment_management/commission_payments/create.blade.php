@@ -6,9 +6,9 @@
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Employee Advance Salary</h5>
+                <h5 class="mb-0 h6">Employee Commission</h5>
                 <div class="col-md-6 text-md-right">
-                    <a href="{{ route('advance_salaries.index') }}" class="btn btn-primary">
+                    <a href="{{ route('commissions.index') }}" class="btn btn-primary">
                         <i class="las la-chevron-left"></i>
                          Back
                     </a>
@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <!-- Search Form -->
-                <form class="" id="sort_salary_advances" action="" method="GET" autocomplete="off">
+                <form class="" id="sort_commissions" action="" method="GET" autocomplete="off">
                     @csrf
                     <div class="box-inline pad-rgt pull-left">
                         <div class="" style="min-width: 200px;">
@@ -30,7 +30,7 @@
         @if(!empty($employee))
         <div class="card">
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('advance_salaries.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="form-horizontal" action="{{ route('commissions.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     
                     <div class="form-group row">

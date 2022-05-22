@@ -15,7 +15,13 @@ class CreateTransportPaymentsTable extends Migration
     {
         Schema::create('transport_payments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->string('payment_month');
+            $table->year('payment_year');
+            $table->double('amount')->nullable()->default(0.00);
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 

@@ -16,8 +16,8 @@ class CreateAdvanceSalariesTable extends Migration
         Schema::create('advance_salaries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
-            $table->string('salary_month');
-            $table->year('salary_year');
+            $table->string('payment_month');
+            $table->year('payment_year');
             $table->double('amount')->nullable()->default(0.00);
             $table->timestamps();
 
