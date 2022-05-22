@@ -109,23 +109,23 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('employee_leaves.index') }}" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Employee Leave</span>
+                            <a href="{{ route('advance_salaries.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Advance Salary</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('holiday_entries.index') }}" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Holiday Entry</span>
+                            <a href="{{ route('commissions.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Commission Payment</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('employee_promotions.index') }}" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Employee Promotion</span>
+                            <a href="{{ route('transport_bills.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Transport Bill Payment</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('salary_increments.index') }}" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Salary Increment</span>
+                            <a href="{{ route('others_payment.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Others Payment</span>
                             </a>
                         </li>
                     </ul>

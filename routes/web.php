@@ -48,8 +48,22 @@ Route::get('/provident_founds/destroy/{id}', 'ProvidentFundController@destroy')-
 
 // Employee Management
 Route::resource('employees', 'EmployeeController');
-//Route::post('employees/updated/{id}', 'EmployeeController@update')->name('employees.updated');
 Route::get('/employees/destroy/{id}', 'EmployeeController@destroy')->name('employees.destroy');
+
+
+// Payment Management
+Route::resource('advance_salaries', 'AdvanceSalaryController');
+Route::get('/advance_salaries/destroy/{id}', 'AdvanceSalaryController@destroy')->name('advance_salaries.destroy');
+
+Route::resource('commissions', 'CommissionController');
+Route::get('/commissions/destroy/{id}', 'CommissionController@destroy')->name('commissions.destroy');
+
+Route::resource('transport_bills', 'TransportBillController');
+Route::get('/transport_bills/destroy/{id}', 'TransportBillController@destroy')->name('transport_bills.destroy');
+
+Route::resource('others_payment', 'OtherPaymentController');
+Route::get('/others_payment/destroy/{id}', 'OtherPaymentController@destroy')->name('others_payment.destroy');
+
 
 // HR Management All Route
 Route::resource('employee_leaves', 'EmployeeLeaveController');

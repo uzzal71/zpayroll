@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdvanceSalary;
 use Illuminate\Http\Request;
 
 class AdvanceSalaryController extends Controller
@@ -13,7 +14,14 @@ class AdvanceSalaryController extends Controller
      */
     public function index()
     {
-        //
+        $sort_search =null;
+        $advance_salaries = AdvanceSalary::orderBy('id', 'desc');
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $advance_salaries = $advance_salaries->where('month', 'like', '%'.$sort_search.'%');
+        }
+        $advance_salaries = $advance_salaries->paginate(50);
+        return view('payment_management.advance_salaries.index', compact('advance_salaries', 'sort_search'));
     }
 
     /**
