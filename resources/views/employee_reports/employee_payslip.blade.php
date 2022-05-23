@@ -110,74 +110,62 @@
                                         <tr>
                                             <th scope="row">Basic</th>
                                             <td>16250.00</td>
-                                            <td>PF</td>
+                                            <td>Late Dduction</td>
                                             <td>1800.00</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">DA</th>
+                                            <th scope="row">House Allowance</th>
                                             <td>550.00</td>
-                                            <td>ESI</td>
+                                            <td>Absent Deduction</td>
                                             <td>142.00</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">HRA</th>
+                                            <th scope="row">Medical Allowance</th>
                                             <td>1650.00 </td>
-                                            <td>TDS</td>
+                                            <td>Tax Deduction</td>
                                             <td>0.00</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">WA</th>
+                                            <th scope="row">Transport Allowance</th>
                                             <td>120.00 </td>
-                                            <td>LOP</td>
+                                            <td>Provident Fund</td>
                                             <td>0.00</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">CA</th>
+                                            <th scope="row">Food Allowance</th>
                                             <td>0.00 </td>
-                                            <td>PT</td>
+                                            <td>Advance Salary</td>
                                             <td>0.00</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">CCA</th>
+                                            <th scope="row">Commission</th>
                                             <td>0.00 </td>
-                                            <td>SPL. Deduction</td>
+                                            <td>Other Deduction</td>
                                             <td>500.00</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">MA</th>
+                                            <th scope="row">Transport Bill</th>
                                             <td>3000.00</td>
-                                            <td>EWF</td>
-                                            <td>0.00</td>
+                                            <td colspan="2"></td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Sales Incentive</th>
-                                            <td>0.00</td>
-                                            <td>CD</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Leave Encashment</th>
+                                            <th scope="row">Leave Earn</th>
                                             <td>0.00</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Holiday Wages</th>
-                                            <td>500.00</td>
+                                            <th scope="row">Overtime Earn</th>
+                                            <td>0.00</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Special Allowance</th>
+                                            <th scope="row">Others Earn</th>
                                             <td>100.00</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Bonus</th>
                                             <td>1400.00</td>
-                                            <td colspan="2"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Individual Incentive</th>
-                                            <td>2400.00</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr class="border-top">
