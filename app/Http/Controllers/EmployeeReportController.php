@@ -89,8 +89,6 @@ class EmployeeReportController extends Controller
 
         $employee_payslips  = $employee_payslips->get();
 
-        echo json_encode($employee);exit();
-
-        return view('employee_reports.employee_payslip', compact('employee_payslips', 'month', 'year'));
+        return view('employee_reports.employee_payslip', compact('employee_payslips', 'employee', 'month', 'year'));
     }
 }

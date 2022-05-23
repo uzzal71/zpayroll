@@ -67,41 +67,33 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="text-center lh-1 mb-2">
-                                <h6 class="fw-bold">Payslip</h6> <span class="fw-normal">Payment slip for the month of June 2021</span>
+                                <h6 class="fw-bold">Payslip</h6> <span class="fw-normal">Payment slip for the month of {{ $month }}, {{ $year }}</span>
                             </div>
-                            <div class="d-flex justify-content-end"> <span>Working Branch:ROHINI</span> </div>
+                            <div class="d-flex justify-content-end"> <span>Working Schedule:{{ $employee->schedule->schedule_name }}</span> </div>
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div> <span class="fw-bolder">EMP Code</span> <small class="ms-3">39124</small> </div>
+                                            <div> <span class="fw-bolder">Employee Card: </span>{{ $employee->employee_punch_card }}</div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div> <span class="fw-bolder">EMP Name</span> <small class="ms-3">Ashok</small> </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div> <span class="fw-bolder">PF No.</span> <small class="ms-3">101523065714</small> </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div> <span class="fw-bolder">NOD</span> <small class="ms-3">28</small> </div>
+                                            <div> <span class="fw-bolder">Employee Name: </span>{{ $employee->employee_name }}</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div> <span class="fw-bolder">ESI No.</span> <small class="ms-3"></small> </div>
+                                            <div> <span class="fw-bolder">Mobile No.: </span>{{ $employee->mobile }}</div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div> <span class="fw-bolder">Mode of Pay</span> <small class="ms-3">SBI</small> </div>
+                                            <div> <span class="fw-bolder">Joining Date: </span>{{ $employee->joining_date }}</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div> <span class="fw-bolder">Designation</span> <small class="ms-3">Marketing Staff (MK)</small> </div>
+                                            <div> <span class="fw-bolder">Designation: </span>{{ $employee->designation->designation_name }}</div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div> <span class="fw-bolder">Ac No.</span> <small class="ms-3">*******0701</small> </div>
+                                            <div> <span class="fw-bolder">Ac No.</span>{{ $employee->department->department_name }}</div>
                                         </div>
                                     </div>
                                 </div>
