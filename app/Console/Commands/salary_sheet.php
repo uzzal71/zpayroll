@@ -38,7 +38,7 @@ class salary_sheet extends Command
      */
     public function __construct()
     {
-        paallowance::__construct();
+        parent::__construct();
     }
 
     /**
@@ -95,6 +95,7 @@ class salary_sheet extends Command
                         $others_addition = 0;
                         $festival_bonus_addition = 0;
                         $total_addition = 0;
+                        $salary_earn = 0;
                         $net_salary = 0;
 
                         $attendance_summary = AttendanceSummary::where([
@@ -145,14 +146,14 @@ class salary_sheet extends Command
                                 }
 
                                 // Advance Salary
-                                $advance_salary_addition = AdvanceSalary::where([
+                                $advance_salary_deduction = AdvanceSalary::where([
                                     'employee_id' => $employee->id,
                                     'payment_month' => $month,
                                     'payment_year' => $year,
                                 ])->sum('amount');
 
                                 // $other Addition
-                                $other_deduction = OtherPayment::where([
+                                $others_deduction = OtherPayment::where([
                                     'employee_id' => $employee->id,
                                     'payment_month' => $month,
                                     'payment_year' => $year,
@@ -167,7 +168,7 @@ class salary_sheet extends Command
                                 ])->sum('amount');
 
                                 // Total Deduction
-                                $total_deduction = $late_deduction + $absent_deduction + $tax_deduction + $provident_found_deduction + $advance_salary_addition;
+                                $total_deduction = $late_deduction + $absent_deduction + $tax_deduction + $provident_fund_deduction  + $advance_salary_deduction + $others_deduction + $stamp_deduction;
 
                                 // Transport Allowance Added
                                 if ($employee->transport_allowance_status == 1) {
@@ -191,9 +192,11 @@ class salary_sheet extends Command
                                 $paid_leave_addition = $per_day_salary * $paid_leave;
 
                                 // Total addition
-                                $total_addition = $transport_bill_addition + $commission_addition + $paid_leave_addition;
+                                $total_addition = $transport_bill_addition + $commission_addition + $paid_leave_addition + $others_addition + $festival_bonus_addition + $overtime_addition;
 
-                                $net_salary = ($total_addition + ($need_to_pay * $per_day_salary)) - $total_deduction;
+                                $salary_earn = ($total_addition + ($need_to_pay * $per_day_salary));
+
+                                $net_salary = $salary_earn - $total_deduction;
                             }
                         }
 
@@ -232,9 +235,9 @@ class salary_sheet extends Command
                             $salary_exists->absent_deduction = $absent_deduction;
                             $salary_exists->tax_deduction = $tax_deduction;
                             $salary_exists->provident_fund_deduction = $provident_fund_deduction;
-                            $salary_sheet->advance_salary_deduction = $advance_salary_deduction;
-                            $salary_sheet->others_deduction = $others_deduction;
-                            $salary_sheet->stamp_deduction = $stamp_deduction;
+                            $salary_exists->advance_salary_deduction = $advance_salary_deduction;
+                            $salary_exists->others_deduction = $others_deduction;
+                            $salary_exists->stamp_deduction = $stamp_deduction;
                             $salary_exists->total_deduction = $total_deduction;
                             $salary_exists->commission_addition = $commission_addition;
                             $salary_exists->transport_bill_addition = $transport_bill_addition;
@@ -243,6 +246,7 @@ class salary_sheet extends Command
                             $salary_exists->others_addition = $others_addition;
                             $salary_exists->festival_bonus_addition = $festival_bonus_addition;
                             $salary_exists->total_addition = $total_addition;
+                            $salary_exists->salary_earn = $salary_earn;
                             $salary_exists->net_salary = $net_salary;
 
                             $salary_exists->save();
@@ -288,6 +292,7 @@ class salary_sheet extends Command
                             $salary_sheet->others_addition = $others_addition;
                             $salary_sheet->festival_bonus_addition = $festival_bonus_addition;
                             $salary_sheet->total_addition = $total_addition;
+                            $salary_sheet->salary_earn = $salary_earn;
                             $salary_sheet->net_salary = $net_salary;
 
                             $salary_sheet->save();
