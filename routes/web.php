@@ -126,7 +126,9 @@ Route::post('/monthly-attendance-preport', 'HRReportController@monthly_attendanc
 Route::get('/monthly-overtime', 'HRReportController@monthly_overtime')->name('monthly.overtime');
 
 // Salary Reports Route
-Route::get('/salary-sheet', 'SalaryReportController@salary_sheet')->name('salary.sheet');
+Route::get('/monthly-salary-sheet', 'SalaryReportController@monthly_salary_sheet')->name('monthly.salary.sheet');
+Route::post('/monthly-salary-sheet-report', 'SalaryReportController@monthly_salary_sheet_report')->name('monthly.salary.sheet.report');
+
 Route::get('/monthly-payslip', 'SalaryReportController@monthly_payslip')->name('monthly.payslip');
 Route::get('/tax-report', 'SalaryReportController@tax_report')->name('tax.report');
 

@@ -19,7 +19,7 @@
                 <!-- Software Settings Start-->
                 <li class="aiz-side-nav-item">
                     <a href="#" class="aiz-side-nav-link">
-                        <i class="las la-wrench aiz-side-nav-icon"></i>
+                        <i class="las la-tools aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Software Settings</span>
                         <span class="aiz-side-nav-arrow"></span>
                     </a>
@@ -102,7 +102,7 @@
                 <!-- HR Payment Management -->
                 <li class="aiz-side-nav-item">
                     <a href="#" class="aiz-side-nav-link">
-                        <i class="las la-user-tie aiz-side-nav-icon"></i>
+                        <i class="las la-money-bill aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Payments Management</span>
                         <span class="aiz-side-nav-arrow"></span>
                     </a>
@@ -263,7 +263,7 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('salary.sheet') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('monthly.salary.sheet') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Monthly Salary Sheet</span>
                             </a>
                         </li>
@@ -281,10 +281,49 @@
                 </li>
                 <!-- Salary Report End -->
 
+                <!-- Employee Module Start -->
+                <li class="aiz-side-nav-item">
+                    <a href="#" class="aiz-side-nav-link">
+                        <i class="las la-user-tie aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">Employee</span>
+                        <span class="aiz-side-nav-arrow"></span>
+                    </a>
+                    <!--Submenu-->
+                    <ul class="aiz-side-nav-list level-2">
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('users.index') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Attendance</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Payslip</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Provident Fund</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Tax</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Advance Salary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Employee Module End -->
+                
+
                 <!-- System Start -->
                 <li class="aiz-side-nav-item">
                     <a href="#" class="aiz-side-nav-link">
-                        <i class="las la-shopping-cart aiz-side-nav-icon"></i>
+                        <i class="las la-server aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">System</span>
                         <span class="aiz-side-nav-arrow"></span>
                     </a>

@@ -12,6 +12,7 @@ use App\Models\ProvidentFund;
 use App\Models\AdvanceSalary;
 use App\Models\OtherPayment;
 use App\Models\TransportPayment;
+use App\Models\CommissionPayment;
 use Illuminate\Console\Command;
 
 class salary_sheet extends Command
