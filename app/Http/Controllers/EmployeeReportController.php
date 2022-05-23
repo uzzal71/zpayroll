@@ -87,7 +87,7 @@ class EmployeeReportController extends Controller
             ])->orderBy('id', 'asc');
         }
 
-        $employee_payslips  = $employee_payslips->get();
+        $employee_payslips  = $employee_payslips->first();
 
         return view('employee_reports.employee_payslip', compact('employee_payslips', 'employee', 'month', 'year'));
     }

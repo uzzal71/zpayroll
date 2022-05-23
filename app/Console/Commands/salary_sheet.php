@@ -38,7 +38,7 @@ class salary_sheet extends Command
      */
     public function __construct()
     {
-        parent::__construct();
+        paallowance::__construct();
     }
 
     /**
@@ -83,14 +83,17 @@ class salary_sheet extends Command
                         $late_deduction = 0;
                         $absent_deduction = 0;
                         $tax_deduction = 0;
-                        $provident_found_deduction = 0;
+                        $provident_fund_deduction = 0;
+                        $others_deduction = 0;
+                        $stamp_deduction = 0;
                         $total_deduction = 0;
                         $commission_addition = 0;
                         $transport_bill_addition = 0;
                         $paid_leave_addition = 0;
                         $overtime_addition = 0;
-                        $advance_salary_addition = 0;
-                        $other_addition = 0;
+                        $advance_salary_deduction = 0;
+                        $others_addition = 0;
+                        $festival_bonus_addition = 0;
                         $total_addition = 0;
                         $net_salary = 0;
 
@@ -156,7 +159,7 @@ class salary_sheet extends Command
                                     'status' => 'Minus',
                                 ])->sum('amount');
 
-                                $other_addition = OtherPayment::where([
+                                $others_addition = OtherPayment::where([
                                     'employee_id' => $employee->id,
                                     'payment_month' => $month,
                                     'payment_year' => $year,
@@ -211,7 +214,7 @@ class salary_sheet extends Command
                             $salary_exists->joining_date = $employee->joining_date;
                             $salary_exists->gross_salary = $salary_info->gross_salary;
                             $salary_exists->basic_salary = $salary_info->basic_salary;
-                            $salary_exists->house_rent = $salary_info->house_rent;
+                            $salary_exists->house_allowance = $salary_info->house_rent;
                             $salary_exists->medical_allowance = $salary_info->medical_allowance;
                             $salary_exists->transport_allowance = $salary_info->transport_allowance;
                             $salary_exists->food_allowance = $salary_info->food_allowance;
@@ -228,14 +231,17 @@ class salary_sheet extends Command
                             $salary_exists->late_deduction = $late_deduction;
                             $salary_exists->absent_deduction = $absent_deduction;
                             $salary_exists->tax_deduction = $tax_deduction;
-                            $salary_exists->provident_found_deduction = $provident_found_deduction;
+                            $salary_exists->provident_fund_deduction = $provident_fund_deduction;
+                            $salary_sheet->advance_salary_deduction = $advance_salary_deduction;
+                            $salary_sheet->others_deduction = $others_deduction;
+                            $salary_sheet->stamp_deduction = $stamp_deduction;
                             $salary_exists->total_deduction = $total_deduction;
                             $salary_exists->commission_addition = $commission_addition;
                             $salary_exists->transport_bill_addition = $transport_bill_addition;
                             $salary_exists->paid_leave_addition = $paid_leave_addition;
                             $salary_exists->overtime_addition = $overtime_addition;
-                            $salary_exists->advance_salary_addition = $advance_salary_addition;
-                            $salary_exists->other_addition = $other_addition;
+                            $salary_exists->others_addition = $others_addition;
+                            $salary_exists->festival_bonus_addition = $festival_bonus_addition;
                             $salary_exists->total_addition = $total_addition;
                             $salary_exists->net_salary = $net_salary;
 
@@ -253,7 +259,7 @@ class salary_sheet extends Command
                             $salary_sheet->joining_date = $employee->joining_date;
                             $salary_sheet->gross_salary = $salary_info->gross_salary;
                             $salary_sheet->basic_salary = $salary_info->basic_salary;
-                            $salary_sheet->house_rent = $salary_info->house_rent;
+                            $salary_sheet->house_allowance = $salary_info->house_rent;
                             $salary_sheet->medical_allowance = $salary_info->medical_allowance;
                             $salary_sheet->transport_allowance = $salary_info->transport_allowance;
                             $salary_sheet->food_allowance = $salary_info->food_allowance;
@@ -270,14 +276,17 @@ class salary_sheet extends Command
                             $salary_sheet->late_deduction = $late_deduction;
                             $salary_sheet->absent_deduction = $absent_deduction;
                             $salary_sheet->tax_deduction = $tax_deduction;
-                            $salary_sheet->provident_found_deduction = $provident_found_deduction;
+                            $salary_sheet->provident_fund_deduction = $provident_fund_deduction;
+                            $salary_sheet->advance_salary_deduction = $advance_salary_deduction;
+                            $salary_sheet->others_deduction = $others_deduction;
+                            $salary_sheet->stamp_deduction = $stamp_deduction;
                             $salary_sheet->total_deduction = $total_deduction;
                             $salary_sheet->commission_addition = $commission_addition;
                             $salary_sheet->transport_bill_addition = $transport_bill_addition;
                             $salary_sheet->paid_leave_addition = $paid_leave_addition;
                             $salary_sheet->overtime_addition = $overtime_addition;
-                            $salary_sheet->advance_salary_addition = $advance_salary_addition;
-                            $salary_sheet->other_addition = $other_addition;
+                            $salary_sheet->others_addition = $others_addition;
+                            $salary_sheet->festival_bonus_addition = $festival_bonus_addition;
                             $salary_sheet->total_addition = $total_addition;
                             $salary_sheet->net_salary = $net_salary;
 

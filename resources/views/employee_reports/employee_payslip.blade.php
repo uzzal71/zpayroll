@@ -109,78 +109,80 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Basic</th>
-                                            <td>16250.00</td>
-                                            <td>Late Dduction</td>
-                                            <td>1800.00</td>
+                                            <td>{{ $employee_payslips->basic_salary }}</td>
+                                            <td>Late Deduction</td>
+                                            <td>{{ $employee_payslips->late_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">House Allowance</th>
-                                            <td>550.00</td>
+                                            <td>{{ $employee_payslips->house_rent }}</td>
                                             <td>Absent Deduction</td>
-                                            <td>142.00</td>
+                                            <td>{{ $employee_payslips->absent_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Medical Allowance</th>
-                                            <td>1650.00 </td>
+                                            <td>{{ $employee_payslips->medical_allowance }}</td>
                                             <td>Tax Deduction</td>
-                                            <td>0.00</td>
+                                            <td>{{ $employee_payslips->tax_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Transport Allowance</th>
-                                            <td>120.00 </td>
+                                            <td>{{ $employee_payslips->transport_allowance }}</td>
                                             <td>Provident Fund</td>
-                                            <td>0.00</td>
+                                            <td>{{ $employee_payslips->provident_found_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Food Allowance</th>
-                                            <td>0.00 </td>
+                                            <td>{{ $employee_payslips->transport_allowance }}</td>
                                             <td>Advance Salary</td>
-                                            <td>0.00</td>
+                                            <td>{{ $employee_payslips->advance_salary_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Commission</th>
-                                            <td>0.00 </td>
+                                            <td>{{ $employee_payslips->commission_addition }}</td>
                                             <td>Other Deduction</td>
-                                            <td>500.00</td>
+                                            <td>{{ $employee_payslips->others_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Transport Bill</th>
-                                            <td>3000.00</td>
+                                            <td>{{ $employee_payslips->transport_bill_addition }}</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Leave Earn</th>
-                                            <td>0.00</td>
+                                            <td>{{ $employee_payslips->paid_leave_addition }}</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Overtime Earn</th>
-                                            <td>0.00</td>
+                                            <td>{{ $employee_payslips->overtime_addition }}</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Others Earn</th>
-                                            <td>100.00</td>
+                                            <td>{{ $employee_payslips->other_addition }}</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Bonus</th>
-                                            <td>1400.00</td>
+                                            <td>{{ $employee_payslips->bonus_aaddition }}</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr class="border-top">
                                             <th scope="row">Total Earning</th>
-                                            <td>25970.00</td>
+                                            <td>{{ $employee_payslips->net_salary }}</td>
                                             <td>Total Deductions</td>
-                                            <td>2442.00</td>
+                                            <td>{{ $employee_payslips->total_deduction }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"> <br> <span class="fw-bold">Net Pay : 24528.00</span> </div>
+                                <div class="col-md-4"> <br> <span class="fw-bold">Net Pay : {{ $employee_payslips->net_salary }}</span> </div>
                                 <div class="border col-md-8">
-                                    <div class="d-flex flex-column"> <span>In Words</span> <span>Twenty Five thousand nine hundred seventy only</span> </div>
+                                    <div class="d-flex flex-column"> 
+                                        <span>In Words</span> 
+                                        <span></span> </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
