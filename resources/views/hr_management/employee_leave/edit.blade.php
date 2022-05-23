@@ -22,12 +22,8 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Employee</label>
                         <div class="col-md-9">
-                            <select class="form-control aiz-selectpicker" name="employee_id" id="employee_id" data-live-search="true" required>
-                                <option value="">Select Employee</option>
-                                @foreach (\App\Models\Employee::all() as $employee)
-                                <option value="{{ $employee->id }}" @if($employee->id == $employee_leave->employee_id) selected @endif>{{ $employee->employee_name }}({{ $employee->employee_punch_card }})</option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="employee_name" id="employee_name" class="form-control" value="{{ $employee_leave->employee->employee_name }}" required>
+                            <input type="hidden" name="employee_id" id="employee_id" value="{{ $employee_leave->employee_id }}" required>
                         </div>
                     </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\SalaryIncrement;
 use Illuminate\Http\Request;
 use DateTime;
@@ -30,9 +31,17 @@ class SalaryIncrementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('hr_management.salary_increment.create');
+        $sort_search = null;
+        $employee = [];
+
+        if ($request->has('search'))
+        {
+            $sort_search = $request->search;
+            $employee = Employee::where('employee_punch_card', $sort_search)->first();
+        }
+        return view('hr_management.salary_increment.create', compact('employee', 'sort_search'));
     }
 
     /**
@@ -87,7 +96,7 @@ class SalaryIncrementController extends Controller
      */
     public function edit($id)
     {
-        $salary_increment = SalaryIncrement::findOrFail($id);
+        $salary_increment = SalaryIncrement::with(['employee'])->findOrFail($id);
 
         return view('hr_management.salary_increment.edit', compact('salary_increment'));
     }

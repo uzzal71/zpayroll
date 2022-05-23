@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\EmployeeLeave;
 use App\Models\EmployeeLeaveDetail;
 use Illuminate\Http\Request;
@@ -31,9 +32,17 @@ class EmployeeLeaveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('hr_management.employee_leave.create');
+        $sort_search = null;
+        $employee = [];
+
+        if ($request->has('search'))
+        {
+            $sort_search = $request->search;
+            $employee = Employee::where('employee_punch_card', $sort_search)->first();
+        }
+        return view('hr_management.employee_leave.create', compact('employee', 'sort_search'));
     }
 
     /**
@@ -106,7 +115,7 @@ class EmployeeLeaveController extends Controller
      */
     public function edit($id)
     {
-        $employee_leave = EmployeeLeave::findOrFail($id);
+        $employee_leave = EmployeeLeave::with(['employee'])->findOrFail($id);
 
         return view('hr_management.employee_leave.edit', compact('employee_leave'));
     }

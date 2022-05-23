@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\EmployeePromotion;
 use Illuminate\Http\Request;
 use DateTime;
@@ -31,9 +32,17 @@ class EmployeePromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('hr_management.employee_promotion.create');
+        $sort_search = null;
+        $employee = [];
+
+        if ($request->has('search'))
+        {
+            $sort_search = $request->search;
+            $employee = Employee::where('employee_punch_card', $sort_search)->first();
+        }
+        return view('hr_management.employee_promotion.create', compact('employee', 'sort_search'));
     }
 
     /**
@@ -84,7 +93,7 @@ class EmployeePromotionController extends Controller
      */
     public function edit($id)
     {
-        $employee_promotion = EmployeePromotion::findOrFail($id);
+        $employee_promotion = EmployeePromotion::with(['employee'])->findOrFail($id);
 
         return view('hr_management.employee_promotion.edit', compact('employee_promotion'));
     }

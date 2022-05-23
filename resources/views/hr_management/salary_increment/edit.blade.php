@@ -20,17 +20,10 @@
                 	@csrf
                     
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Employee Name</label>
+                        <label class="col-md-3 col-form-label">Employee</label>
                         <div class="col-md-9">
-                           <select class="form-control aiz-selectpicker" name="employee_id" id="employee_id" data-live-search="true" required>
-                                <option value="">Select Employee</option>
-                                @foreach (\App\Models\Employee::all() as $employee)
-                                <option value="{{ $employee->id }}" @if($employee->id == $salary_increment->employee_id) selected @endif>
-                                    {{ $employee->employee_name }}
-                                    ({{ $employee->employee_punch_card }})
-                                </option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="employee_name" id="employee_name" class="form-control" value="{{ $salary_increment->employee->employee_name }}" required>
+                            <input type="hidden" name="employee_id" id="employee_id" value="{{ $salary_increment->employee_id }}" required>
                         </div>
                     </div>
 
@@ -49,9 +42,9 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">House Rent</label>
+                        <label class="col-md-3 col-form-label">House Allowance</label>
                         <div class="col-md-9">
-                            <input type="number" placeholder="House Rent" id="house_rent" name="house_rent" class="form-control" value="{{ $salary_increment->house_rent }}" required>
+                            <input type="number" placeholder="House Allowance" id="house_rent" name="house_rent" class="form-control" value="{{ $salary_increment->house_rent }}" required>
                         </div>
                     </div>
 
