@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="row">
-    <div class="col-lg-8 mx-auto">
+    <div class="col-lg-10 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 h6">Employee Advance Salary</h5>
+                <h5 class="mb-0 h6">Employee Attendance</h5>
             </div>
             <div class="card-body">
                 <!-- Search Form -->
@@ -61,11 +61,72 @@
             </div>
         </div>
         @if(!empty($attendances))
+        @if(!empty($attendance_summary))
         <div class="card">
             <div class="card-body">
-                
+                <h5>Attendance Summary</h5>
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Total Days</td>
+                        <td>{{ $attendance_summary->number_of_days }}</td>
+                        <td>Weekend</td>
+                        <td>{{ $attendance_summary->weekend }}</td>
+                    </tr>
+                    <tr>
+                        <td>Holiday</td>
+                        <td>{{ $attendance_summary->holiday }}</td>
+                        <td>Need To Work</td>
+                        <td>{{ $attendance_summary->need_to_work }}</td>
+                    </tr>
+                    <tr>
+                        <td>Present</td>
+                        <td>{{ $attendance_summary->present }}</td>
+                        <td>Late</td>
+                        <td>{{ $attendance_summary->late }}</td>
+                    </tr>
+                    <tr>
+                        <td>Absent</td>
+                        <td>{{ $attendance_summary->absent }}</td>
+                        <td>Unpaid Leave</td>
+                        <td>{{ $attendance_summary->unpaid_leave }}</td>
+                    </tr>
+                    <tr>
+                        <td>Paid Leave</td>
+                        <td>{{ $attendance_summary->paid_leave }}</td>
+                        <td>Need To Pay</td>
+                        <td>{{ $attendance_summary->need_to_pay }}</td>
+                    </tr>
+                </table>
+                <h5>Attendance Time Sheet</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>In-Time</th>
+                            <th>Out-Time</th>
+                            <th>Late-Time</th>
+                            <th>Over-Time</th>
+                            <th>Status</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($attendances as $key => $row)
+                        <tr>
+                            <td>{{ $row->attendance_date }}</td>
+                            <td>{{ $row->in_time }}</td>
+                            <td>{{ $row->out_time }}</td>
+                            <td>{{ $row->late_time }}</td>
+                            <td>{{ $row->over_time }}</td>
+                            <td>{{ $row->attendance_status }}</td>
+                            <td>{{ $row->remarks }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
+        @endif
         @endif
     </div>
 </div>
