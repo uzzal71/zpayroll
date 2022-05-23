@@ -14,7 +14,7 @@ class EmployeeReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function employee_view_report(Request $request)
+    public function employee_view_attendance(Request $request)
     {
     	$month = date('m');
         $year = date('Y');
@@ -53,5 +53,15 @@ class EmployeeReportController extends Controller
         $attendance_summary  = $attendance_summary->first();
 
         return view('employee_reports.employee_attendance', compact('attendances', 'attendance_summary', 'month', 'year'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employee_view_payslip(Request $request)
+    {
+
     }
 }

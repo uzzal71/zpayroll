@@ -134,7 +134,8 @@ Route::get('/tax-report', 'SalaryReportController@tax_report')->name('tax.report
 
 
 // Employee Report Controller
-Route::get('/employee/view/attendance', 'EmployeeReportController@employee_view_report')->name('employee.view.attendance');
+Route::get('/employee/view/attendance', 'EmployeeReportController@employee_view_attendance')->name('employee.view.attendance');
+Route::get('/employee/view/payslip', 'EmployeeReportController@employee_view_payslip')->name('employee.view.payslip');
 
 // Systems Route
 Route::resource('/users', 'UserController');

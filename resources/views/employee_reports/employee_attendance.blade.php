@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Employee Name</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" readonly>
+                            <input type="text" class="form-control" value="{{ Auth::user()->name; }}" readonly>
                         </div>
                     </div>
 
