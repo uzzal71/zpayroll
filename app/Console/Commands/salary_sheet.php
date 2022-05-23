@@ -138,10 +138,10 @@ class salary_sheet extends Command
 
                                 // Provident Found Deduction
                                 if ($employee->provident_fund_status == 1) {
-                                    $provident_fund_info = ProvidentFund::where('id', $employee->provident_fund_id )->first();
+                                    $provident_fund_info = ProvidentFund::where('id', $employee->provident_fund_id)->first();
 
                                     if ($provident_fund_info) {
-                                        $provident_found_deduction = ($salary_info->basic_salary * $provident_fund_info->percentage) / 100;
+                                        $provident_fund_deduction = ($salary_info->basic_salary * $provident_fund_info->percentage) / 100;
                                     }
                                 }
 

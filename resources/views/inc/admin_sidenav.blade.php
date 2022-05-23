@@ -263,8 +263,13 @@
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
+                            <a href="{{ route('monthly.salary.details') }}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Monthly Salary Details</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
                             <a href="{{ route('monthly.salary.sheet') }}" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Monthly Salary Sheet</span>
+                                <span class="aiz-side-nav-text">Monthly Sheet Sheet</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">

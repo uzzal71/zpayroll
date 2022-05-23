@@ -229,7 +229,7 @@
                     var link=document.createElement('a');
                     link.href=window.URL.createObjectURL(blob);
                     var currentdate = new Date();
-                    link.download="monthly_salary_sheet_report.pdf";
+                    link.download="monthly_salary_details_report.pdf";
                     link.click();
                 },
                 error: function(blob){

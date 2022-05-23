@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::group(['middleware' => 'auth'], function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Software Settings
@@ -72,9 +72,6 @@ Route::get('/employee_leaves/destroy/{id}', 'EmployeeLeaveController@destroy')->
 Route::resource('holiday_entries', 'HolidayEntryController');
 Route::get('/holiday_entries/destroy/{id}', 'HolidayEntryController@destroy')->name('holiday_entries.destroy');
 
-Route::resource('weekend_entries', 'WeekendEntryController');
-Route::get('/weekend_entries/destroy/{id}', 'WeekendEntryController@destroy')->name('weekend_entries.destroy');
-
 Route::resource('employee_promotions', 'EmployeePromotionController');
 Route::get('/employee_promotions/destroy/{id}', 'EmployeePromotionController@destroy')->name('employee_promotions.destroy');
 
@@ -126,6 +123,9 @@ Route::post('/monthly-attendance-preport', 'HRReportController@monthly_attendanc
 Route::get('/monthly-overtime', 'HRReportController@monthly_overtime')->name('monthly.overtime');
 
 // Salary Reports Route
+Route::get('/monthly-salary-details', 'SalaryReportController@monthly_salary_details')->name('monthly.salary.details');
+Route::post('/monthly-salary-details-report', 'SalaryReportController@monthly_salary_details_report')->name('monthly.salary.details.report');
+
 Route::get('/monthly-salary-sheet', 'SalaryReportController@monthly_salary_sheet')->name('monthly.salary.sheet');
 Route::post('/monthly-salary-sheet-report', 'SalaryReportController@monthly_salary_sheet_report')->name('monthly.salary.sheet.report');
 
@@ -148,3 +148,5 @@ Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
     return redirect()->route('home');
 })->name('clear-cache');
+
+});

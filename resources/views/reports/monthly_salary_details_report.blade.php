@@ -12,8 +12,8 @@
 			footer: page-footer;
 		}
 		body{
-			font-size: 1rem;
-            font-family: "Times New Roman", Times, serif;
+			font-size: 0.875rem;
+            font-family: 'Roboto','sans-serif';
             font-weight: normal;
             direction: '';
             text-align: '';
