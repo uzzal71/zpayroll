@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\AttendanceSummary;
 use App\Models\SalarySheet;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,6 +74,8 @@ class EmployeeReportController extends Controller
                 'salary_year' => $year
             ])->orderBy('id', 'asc');
 
+        $employee = Employee::with(['department', 'designation', 'schedule'])->where('id', 1)->first();
+
         if ($request->has('month')){
             $month = $request->month;
             $year = $request->year;
@@ -85,6 +88,8 @@ class EmployeeReportController extends Controller
         }
 
         $employee_payslips  = $employee_payslips->get();
+
+        echo json_encode($employee);exit();
 
         return view('employee_reports.employee_payslip', compact('employee_payslips', 'month', 'year'));
     }

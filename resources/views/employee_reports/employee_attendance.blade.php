@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="form-group mb-0 text-right">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                 </form>
                 <!-- Search Form -->
