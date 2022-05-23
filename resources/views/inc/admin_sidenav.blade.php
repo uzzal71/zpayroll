@@ -296,7 +296,7 @@
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('employee.view.payslip') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Payslip</span>
                             </a>
                         </li>
