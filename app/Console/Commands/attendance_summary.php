@@ -110,7 +110,7 @@ class attendance_summary extends Command
                             }
 
                             $need_to_work = $number_of_days - ($weekend + $holiday);
-                            $need_to_pay = ($present + $weekend + $holiday + $paid_leave) - floor($late / 3);
+                            $need_to_pay = $present + $weekend + $holiday + $paid_leave + $late;
                         }
 
                         $attendance_summary_exists = AttendanceSummary::where([
