@@ -132,6 +132,10 @@ Route::post('/monthly-salary-sheet-report', 'SalaryReportController@monthly_sala
 Route::get('/monthly-payslip', 'SalaryReportController@monthly_payslip')->name('monthly.payslip');
 Route::get('/tax-report', 'SalaryReportController@tax_report')->name('tax.report');
 
+
+// Employee Report Controller
+Route::get('/employee/view/attendance', 'EmployeeReportController@employee_view_report')->name('employee.view.attendance');
+
 // Systems Route
 Route::resource('/users', 'UserController');
 Route::get('/system-information', 'SystemController@system_information')->name('system.information');
