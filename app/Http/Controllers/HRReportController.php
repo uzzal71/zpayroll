@@ -213,7 +213,7 @@ class HRReportController extends Controller
         $employee_id = $request->employee_id;
         $employees = Employee::with(['department', 'designation', 'schedule'])->whereIn('id', $employee_id)->get();
 
-        $company = DB::table('companies')->find(1);
+        $company = Company::orderBy('id', 'desc')->first();
 
         $output = '';
         $emp_length = count($employees);
@@ -226,8 +226,8 @@ class HRReportController extends Controller
                 ->get();
 
             $output .= '<div style="padding: 2rem;">
-                <h2 class="text-center p-0 m-0">ZAMAN-IT</h2>
-                <p class="text-center">House 63, Road 13, Sector 10, Uttara, Dhaka-1230</p>
+                <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
+                <p class="text-center">'.$company->address.'</p>
                 <h3 class="text-center">'.$from_date.' To '.$to_date.' Attendance Sheet</h3>
                 <div>
                     <table class="padding text-left small">
@@ -344,7 +344,7 @@ class HRReportController extends Controller
         $employee_id = $request->employee_id;
         $employees = Employee::with(['department', 'designation', 'schedule'])->whereIn('id', $employee_id)->get();
 
-        $company = DB::table('companies')->find(1);
+        $company = Company::orderBy('id', 'desc')->first();
 
         $output = '';
         $month_name = date("F", mktime(0, 0, 0, $month, 10));
@@ -359,8 +359,8 @@ class HRReportController extends Controller
                 ->get();
 
             $output .= '<div style="padding: 2rem;">
-                <h2 class="text-center p-0 m-0">ZAMAN-IT</h2>
-                <p class="text-center">House 63, Road 13, Sector 10, Uttara, Dhaka-1230</p>
+                <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
+                <p class="text-center">'.$company->address.'</p>
                 <h3 class="text-center">'.$month_name.' - '.$year.' Attendance Sheet</h3>
                 <div>
                     <table class="padding text-left small">
@@ -479,7 +479,8 @@ class HRReportController extends Controller
             ->where('attendance_status', 'P')
             ->whereIn('employee_id', $employee_id)
             ->get();
-        $company = DB::table('companies')->find(1);
+
+        $company = Company::orderBy('id', 'desc')->first();
 
         $data = [
             "company" => $company,

@@ -383,7 +383,6 @@ class SalaryReportController extends Controller
                 $output .= '<td colspan="2"></td>';
             $output .= '</tr>';
 
-
             $output .= '<tr>';
                 $output .= '<td>Leave Earn</td>';
                 $output .= '<td>'.$row->paid_leave_addition.'</td>';
