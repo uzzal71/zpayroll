@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Excel;
 use App\Imports\AttendanceImport;
+use Faker\Core\File;
 use Illuminate\Console\Command;
 
 class import extends Command
@@ -39,7 +40,13 @@ class import extends Command
      */
     public function handle()
     {
-        echo public_path(). '/uploads/attendance_files/';
-       // Excel::import(new AttendanceImport, 'C:\xampp\htdocs\zpayroll\public\uploads\attendance_files\April-2022.xls');
+        $files =  'http://127.0.0.1:8000/public/uploads/attendance_files/April-2022.xls';
+
+        if (file_exists ($files)) {
+            echo $files;
+        } else {
+            echo "NO";
+        }
+       Excel::import(new AttendanceImport, $files);
     }
 }
