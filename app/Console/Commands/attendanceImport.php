@@ -49,6 +49,7 @@ class attendanceImport extends Command
         try {
 
             $cronjobs = CronJob::where('status', 'on')->get();
+
             if ($cronjobs) {
                 foreach ($cronjobs as $key => $row) {
                     $month = date("m", strtotime($row->cron_job_month));
@@ -58,11 +59,9 @@ class attendanceImport extends Command
 
                     foreach ($employees as $key => $employee) {
 
-                        $start_date = "01-".$month."-".$year;
+                        $start_date = "01-".trim($month)."-".trim($year);
                         $start_time = strtotime($start_date);
                         $end_time = strtotime("+1 month", $start_time);
-
-                        echo $employee->employee_name;
 
                         $dates = array();
 
@@ -71,6 +70,7 @@ class attendanceImport extends Command
                             $dates[] = trim(date('Y-m-d', $i));
                         }
 
+                        $count = 0;
                         foreach ($dates as $value) {
 
 
@@ -125,6 +125,8 @@ class attendanceImport extends Command
                                     'status' => 'Y',
                                 ])->first();
 
+                                //echo json_encode($attendance_log);
+
                                 $attendance->employee_id = $employee->id;
                                 $attendance->attendance_month = $month;
                                 $attendance->attendance_year = $year;
@@ -153,12 +155,14 @@ class attendanceImport extends Command
 
                                 $attendance->over_time = 0;
                                 $attendance->remarks = $remarks;
-                                if ($attendance_log->status == 'N') {
-                                    $attendance->attendance_status = 'A';
-                                } else {
-                                    $attendance->attendance_status = $status;
-                                }
 
+                                if ($attendance_log) {
+                                    if ($attendance_log->status == 'N') {
+                                        $attendance->attendance_status = 'A';
+                                    } else {
+                                        $attendance->attendance_status = $status;
+                                    }
+                                }
                                 $attendance->save();
                             } else {
 
