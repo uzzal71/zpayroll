@@ -25,6 +25,13 @@
                     </div>
 
                     <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Short Name</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="Short Name" id="short_name" name="short_name" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-md-3 col-form-label">Leave Days</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" name="leave_days" id="leave_days" placeholder="Leave Days" value="0">

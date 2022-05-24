@@ -86,7 +86,7 @@
 
 
 <htmlpagefooter name="page-footer">
-		<div style="width: 20%; margin: 0px auto; float: left; display: inline-block;">
+		<div style="width: 20%; float: right; display: inline-block;">
 			<span style="text-align: center;border-top: 1px solid #000;">Authorized Signature</span>
 		</div>
 </htmlpagefooter>

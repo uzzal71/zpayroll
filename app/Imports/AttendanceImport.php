@@ -17,30 +17,43 @@ class AttendanceImport implements ToCollection
     */
     public function collection(Collection $rows)
     {
-        foreach ($rows as $row) 
+        $count = 0;
+
+        foreach ($rows as $key =>  $row) 
         {
-            $exists = AttendanceLog::where([
-                'employee_id' => $row[0],
-                'attendance_date' => date('Y-m-d', strtotime($row[1])),
-            ])->first();
+            $employee_id  = $row[0];
+            $employee_name  = $row[1];
+            $attendance_date  = date('Y-m-d', strtotime($row[2]));
+            $attendance_in  = $row[3];
+            $attendance_out  = $row[4];
 
-            if ($exists) {
-                AttendanceLog::where('employee_id', $row[0])
-                  ->where('attendance_date', date('Y-m-d', strtotime($row[1])))
-                  ->update([
-                    'employee_id'     => $row[0],
-                    'attendance_date'    => date('Y-m-d', strtotime($row[1])), 
-                    'attendance_in' => $row[2],
-                    'attendance_out' => $row[3],
-                ]);
 
-            } else {
-                AttendanceLog::create([
-                    'employee_id'     => $row[0],
-                    'attendance_date'    => date('Y-m-d', strtotime($row[1])), 
-                    'attendance_in' => $row[2],
-                    'attendance_out' => $row[3],
-                ]);
+            if ($row[0] != null && gettype($employee_id) != "string") { 
+                $exists = AttendanceLog::where([
+                    'employee_id' => $row[0],
+                    'attendance_date' => date('Y-m-d', strtotime($row[2])),
+                ])->first();
+
+
+                if ($exists) {
+                    AttendanceLog::where('employee_id', $row[0])
+                      ->where('attendance_date', date('Y-m-d', strtotime($row[2])))
+                      ->update([
+                        'employee_id'     => $row[0],
+                        'attendance_date'    => date('Y-m-d', strtotime($row[2])), 
+                        'attendance_in' => $row[3],
+                        'attendance_out' => $row[4],
+                    ]);
+
+                } else {
+                    AttendanceLog::create([
+                        'employee_id'     => $row[0],
+                        'attendance_date'    => date('Y-m-d', strtotime($row[2])), 
+                        'attendance_in' => $row[3],
+                        'attendance_out' => $row[4],
+                    ]);
+                }
+
             }
         }
     }

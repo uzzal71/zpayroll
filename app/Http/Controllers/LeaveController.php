@@ -45,6 +45,7 @@ class LeaveController extends Controller
         $leave = new Leave();
 
         $leave->leave_name = $request->leave_name;
+        $leave->short_name = $request->short_name;
         $leave->leave_days = $request->leave_days;
         $leave->status	 = $request->status;
 
@@ -91,6 +92,7 @@ class LeaveController extends Controller
         $leave = Leave::findOrFail($id);
 
         $leave->leave_name = $request->leave_name;
+        $leave->short_name = $request->short_name;
         $leave->leave_days = $request->leave_days;
         $leave->status	 = $request->status;
 
