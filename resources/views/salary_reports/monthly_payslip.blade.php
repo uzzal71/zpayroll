@@ -123,7 +123,7 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <button type="button" class="btn btn-success mt-2">Submit</button>
+        <button type="button" class="btn btn-success mt-2 mb-4" id="monthly_payslip_report">Submit</button>
     </div>
 </div>
 
@@ -184,20 +184,74 @@
             });
         }
     });
+
+    $(document).ready(function() {
+        $('#monthly_payslip_report').click(function() {
+            var month = document.getElementById('month').value;
+            var year = document.getElementById('year').value;
+            var employee_id = [];
+            $.each($("input[type=checkbox].check-one:checked"), function(){
+                employee_id.push($(this).val());
+            });
+
+            // validation
+            if (month == '') {
+                AIZ.plugins.notify('danger', 'Please select month');
+                return false;
+            }
+
+            if (year == '') {
+                AIZ.plugins.notify('danger', 'Please select year');
+                return false;
+            }
+
+            if (employee_id.length == 0) {
+                AIZ.plugins.notify('danger', 'Please select employees');
+                return false;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type:"POST",
+                url:'{{ route('monthly.salary.details.report') }}',
+                data: {
+                    'month': month,
+                    'year': year,
+                    'employee_id': employee_id
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(data) {
+                    var blob=new Blob([data]);
+                    var link=document.createElement('a');
+                    link.href=window.URL.createObjectURL(blob);
+                    var currentdate = new Date();
+                    link.download="monthly_salary_sheet_report.pdf";
+                    link.click();
+                },
+                error: function(blob){
+                    console.log(blob);
+                }
+            });
+        });
+    });
 </script>
 
 <style>
     .FixedHeightContainer
     {
         float:right;
-        height: 292px;
+        height: 348px;
         width:100%;
         padding:3px;
-        background:#ef4f2d;
+        background:#ffc519;
     }
     .Content
     {
-        height:286px;
+        height:342px;
         overflow:auto;
         background:#fff;
     }
