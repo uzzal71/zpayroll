@@ -98,4 +98,22 @@ class SalarySettingController extends Controller
     {
         
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function get_salary_settings(Request $request)
+    {
+        $salary_info = SalarySetting::orderBy('id', 'desc')->first();
+
+        return response()->json([
+            'status' => true,
+            'salary_info' => $salary_info,
+        ]);
+    }
+
+    
 }

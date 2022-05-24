@@ -387,7 +387,7 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-from-label">Gross</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="gross_salary" placeholder="0.00">
+                                <input type="text" class="form-control" onkeyup="calculate_salary()" name="gross_salary" id="gross_salary" placeholder="0.00">
                             </div>
                         </div>
 
@@ -395,35 +395,35 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-from-label">Basic</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="basic_salary" placeholder="0.00">
+                                <input type="text" class="form-control" name="basic_salary" id="basic_salary" placeholder="0.00" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-from-label">House Rent</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="house_rent" placeholder="0.00">
+                                <input type="text" class="form-control" name="house_rent" id="house_rent" placeholder="0.00" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-from-label">Medical</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="medical_allowance" placeholder="0.00">
+                                <input type="text" class="form-control" name="medical_allowance" id="medical_allowance" placeholder="0.00" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-from-label">Transport</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="transport_allowance" placeholder="0.00">
+                                <input type="text" class="form-control" name="transport_allowance" id="transport_allowance" placeholder="0.00" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-from-label">Food</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="food_allowance" placeholder="0.00">
+                                <input type="text" class="form-control" name="food_allowance" id="food_allowance" placeholder="0.00" readonly>
                             </div>
                         </div>
 
@@ -612,5 +612,27 @@
             $("button[type='submit']").button.prop('disabled', false);
         }
     });
+
+    function calculate_salary() {
+        
+        $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type:"POST",
+                url:'{{ route('Get.Salary.Setting') }}',
+                data: {},
+                success: function(data) {
+                    var gross_salary = document.getElementById("gross_salary").value;
+
+                    document.getElementById("basic_salary").value = (gross_salary * data.salary_info.basic_salary) / 100;
+                    document.getElementById("house_rent").value = (gross_salary * data.salary_info.house_rent) / 100;
+                    document.getElementById("medical_allowance").value = (gross_salary * data.salary_info.medical_allowance) / 100;
+                    document.getElementById("transport_allowance").value = (gross_salary * data.salary_info.transport_allowance) / 100;
+                    document.getElementById("food_allowance").value = (gross_salary * data.salary_info.food_allowance) / 100;
+
+                }
+            });
+    };
 </script>
 @endsection

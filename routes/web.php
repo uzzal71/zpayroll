@@ -42,6 +42,7 @@ Route::get('/taxs/destroy/{id}', 'TaxController@destroy')->name('taxs.destroy');
 
 // salary settings
 Route::resource('salary_settings', 'SalarySettingController');
+Route::post('get_salary_settings', 'SalarySettingController@get_salary_settings')->name('Get.Salary.Setting');
 
 Route::resource('provident_founds', 'ProvidentFundController');
 Route::get('/provident_founds/destroy/{id}', 'ProvidentFundController@destroy')->name('provident_founds.destroy');
