@@ -130,6 +130,8 @@ Route::get('/monthly-salary-sheet', 'SalaryReportController@monthly_salary_sheet
 Route::post('/monthly-salary-sheet-report', 'SalaryReportController@monthly_salary_sheet_report')->name('monthly.salary.sheet.report');
 
 Route::get('/monthly-payslip', 'SalaryReportController@monthly_payslip')->name('monthly.payslip');
+Route::post('/monthly-payslip-report', 'SalaryReportController@monthly_payslip_report')->name('monthly.payslip.report');
+
 Route::get('/tax-report', 'SalaryReportController@tax_report')->name('tax.report');
 
 

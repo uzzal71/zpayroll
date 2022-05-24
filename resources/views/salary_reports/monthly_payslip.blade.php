@@ -215,7 +215,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type:"POST",
-                url:'{{ route('monthly.salary.details.report') }}',
+                url:'{{ route('monthly.payslip.report') }}',
                 data: {
                     'month': month,
                     'year': year,
@@ -229,7 +229,7 @@
                     var link=document.createElement('a');
                     link.href=window.URL.createObjectURL(blob);
                     var currentdate = new Date();
-                    link.download="monthly_salary_sheet_report.pdf";
+                    link.download="monthly_payslip_report.pdf";
                     link.click();
                 },
                 error: function(blob){

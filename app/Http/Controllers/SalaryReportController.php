@@ -29,6 +29,8 @@ class SalaryReportController extends Controller
      */
     public function monthly_salary_details_report(Request $request)
     {
+        $company = Company::orderBy('id', 'desc')->first();
+
         $month = $request->month;
         $year = $request->year;
         $employee_id = $request->employee_id;
@@ -37,8 +39,8 @@ class SalaryReportController extends Controller
         $month_name = date("F", mktime(0, 0, 0, $month, 10));
 
         $output = '<div>
-                <h2 class="text-center p-0 m-0">ZAMAN-IT</h2>
-                <p class="text-center">House 63, Road 13, Sector 10, Uttara, Dhaka-1230</p>
+                <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
+                <p class="text-center">'.$company->address.'</p>
                 <h3 class="text-center">'.$month_name.' - '.$year.' Salary Sheet</h3>';
 
         $output .= '
@@ -139,6 +141,8 @@ class SalaryReportController extends Controller
      */
     public function monthly_salary_sheet_report(Request $request)
     {
+        $company = Company::orderBy('id', 'desc')->first();
+
         $month = $request->month;
         $year = $request->year;
         $employee_id = $request->employee_id;
@@ -147,8 +151,8 @@ class SalaryReportController extends Controller
         $month_name = date("F", mktime(0, 0, 0, $month, 10));
 
         $output = '<div>
-                <h2 class="text-center p-0 m-0">ZAMAN-IT</h2>
-                <p class="text-center">House 63, Road 13, Sector 10, Uttara, Dhaka-1230</p>
+                <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
+                <p class="text-center">'.$company->address.'</p>
                 <h3 class="text-center">'.$month_name.' - '.$year.' Salary Sheet</h3>';
 
         $output .= '
@@ -262,6 +266,173 @@ class SalaryReportController extends Controller
     public function monthly_payslip(Request $request)
     {
     	return view('salary_reports.monthly_payslip');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function monthly_payslip_report(Request $request)
+    {
+        $company = Company::orderBy('id', 'desc')->first();
+
+        $month = $request->month;
+        $year = $request->year;
+        $employee_id = $request->employee_id;
+        $employees = Employee::with(['department', 'designation', 'schedule'])->whereIn('id', $employee_id)->get();
+
+        $month_name = date("F", mktime(0, 0, 0, $month, 10));
+
+        $output = '';
+        $count = count($employee_id);
+        $lenth = count($employee_id);
+
+        foreach ($employees as $key => $employee) { 
+            $count = $count - 1;
+
+            $output .= '
+                <div><br/>
+                <div class="text-center line-height">
+                    <p style="font-weight: bolder;">'.$company->company_full_name.'</p>
+                    <p>'.$company->address.'</p>
+                    <p>'.$month_name.' - '.$year.' Payslip</p>
+                </div>
+                ';
+
+            $output .= '
+                <table style="background-color: #cce7ed">
+                        <tr>
+                            <td class="text-center">Employee name</td>
+                            <td class="text-center">'.$employee->employee_name.'</td>
+                            <td class="text-center">Joining Date</td>
+                            <td class="text-center">'.$employee->joining_date.'</td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-center">Designation</td>
+                            <td class="text-center">'.$employee->designation->designation_name.'</td>
+                            <td class="text-center">Department</td>
+                            <td class="text-center">'.$employee->department->department_name.'</td>
+                        </tr>
+
+                </table> <br />';
+
+            $output .= '
+                <table>
+                    <thead>
+                        <tr class="white-color" style="background: #8ab6bf;">
+                            <th class="text-center">Earnings</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Deductions</th>
+                            <th class="text-center">Amount</th>
+                        </tr>
+                    </thead>
+                <tbody>';
+
+            $row = SalarySheet::where('salary_month', $month)
+                ->where('salary_year', $year)
+                ->where('employee_id', $employee->id)
+                ->first();
+        
+            $output .= '<tr>';
+                $output .= '<td>Basic</td>';
+                $output .= '<td>'.$row->basic_salary.'</td>';
+                $output .= '<td>Late Deduction</td>';
+                $output .= '<td>'.$row->late_deduction.'</td>';
+            $output .= '</tr>'; 
+
+            $output .= '<tr>';
+                $output .= '<td>House Allowance</td>';
+                $output .= '<td>'.$row->house_allowance.'</td>';
+                $output .= '<td>Absent Deduction</td>';
+                $output .= '<td>'.$row->absent_deduction.'</td>';
+            $output .= '</tr>';
+            
+            $output .= '<tr>';
+                $output .= '<td>Medical Allowance</td>';
+                $output .= '<td>'.$row->medical_allowance.'</td>';
+                $output .= '<td>Tax Deduction</td>';
+                $output .= '<td>'.$row->tax_deduction.'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+                $output .= '<td>Transport Allowance</td>';
+                $output .= '<td>'.$row->transport_allowance.'</td>';
+                $output .= '<td>Provident Fund</td>';
+                $output .= '<td>'.$row->provident_found_deduction.'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+                $output .= '<td>Food Allowance</td>';
+                $output .= '<td>'.$row->transport_allowance.'</td>';
+                $output .= '<td>Advance Salary</td>';
+                $output .= '<td>'.$row->advance_salary_deduction.'</td>';
+            $output .= '</tr>'; 
+
+            $output .= '<tr>';
+                $output .= '<td>Commission</td>';
+                $output .= '<td>'.$row->commission_addition.'</td>';
+                $output .= '<td>Others Deduction</td>';
+                $output .= '<td>'.$row->others_deduction.'</td>';
+            $output .= '</tr>';
+            
+            $output .= '<tr>';
+                $output .= '<td>Transport Bill</td>';
+                $output .= '<td>'.$row->transport_bill_addition.'</td>';
+                $output .= '<td colspan="2"></td>';
+            $output .= '</tr>';
+
+
+            $output .= '<tr>';
+                $output .= '<td>Leave Earn</td>';
+                $output .= '<td>'.$row->paid_leave_addition.'</td>';
+                $output .= '<td colspan="2"></td>';
+            $output .= '</tr>'; 
+
+            $output .= '<tr>';
+                $output .= '<td>Overtime Earn</td>';
+                $output .= '<td>'.$row->overtime_addition.'</td>';
+                $output .= '<td colspan="2"></td>';
+            $output .= '</tr>';
+            
+            $output .= '<tr>';
+                $output .= '<td>Others Earn</td>';
+                $output .= '<td>'.$row->other_addition.'</td>';
+                $output .= '<td colspan="2"></td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+                $output .= '<td>Bonus</td>';
+                $output .= '<td>'.$row->bonus_aaddition.'</td>';
+                $output .= '<td colspan="2"></td>';
+            $output .= '</tr>';
+
+            $output .= '<tr class="border-top">';
+                $output .= '<th>Total Earning</th>';
+                $output .= '<td>'.$row->salary_earn.'</td>';
+                $output .= '<td>Total Deductions</td>';
+                $output .= '<td>'.$row->total_deduction.'</td>';
+            $output .= '</tr>'; 
+
+            $output .= '<tr class="border-top">';
+                $output .= '<th>Net Salary</th>';
+                $output .= '<td colspan="3">'.$row->net_salary.'</td>';
+            $output .= '</tr>';          
+
+
+            $output .= '</tbody>
+                    </table>
+                    <div>'; 
+
+            if ($count) {
+                $output .= '<pagebreak></pagebreak>';
+            }
+        }
+
+        $pdf = PDF::loadView('reports.monthly_payslip_report', ['output' => $output], [], ['orientation' => 'L', 'format' => 'A5-L']);
+        $pdf->save('pdf/monthly_payslip_report.pdf');
+        return response()->download('pdf/monthly_payslip_report.pdf');
     }
     
     /**
