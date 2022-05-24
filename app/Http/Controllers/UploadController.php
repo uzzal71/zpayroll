@@ -48,17 +48,14 @@ class UploadController extends Controller
 
         $create_date = date("Y-m-d");
         $create_date   = new DateTime($create_date);
-        $year = $create_date->format('Y');
-        $month = $create_date->format('m');
+        $year = $request->attendance_year;
+        $month = $request->attendance_month;
 
         $filename = '';
         if($request->file('upload_file_name')){
             $file = $request->upload_file_name;
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $file_explode = explode('-', $filename);
-
-            $month = $file_explode[0];
-            $year = $file_explode[1];
 
             $destinationPath = public_path() .'\uploads\attendance_files';
 
@@ -113,8 +110,8 @@ class UploadController extends Controller
 
         $create_date = date("Y-m-d");
         $create_date   = new DateTime($create_date);
-        $year = $create_date->format('Y');
-        $month = $create_date->format('m');
+        $year = $request->attendance_year;
+        $month = $request->attendance_month;
 
         $filename = '';
         if($request->file('upload_file_name')){
@@ -122,8 +119,6 @@ class UploadController extends Controller
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $file_explode = explode('-', $filename);
 
-            $month = $file_explode[0];
-            $year = $file_explode[1];
 
             $destinationPath = public_path() .'\uploads\attendance_files';
 

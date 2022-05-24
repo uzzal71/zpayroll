@@ -99,7 +99,7 @@ class attendanceImport extends Command
                                     'id' => $leave_info->leave_id
                                 ])->first();
 
-                                $status = $leave->short_name;
+                                $status = "ML";
                                 $remarks = $leave->leave_name;
 
                             } elseif ($holiday_info) {

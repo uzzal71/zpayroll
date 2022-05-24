@@ -150,10 +150,14 @@ class SalaryReportController extends Controller
 
         $month_name = date("F", mktime(0, 0, 0, $month, 10));
 
-        $output = '<div>
-                <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
-                <p class="text-center">'.$company->address.'</p>
-                <h3 class="text-center">'.$month_name.' - '.$year.' Salary Sheet</h3>';
+        $output .= '
+                <div><br/>
+                <div class="text-center line-height">
+                    <p style="font-weight: bolder;">'.$company->company_full_name.'</p>
+                    <p>'.$company->address.'</p>
+                    <p>'.$month_name.' - '.$year.' Payslip</p>
+                </div>
+                ';
 
         $output .= '
                 <table class="padding text-center small border-bottom">

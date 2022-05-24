@@ -70,6 +70,10 @@
 		.m-0 {
 			margin: 0px;
 		}
+
+		.line-height *, .line-height {
+			line-height: 5px;
+		}
 	</style>
 </head>
 <body>
