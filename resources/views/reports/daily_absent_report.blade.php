@@ -62,8 +62,8 @@
 	<div>
 
 		<div style="padding: 1rem;">
-			<h2 class="text-center p-0 m-0">ZAMAN-IT</h2>
-			<p class="text-center">House 63, Road 13, Sector 10, Uttara, Dhaka-1230</p>
+			<h2 class="text-center p-0 m-0">{{ $company->company_full_name }}</h2>
+			<p class="text-center">{{ $company->address }}</p>
 			<h3 class="text-center">Daily Absent</h3>
 		</div>
 

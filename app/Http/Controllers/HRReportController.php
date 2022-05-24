@@ -35,7 +35,8 @@ class HRReportController extends Controller
             ->where('attendance_status', 'P')
             ->whereIn('employee_id', $employee_id)
             ->get();
-        $company = DB::table('companies')->find(1);
+            
+        $company = Company::orderBy('id', 'desc')->first();
 
         $data = [
             "company" => $company,
@@ -66,12 +67,14 @@ class HRReportController extends Controller
     {
         $from_date = $request->from_date;
         $employee_id = $request->employee_id;
+
         $results = Attendance::with(['employee'])
             ->where('attendance_date', $from_date)
             ->where('attendance_status', 'A')
             ->whereIn('employee_id', $employee_id)
             ->get();
-        $company = DB::table('companies')->find(1);
+
+        $company = Company::orderBy('id', 'desc')->first();
 
         $data = [
             "company" => $company,
@@ -102,12 +105,14 @@ class HRReportController extends Controller
     {
         $from_date = $request->from_date;
         $employee_id = $request->employee_id;
+
         $results = Attendance::with(['employee'])
             ->where('attendance_date', $from_date)
             ->where('attendance_status', 'L')
             ->whereIn('employee_id', $employee_id)
             ->get();
-        $company = DB::table('companies')->find(1);
+
+        $company = Company::orderBy('id', 'desc')->first();
 
         $data = [
             "company" => $company,
@@ -143,7 +148,8 @@ class HRReportController extends Controller
             ->whereIn('attendance_status', ['SL','AL','CL','MAT','ML','PAT'])
             ->whereIn('employee_id', $employee_id)
             ->get();
-        $company = DB::table('companies')->find(1);
+
+        $company = Company::orderBy('id', 'desc')->first();
 
         $data = [
             "company" => $company,
@@ -179,7 +185,8 @@ class HRReportController extends Controller
             ->where('over_time', '!=', 0)
             ->whereIn('employee_id', $employee_id)
             ->get();
-        $company = DB::table('companies')->find(1);
+
+        $company = Company::orderBy('id', 'desc')->first();
 
         $data = [
             "company" => $company,
