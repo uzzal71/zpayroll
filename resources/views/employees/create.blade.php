@@ -518,7 +518,7 @@
                 </div>
                 <!-- Tax -->
 
-                <!-- Provident found Status -->
+                <!-- Provident fund Status -->
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">Provident Fund Status</h5>
@@ -532,16 +532,16 @@
                         </div>
                     </div>
                 </div>
-                <!-- Provident found Status-->
+                <!-- Provident fund Status-->
 
-                <!-- Provident found -->
+                <!-- Provident fund -->
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0 h6">Provident Found</h5>
+                        <h5 class="mb-0 h6">Provident Fund</h5>
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <select class="form-control aiz-selectpicker" name="tax_id" id="tax_id" data-live-search="true" required>
+                            <select class="form-control aiz-selectpicker" name="provident_fund_id" id="provident_fund_id" data-live-search="true" required>
                                 @foreach (\App\Models\ProvidentFund::all() as $fund)
                                     <option value="{{ $fund->id }}">{{ $fund->provident_fund_name }}({{ $fund->percentage }})</option>
                                 @endforeach
@@ -549,7 +549,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Provident found -->
+                <!-- Provident fund -->
 
                 <!-- Transport allowance -->
                 <div class="card">

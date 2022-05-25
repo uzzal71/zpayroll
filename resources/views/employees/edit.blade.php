@@ -499,10 +499,29 @@
                 </div>
                 <!-- Tax Status -->
 
-                <!-- Provident found -->
+                <!-- Tax -->
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0 h6">Provident Found</h5>
+                        <h5 class="mb-0 h6">Tax</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <select class="form-control aiz-selectpicker" name="tax_id" id="tax_id" data-live-search="true" required>
+                                @foreach (\App\Models\Tax::all() as $tax)
+                                    <option value="{{ $tax->id }}" @if($tax->id == $employee->tax_id) selected @endif>
+                                        {{ $tax->tax_name }}({{ $tax->percentage }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tax -->
+
+                <!-- Provident fund -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0 h6">Provident Fund</h5>
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
@@ -513,7 +532,26 @@
                         </div>
                     </div>
                 </div>
-                <!-- Provident found -->
+                <!-- Provident fund -->
+
+                <!-- Provident fund -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0 h6">Provident Fund</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <select class="form-control aiz-selectpicker" name="provident_fund_id" id="provident_fund_id" data-live-search="true" required>
+                                @foreach (\App\Models\ProvidentFund::all() as $fund)
+                                    <option value="{{ $fund->id }}" @if($fund->id == $employee->provident_fund_id) selected @endif>
+                                        {{ $fund->provident_fund_name }}({{ $fund->percentage }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Provident fund -->
 
                 <!-- Transport allowance -->
                 <div class="card">
