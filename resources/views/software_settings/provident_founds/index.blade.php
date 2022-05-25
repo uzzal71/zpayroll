@@ -7,7 +7,7 @@
             <h1 class="h3">All Provident Fund</h1>
         </div>
         <div class="col-md-6 text-md-right">
-            <a href="{{ route('provident_founds.create') }}" class="btn btn-primary">
+            <a href="{{ route('provident_funds.create') }}" class="btn btn-primary">
                 <span>Add New Provident Fund</span>
             </a>
         </div>
@@ -36,19 +36,21 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($provident_founds as $key => $provident_found)
+                @foreach($provident_funds as $key => $provident_fund)
                     <tr>
-                        <td>{{ ($key+1) + ($provident_founds->currentPage() - 1)*$provident_founds->perPage() }}</td>
-                        <td>{{ $provident_found->provident_found_name }}</td>
-                        <td>{{ $provident_found->percentage }}%</td>
-                        <td>{{ $provident_found->status }}</td>
+                        <td>{{ ($key+1) + ($provident_funds->currentPage() - 1)*$provident_funds->perPage() }}</td>
+                        <td>{{ $provident_fund->provident_fund_name }}</td>
+                        <td>{{ $provident_fund->percentage }}%</td>
+                        <td>{{ $provident_fund->status }}</td>
                         <td class="text-right">
-                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('provident_founds.edit', $provident_found->id)  }}" title="Edit">
+                            @if ($provident_fund->provident_fund_name != "Default")
+                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('provident_funds.edit', $provident_fund->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('provident_founds.destroy', $provident_found->id) }}" title="Delete">
+                            <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('provident_funds.destroy', $provident_fund->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
