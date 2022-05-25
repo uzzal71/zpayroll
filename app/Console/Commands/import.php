@@ -52,7 +52,7 @@ class import extends Command
 
                 if ($upload) {
                     $fullpath = $upload->upload_path;
-                    Excel::import(new AttendanceImport, $fullpath);
+                    Excel::import(new AttendanceImport, 'C:\xampp\htdocs\zpayroll\public\uploads\attendance_files\April-2022.xls');
                 }
         
             }

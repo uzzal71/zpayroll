@@ -58,7 +58,7 @@ class UploadController extends Controller
             $file = $request->upload_file_name;
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $file_explode = explode('-', $filename);
-            $destinationPath = public_path() .'\uploads\attendance_files';
+            $destinationPath = public_path() .'/uploads/attendance_files';
             $filename = $month. '-'. $year . '.'.$file->clientExtension();
             Excel::import(new AttendanceImport, request()->file('upload_file_name'));
             $file->move($destinationPath, $filename);
@@ -118,7 +118,7 @@ class UploadController extends Controller
             $file = $request->upload_file_name;
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $file_explode = explode('-', $filename);
-            $destinationPath = public_path() .'\uploads\attendance_files';
+            $destinationPath = public_path() .'/uploads/attendance_files';
             $filename = $month. '-'. $year . '.'.$file->clientExtension();
             Excel::import(new AttendanceImport, request()->file('upload_file_name'));
             $file->move($destinationPath, $filename);
