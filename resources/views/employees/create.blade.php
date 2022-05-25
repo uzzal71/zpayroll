@@ -73,7 +73,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-from-label">Date Of Birth</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="date_of_birth" placeholder="Date Of Birth">
+                                <input type="text" class="form-control" name="date_of_birth" id="calendar2" placeholder="Date Of Birth">
                             </div>
                         </div>
 
@@ -136,7 +136,7 @@
                             <label class="col-md-3 col-from-label">Employee Status</label>
                             <div class="col-md-8">
                                 <select class="form-control aiz-selectpicker" name="employee_status" id="employee_status" data-live-search="true">
-                                    <option value="N/A">Select Sex</option>
+                                    <option value="N/A">Select Status</option>
                                     <option value="Regular">Regular</option>
                                     <option value="New">New</option>
                                     <option value="Other">Other</option>
@@ -147,7 +147,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-from-label">Joining Date</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="joining_date" placeholder="Date Of Birth">
+                                <input type="text" class="form-control" name="joining_date" id="calendar3" placeholder="Date Of Birth">
                             </div>
                         </div>
                     </div>
