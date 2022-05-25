@@ -10,7 +10,7 @@ class ProvidentFund extends Model
     use HasFactory;
 
     protected $fillable = [
-        'provident_found_name',
+        'provident_fund_name',
         'percentage',
         'status',
     ];
