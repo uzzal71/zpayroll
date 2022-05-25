@@ -501,7 +501,7 @@
                 </div>
                 <!-- Tax Status -->
 
-                <!-- Schedule -->
+                <!-- Tax -->
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">Tax</h5>
@@ -510,13 +510,29 @@
                         <div class="form-group row">
                             <select class="form-control aiz-selectpicker" name="tax_id" id="tax_id" data-live-search="true" required>
                                 @foreach (\App\Models\Tax::all() as $tax)
-                                    <option value="{{ $tax->id }}">{{ $tax->tax_name }}</option>
+                                    <option value="{{ $tax->id }}">{{ $tax->tax_name }}({{ $tax->percentage }})</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
-                <!-- Schedule -->
+                <!-- Tax -->
+
+                <!-- Provident found Status -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0 h6">Provident Fund Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <select class="form-control aiz-selectpicker" name="provident_fund_status" id="provident_fund_status" data-live-search="true" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Provident found Status-->
 
                 <!-- Provident found -->
                 <div class="card">
@@ -525,9 +541,10 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <select class="form-control aiz-selectpicker" name="provident_fund_status" id="provident_fund_status" data-live-search="true" required>
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                            <select class="form-control aiz-selectpicker" name="tax_id" id="tax_id" data-live-search="true" required>
+                                @foreach (\App\Models\ProvidentFund::all() as $fund)
+                                    <option value="{{ $fund->id }}">{{ $fund->provident_fund_name }}({{ $fund->percentage }})</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
