@@ -47,6 +47,7 @@
                                 <option value="Admin">Admin</option>
                                 <option value="HR">HR</option>
                                 <option value="Finance">Finance</option>
+                                <option value="Employee">Employee</option>
                             </select>
                         </div>
                     </div>

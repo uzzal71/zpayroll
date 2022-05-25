@@ -48,6 +48,7 @@
                                 <option value="Admin" @if ($user->user_type == 'Admin') selected @endif>Admin</option>
                                 <option value="HR" @if ($user->user_type == 'HR') selected @endif>HR</option>
                                 <option value="Finance" @if ($user->user_type == 'Finance') selected @endif>Finance</option>
+                                <option value="Employee" @if ($user->user_type == 'Employee') selected @endif>Employee</option>
                             </select>
                         </div>
                     </div>

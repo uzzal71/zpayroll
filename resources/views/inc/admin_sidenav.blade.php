@@ -16,6 +16,7 @@
                         <span class="aiz-side-nav-text">Dashboard</span>
                     </a>
                 </li>
+                @if (Auth::user()->user_type == "Super admin")
                 <!-- Software Settings Start-->
                 <li class="aiz-side-nav-item">
                     <a href="#" class="aiz-side-nav-link">
@@ -285,6 +286,7 @@
                     </ul>
                 </li>
                 <!-- Salary Report End -->
+                @endif
 
                 <!-- Employee Module Start -->
                 <li class="aiz-side-nav-item">
@@ -334,11 +336,13 @@
                     </a>
                     <!--Submenu-->
                     <ul class="aiz-side-nav-list level-2">
+                        @if (Auth::user()->user_type == "Super admin")
                         <li class="aiz-side-nav-item">
                             <a href="{{ route('users.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">User Management</span>
                             </a>
                         </li>
+                        @endif
                         <li class="aiz-side-nav-item">
                             <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">System Information</span>
@@ -347,7 +351,7 @@
                     </ul>
                 </li>
                 <!-- System End -->
-
+                @if (Auth::user()->user_type == "Super admin")
                 <!-- Database Backup Start-->
                 <li class="aiz-side-nav-item">
                     <a href="{{route('home')}}" class="aiz-side-nav-link">
@@ -356,6 +360,7 @@
                     </a>
                 </li>
                 <!-- Database Backup End -->
+                @endif
 
             </ul><!-- .aiz-side-nav -->
         </div><!-- .aiz-side-nav-wrap -->
