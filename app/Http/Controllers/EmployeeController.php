@@ -28,7 +28,7 @@ class EmployeeController extends Controller
             $employees = $employees->where('employee_id_card', 'like', '%'.$sort_search.'%');
         }
 
-        $employees = $employees->paginate(100);
+        $employees = $employees->paginate(1);
 
         return view('employees.index', compact('employees', 'sort_search'));
     }
