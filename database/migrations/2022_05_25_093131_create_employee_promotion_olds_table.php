@@ -15,7 +15,19 @@ class CreateEmployeePromotionOldsTable extends Migration
     {
         Schema::create('employee_promotion_olds', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('designation_id');
+            $table->string('promotion_month');
+            $table->year('promotion_year');
+            $table->date('effective_date');
+            $table->string('remarks');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('designation_id')->references('id')->on('designations');
         });
     }
 
