@@ -2,7 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Employee;
+use App\Models\EmployeePromotion;
+use App\Models\EmployeePromotionOld;
 use Illuminate\Console\Command;
+use DateTime;
 
 class employee_promotion_checkup extends Command
 {
@@ -11,7 +15,7 @@ class employee_promotion_checkup extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'employee_promotion_checkup:name';
 
     /**
      * The console command description.
@@ -37,6 +41,31 @@ class employee_promotion_checkup extends Command
      */
     public function handle()
     {
-        return 0;
+        $current_date = date('Y-m-d');
+        $employee_promotions = EmployeePromotion::where('effective_date', $current_date)->get();
+
+        foreach ($employee_promotions as $key => $row)
+        {
+            $employee_promotion = new EmployeePromotionOld;
+            $effective_date   = new DateTime( $row->effective_date );
+            $year = $effective_date->format('Y');
+            $month = $effective_date->format('m');
+            $employee_promotion->employee_id  = $row->employee_id;
+            $employee_promotion->department_id   = $row->department_id;
+            $employee_promotion->designation_id   = $row->designation_id;
+            $employee_promotion->promotion_month   = $month ;
+            $employee_promotion->promotion_year   = $year;
+            $employee_promotion->effective_date  = $row->effective_date;
+            $employee_promotion->remarks  = $row->remarks;
+            $employee_promotion->status	 = "active";
+            $employee_promotion->save();
+
+            $employee = Employee::where('id',$row->employee_id)->first();
+
+            $employee->department_id                    = $row->department_id;
+            $employee->designation_id                   = $row->designation_id;
+
+            $employee->save();
+        }
     }
 }

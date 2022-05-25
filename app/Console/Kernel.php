@@ -18,6 +18,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('attendance:name')->everyMinute();
         $schedule->command('attendance_summary:name')->everyMinute();
         $schedule->command('salary_sheet:name')->everyMinute();
+        $schedule->command('employee_promotion_checkup:name')->everyMinute();
+        $schedule->command('salary_increment_checkup:name')->everyMinute();
     }
 
     /**
