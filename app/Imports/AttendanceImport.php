@@ -20,20 +20,13 @@ class AttendanceImport implements ToCollection
         $count = 0;
 
         foreach ($rows as $key =>  $row) 
-        {
-            $employee_id  = $row[0];
-            $employee_name  = $row[1];
-            $attendance_date  = date('Y-m-d', strtotime($row[2]));
-            $attendance_in  = $row[3];
-            $attendance_out  = $row[4];
-
-
-            if ($row[0] != null && gettype($employee_id) != "string") { 
+        {   
+            if ($row[0] != null) { 
+                if ($row[0] != "Emp No.") {
                 $exists = AttendanceLog::where([
                     'employee_id' => $row[0],
                     'attendance_date' => date('Y-m-d', strtotime($row[2])),
                 ])->first();
-
 
                 if ($exists) {
                     AttendanceLog::where('employee_id', $row[0])
@@ -53,7 +46,7 @@ class AttendanceImport implements ToCollection
                         'attendance_out' => $row[4],
                     ]);
                 }
-
+             }
             }
         }
     }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Upload;
-use Illuminate\Http\Request;
 use DateTime;
+use Excel;
+use App\Imports\AttendanceImport;
+use App\Models\Upload;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
@@ -56,11 +58,9 @@ class UploadController extends Controller
             $file = $request->upload_file_name;
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $file_explode = explode('-', $filename);
-
             $destinationPath = public_path() .'\uploads\attendance_files';
-
             $filename = $month. '-'. $year . '.'.$file->clientExtension();
-
+            Excel::import(new AttendanceImport, request()->file('upload_file_name'));
             $file->move($destinationPath, $filename);
         }
 
@@ -118,12 +118,9 @@ class UploadController extends Controller
             $file = $request->upload_file_name;
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $file_explode = explode('-', $filename);
-
-
             $destinationPath = public_path() .'\uploads\attendance_files';
-
             $filename = $month. '-'. $year . '.'.$file->clientExtension();
-
+            Excel::import(new AttendanceImport, request()->file('upload_file_name'));
             $file->move($destinationPath, $filename);
         } else {
             $filename = $request->old_upload_file_name;
