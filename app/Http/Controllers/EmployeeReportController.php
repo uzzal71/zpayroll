@@ -91,4 +91,34 @@ class EmployeeReportController extends Controller
 
         return view('employee_reports.employee_payslip', compact('employee_payslips', 'employee', 'month', 'year'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employee_view_provident_fund(Request $request)
+    {
+        return view('employee_reports.employee_view_provident_fund');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employee_view_tax(Request $request)
+    {
+        return view('employee_reports.employee_view_tax');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employee_view_advance_salary(Request $request)
+    {
+        return view('employee_reports.employee_view_advance_salary');
+    }
 }

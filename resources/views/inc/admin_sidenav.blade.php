@@ -306,17 +306,17 @@
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('employee.view.provident_fund') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Provident Fund</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('employee.view.tax') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Tax</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="{{ route('system.information') }}" class="aiz-side-nav-link">
+                            <a href="{{ route('employee.view.advance_salary') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">Advance Salary</span>
                             </a>
                         </li>
