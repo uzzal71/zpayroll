@@ -43,12 +43,14 @@
                         <td>{{ $tax->percentage }} %</td>
                         <td>{{ $tax->status }}</td>
                         <td class="text-right">
+                            @if($tax->tax_name != "Default")
                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('taxs.edit', $tax->id)  }}" title="Edit">
                                 <i class="las la-edit"></i>
                             </a>
                             <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('taxs.destroy', $tax->id) }}" title="Delete">
                                 <i class="las la-trash"></i>
                             </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

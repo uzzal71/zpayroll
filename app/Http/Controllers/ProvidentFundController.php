@@ -15,13 +15,13 @@ class ProvidentFundController extends Controller
     public function index(Request $request)
     {
         $sort_search = null;
-        $provident_founds = ProvidentFund::orderBy('id', 'desc');
+        $provident_funds = ProvidentFund::orderBy('id', 'desc');
         if ($request->has('search')){
             $sort_search = $request->search;
-            $provident_founds = $provident_founds->where('provident_fund_name', 'like', '%'.$sort_search.'%');
+            $provident_funds = $provident_funds->where('provident_fund_name', 'like', '%'.$sort_search.'%');
         }
-        $provident_founds = $provident_founds->paginate(100);
-        return view('software_settings.provident_founds.index', compact('provident_founds', 'sort_search'));
+        $provident_funds = $provident_funds->paginate(100);
+        return view('software_settings.provident_funds.index', compact('provident_funds', 'sort_search'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ProvidentFundController extends Controller
      */
     public function create()
     {
-        return view('software_settings.provident_founds.create');
+        return view('software_settings.provident_funds.create');
     }
 
     /**
@@ -44,15 +44,15 @@ class ProvidentFundController extends Controller
     {
         $provident_fund = new ProvidentFund;
 
-        $provident_fund->provident_found_name = $request->provident_found_name;
+        $provident_fund->provident_fund_name = $request->provident_fund_name;
         $provident_fund->percentage = $request->percentage;
         $provident_fund->status	 = $request->status;
 
 
         $provident_fund->save();
 
-        flash('Provident Found has been inserted successfully')->success();
-        return redirect()->route('provident_founds.index');
+        flash('Provident Fund has been inserted successfully')->success();
+        return redirect()->route('provident_funds.index');
     }
 
     /**
@@ -74,9 +74,9 @@ class ProvidentFundController extends Controller
      */
     public function edit($id)
     {
-        $provident_found = ProvidentFund::findOrFail($id);
+        $provident_fund = ProvidentFund::findOrFail($id);
 
-        return view('software_settings.provident_founds.edit', compact('provident_found'));
+        return view('software_settings.provident_funds.edit', compact('provident_fund'));
     }
 
     /**
@@ -90,14 +90,14 @@ class ProvidentFundController extends Controller
     {
         $provident_fund = ProvidentFund::findOrFail($id);
 
-        $provident_fund->provident_found_name = $request->provident_found_name;
+        $provident_fund->provident_fund_name = $request->provident_fund_name;
         $provident_fund->percentage = $request->percentage;
         $provident_fund->status	 = $request->status;
 
         $provident_fund->save();
 
-        flash('Provident Found has been updated successfully')->success();
-        return redirect()->route('provident_founds.index');
+        flash('Provident Fund has been updated successfully')->success();
+        return redirect()->route('provident_funds.index');
     }
 
     /**
@@ -109,8 +109,8 @@ class ProvidentFundController extends Controller
     public function destroy($id)
     {
         ProvidentFund::find($id)->delete();
-        flash('Provident Found has been deleted successfully')->success();
+        flash('Provident Fund has been deleted successfully')->success();
 
-        return redirect()->route('provident_founds.index');
+        return redirect()->route('provident_funds.index');
     }
 }

@@ -44,8 +44,8 @@ Route::get('/taxs/destroy/{id}', 'TaxController@destroy')->name('taxs.destroy');
 Route::resource('salary_settings', 'SalarySettingController');
 Route::post('get_salary_settings', 'SalarySettingController@get_salary_settings')->name('Get.Salary.Setting');
 
-Route::resource('provident_founds', 'ProvidentFundController');
-Route::get('/provident_founds/destroy/{id}', 'ProvidentFundController@destroy')->name('provident_founds.destroy');
+Route::resource('provident_funds', 'ProvidentFundController');
+Route::get('/provident_funds/destroy/{id}', 'ProvidentFundController@destroy')->name('provident_funds.destroy');
 
 // Employee Management
 Route::resource('employees', 'EmployeeController');

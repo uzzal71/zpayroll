@@ -57,7 +57,7 @@
             </tbody>
         </table>
         <div class="aiz-pagination">
-            {{ $provident_founds->appends(request()->input())->links() }}
+            {{ $provident_funds->appends(request()->input())->links() }}
         </div>
     </div>
 </div>
