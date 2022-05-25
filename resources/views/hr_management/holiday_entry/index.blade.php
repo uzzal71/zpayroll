@@ -46,7 +46,7 @@
                         <td>{{ $holiday_entry->from_date }}</td>
                         <td>{{ $holiday_entry->to_date }}</td>
                         <td>{{ $holiday_entry->holiday_days }}</td>
-                        <td>{{ $holiday_entry->remarks }}</td>
+                        <td><?php echo $holiday_entry->remarks; ?></td>
                         <td>{{ $holiday_entry->status }}</td>
                         <td class="text-right">
                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{ route('holiday_entries.edit', $holiday_entry->id)  }}" title="Edit">

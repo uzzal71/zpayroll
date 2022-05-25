@@ -94,7 +94,7 @@
                                    <input type="text" class="form-customer" id="status" name="status[]" value="{{ $attendance['status'] }}" placeholder="" readonly>
                                 </td>
                                 <td>
-                                   <input type="text[]" class="form-customer" id="remarks" name="remarks" value="{{ $attendance['remarks'] }}" placeholder="" readonly>
+                                   <input type="text[]" class="form-customer" id="remarks" name="remarks" value="<?php echo $attendance['remarks']; ?>" placeholder="" readonly>
                                 </td>
                             </tr>
                             @endforeach
