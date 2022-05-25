@@ -88,7 +88,9 @@ class EmployeeController extends Controller
         $employee->present_address                  = $request->present_address;
         $employee->permanent_address                = $request->permanent_address;
         $employee->tax_status                       = $request->tax_status;
-        $employee->provident_fund_status           = $request->provident_fund_status;
+        $employee->tax_id                           = $request->tax_id;
+        $employee->provident_fund_status            = $request->provident_fund_status;
+        $employee->provident_fund_id                = $request->provident_fund_id;
         $employee->transport_allowance_status       = $request->transport_allowance_status;
         $employee->commission_status                = $request->commission_status;
         $employee->salary_withdraw                  = $request->salary_withdraw;
@@ -219,7 +221,9 @@ class EmployeeController extends Controller
         $employee->present_address                  = $request->present_address;
         $employee->permanent_address                = $request->permanent_address;
         $employee->tax_status                       = $request->tax_status;
-        $employee->provident_fund_status           = $request->provident_fund_status;
+        $employee->tax_id                           = $request->tax_id;
+        $employee->provident_fund_status            = $request->provident_fund_status;
+        $employee->provident_fund_id                = $request->provident_fund_id;
         $employee->transport_allowance_status       = $request->transport_allowance_status;
         $employee->commission_status                = $request->commission_status;
         $employee->salary_withdraw                  = $request->salary_withdraw;
