@@ -501,6 +501,23 @@
                 </div>
                 <!-- Tax Status -->
 
+                <!-- Schedule -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0 h6">Tax</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <select class="form-control aiz-selectpicker" name="tax_id" id="tax_id" data-live-search="true" required>
+                                @foreach (\App\Models\Tax::all() as $tax)
+                                    <option value="{{ $tax->id }}">{{ $tax->tax_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Schedule -->
+
                 <!-- Provident found -->
                 <div class="card">
                     <div class="card-header">
@@ -602,19 +619,19 @@
     $('form').bind('submit', function (e) {
         // Disable the submit button while evaluating if the form should be submitted
         $("button[type='submit']").prop('disabled', true);
-        
+
         var valid = true;
 
         if (!valid) {
             e.preventDefault();
-            
+
             // Reactivate the button if the form was not submitted
             $("button[type='submit']").button.prop('disabled', false);
         }
     });
 
     function calculate_salary() {
-        
+
         $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
