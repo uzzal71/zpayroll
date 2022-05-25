@@ -55,8 +55,6 @@ class attendance_summary extends Command
                         $start_time = strtotime($start_date);
                         $end_time = strtotime("+1 month", $start_time);
 
-                        echo $employee->employee_name;
-
                         $dates = array();
 
                         for($i=$start_time; $i<$end_time; $i+=86400)

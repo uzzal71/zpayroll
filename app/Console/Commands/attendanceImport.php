@@ -196,8 +196,6 @@ class attendanceImport extends Command
                                         $late = date('H:i', $difference);
                                         $remarks = 'Late in';
                                     }
-
-                                    echo $attendance->attendance_in;
                                 }
                                 // Late calculation end
 
