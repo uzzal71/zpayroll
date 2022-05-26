@@ -15,8 +15,30 @@
                 </div>
             </div>
             <div class="card-body">
+                <!-- Search Form -->
+                <form class="" action="" method="GET" autocomplete="off">
+                    @csrf
+                    <div class="box-inline pad-rgt pull-left">
+                        <div class="" style="min-width: 200px;">
+                            <input type="text text-center" class="form-control" id="search" name="search" @isset($sort_search) value="{{ $sort_search }}" @endisset placeholder="Type Employee Card & Enter">
+                        </div>
+                    </div>
+                </form>
+                <!-- Search Form -->
+            </div>
+        </div>
+        <div class="card">
+            @if($employee)
+            <div class="card-body">
                 <form class="form-horizontal" action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
-                	@csrf
+                    @csrf
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Employee name</label>
+                        <div class="col-md-9">
+                            <input type="text" name="employee_name" class="form-control" id="employee_name" value="{{ $employee->employee_name }}" readonly>
+                        </div>
+                    </div>
                     
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Username</label>
@@ -40,6 +62,13 @@
                     </div>
 
                     <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Password</label>
+                        <div class="col-md-9">
+                            <input type="text" name="password" class="form-control" id="password" placeholder="Password" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-md-3 col-form-label">User Type</label>
                         <div class="col-md-9">
                             <select name="user_type" required class="form-control aiz-selectpicker mb-2 mb-md-0">
@@ -52,11 +81,14 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="employee_id" value="{{ $employee->id }}">
+
                     <div class="form-group mb-0 text-right">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
+            @endif
         </div>
     </div>
 </div>

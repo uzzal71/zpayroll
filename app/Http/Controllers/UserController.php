@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,9 +31,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('systems.users.create');
+        $sort_search = null;
+        $employee = [];
+
+        if ($request->has('search'))
+        {
+            $sort_search = $request->search;
+            $employee = Employee::where('employee_punch_card', $sort_search)->first();
+        }
+        return view('systems.users.create', compact('employee', 'sort_search'));
     }
 
     /**
@@ -45,6 +54,7 @@ class UserController extends Controller
     {
         $user = new User;
 
+        $user->employee_id = $request->employee_id;
         $user->username = $request->username;
         $user->name  = $request->name;
         $user->email  = $request->email;
@@ -92,6 +102,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $user->employee_id = $request->employee_id;
         $user->username = $request->username;
         $user->name  = $request->name;
         $user->email  = $request->email;
@@ -141,6 +152,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $user->employee_id = $request->employee_id;
         $user->username = $request->username;
         $user->name  = $request->name;
         $user->email  = $request->email;

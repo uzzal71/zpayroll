@@ -47,6 +47,8 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="employee_id" value="{{ $user->employee_id }}">
+
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">User Type</label>
                         <div class="col-md-9">
