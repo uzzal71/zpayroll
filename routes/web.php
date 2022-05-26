@@ -145,6 +145,7 @@ Route::get('/employee/view/advance_salary', 'EmployeeReportController@employee_v
 
 // Systems Route
 Route::resource('/users', 'UserController');
+Route::get('/user/profile/{id}', 'UserController@show_profile')->name('user.profile');
 Route::get('/system-information', 'SystemController@system_information')->name('system.information');
 
 // Ajax Route

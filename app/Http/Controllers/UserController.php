@@ -117,4 +117,17 @@ class UserController extends Controller
 
         return redirect()->route('users.index');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show_profile($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('systems.users.profile', compact('user'));
+    }
 }
