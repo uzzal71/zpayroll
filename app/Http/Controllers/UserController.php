@@ -137,11 +137,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update_profile($id)
+    public function update_profile(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
-        return view('systems.users.profile', compact('user'));
+        $user->username = $request->username;
+        $user->name  = $request->name;
+        $user->email  = $request->email;
+        $user->user_type  = $request->user_type;
+
+        if ($request->new_password != $request->confirm_password) {
+            flash('password confirmation does not match')->success();
+            return redirect()->route('user.profile', $id);
+        }
+
+        $user->password  = Hash::make($request->new_password);
+        $user->save();
+
+        flash('User profile has been updated successfully')->success();
+        return redirect()->route('home');
     }
 
     

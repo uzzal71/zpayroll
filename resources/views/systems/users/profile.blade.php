@@ -43,24 +43,17 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-from-label" for="new_password">New Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" placeholder="New Password" name="new_password" autocomplete="off">
+                            <input type="password" class="form-control" placeholder="New Password" name="new_password" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-from-label" for="confirm_password">Confirm Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" autocomplete="off">
+                            <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" autocomplete="off" required>
                         </div>
                     </div>
 
                     <input type="hidden" name="user_type" value="{{ $user->user_type }}">
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="signinSrEmail">Avatar <small>(90x90)</small></label>
-                        <div class="col-md-9">
-                            <input type="file" name="avatar" class="selected-files" />
-                        </div>
-                    </div>
 
                     <div class="form-group mb-0 text-right">
                         <button type="submit" class="btn btn-primary">Save</button>

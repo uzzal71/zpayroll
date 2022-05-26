@@ -41,6 +41,13 @@
                     </div>
 
                     <div class="form-group row">
+                        <label class="col-sm-3 col-from-label" for="new_password">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="Password" name="password" autocomplete="off" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-md-3 col-form-label">User Type</label>
                         <div class="col-md-9">
                             <select name="user_type" required class="form-control aiz-selectpicker mb-2 mb-md-0">
