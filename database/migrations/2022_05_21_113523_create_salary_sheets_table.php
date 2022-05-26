@@ -21,7 +21,7 @@ class CreateSalarySheetsTable extends Migration
             $table->string('employee_name');
             $table->string('designation');
             $table->string('department');
-            $table->date('joining_date');
+            $table->date('joining_date')->nullable();
             $table->double('gross_salary', 10, 2)->nullable()->default(0.00);
             $table->double('basic_salary', 10, 2)->nullable()->default(0.00);
             $table->double('house_allowance', 10, 2)->nullable()->default(0.00);

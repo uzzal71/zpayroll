@@ -119,7 +119,7 @@
                             <td>{{ $row->late_time }}</td>
                             <td>{{ $row->over_time }}</td>
                             <td>{{ $row->attendance_status }}</td>
-                            <td>{{ $row->remarks }}</td>
+                            <td>{{ strip_tags($row->remarks) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
