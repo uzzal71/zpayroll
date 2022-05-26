@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\AttendanceSummary;
 use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -11,14 +12,14 @@ use PDF;
 
 class HRReportController extends Controller
 {
-	/**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function daily_present(Request $request)
     {
-    	return view('hr_reports.daily_present');
+        return view('hr_reports.daily_present');
     }
 
     /**
@@ -35,7 +36,7 @@ class HRReportController extends Controller
             ->where('attendance_status', 'P')
             ->whereIn('employee_id', $employee_id)
             ->get();
-            
+
         $company = Company::orderBy('id', 'desc')->first();
 
         $data = [
@@ -55,7 +56,7 @@ class HRReportController extends Controller
      */
     public function daily_absent(Request $request)
     {
-    	return view('hr_reports.daily_absent');
+        return view('hr_reports.daily_absent');
     }
 
     /**
@@ -93,7 +94,7 @@ class HRReportController extends Controller
      */
     public function daily_late(Request $request)
     {
-    	return view('hr_reports.daily_late');
+        return view('hr_reports.daily_late');
     }
 
     /**
@@ -131,7 +132,7 @@ class HRReportController extends Controller
      */
     public function daily_leave(Request $request)
     {
-    	return view('hr_reports.daily_leave');
+        return view('hr_reports.daily_leave');
     }
 
     /**
@@ -168,7 +169,7 @@ class HRReportController extends Controller
      */
     public function daily_overtime(Request $request)
     {
-    	return view('hr_reports.daily_overtime');
+        return view('hr_reports.daily_overtime');
     }
 
     /**
@@ -205,7 +206,7 @@ class HRReportController extends Controller
      */
     public function range_attendance(Request $request)
     {
-    	return view('hr_reports.range_attendance');
+        return view('hr_reports.range_attendance');
     }
 
     /**
@@ -225,8 +226,16 @@ class HRReportController extends Controller
         $output = '';
         $emp_length = count($employees);
 
-        foreach ($employees as $key => $employee) { 
+        $month = date('m', strtotime($from_date));
+        $year = date('Y', strtotime($from_date));
+
+        foreach ($employees as $key => $employee) {
             $emp_length = $emp_length - 1;
+
+            $attendance_summary = AttendanceSummary::where('attendance_month', $month)
+                ->where('attendance_year', $year)
+                ->where('employee_id', $employee->id)
+                ->first();
 
             $results = Attendance::whereBetween('attendance_date', [$from_date, $to_date])
                 ->where('employee_id', $employee->id)
@@ -266,7 +275,7 @@ class HRReportController extends Controller
 
             $output .= '<tbody class="strong">';
 
-            foreach ($results as $key1 => $row) {  
+            foreach ($results as $key1 => $row) {
                 $output .= '<tr>';
                     $output .= '<td>'.$row->attendance_date.'</td>';
                     $output .= '<td>'.$row->in_time.'</td>';
@@ -301,16 +310,16 @@ class HRReportController extends Controller
                             <td width="50%">
                                 <table>
                                     <tr>
-                                        <td width="50%">Present = </td>
-                                        <td width="50%">Absent = </td>
+                                        <td width="50%">Present = '.$attendance_summary->present.'</td>
+                                        <td width="50%">Absent = '.$attendance_summary->absent.'</td>
                                     </tr>
                                     <tr>
-                                        <td width="50%">Late = </td>
-                                        <td width="50%">Weekend = </td>
+                                        <td width="50%">Late = '.$attendance_summary->late.'</td>
+                                        <td width="50%">Weekend = '.$attendance_summary->weekend.'</td>
                                     </tr>
                                     <tr>
-                                        <td width="50%">Holiday = </td>
-                                        <td width="50%">Leave = </td>
+                                        <td width="50%">Holiday = '.$attendance_summary->holiday.'</td>
+                                        <td width="50%">Leave = '.$attendance_summary->leave.'</td>
                                     </tr>
                                 </table>
                             </td>
@@ -336,7 +345,7 @@ class HRReportController extends Controller
      */
     public function monthly_attendance(Request $request)
     {
-    	return view('hr_reports.monthly_attendance');
+        return view('hr_reports.monthly_attendance');
     }
 
     /**
@@ -357,13 +366,18 @@ class HRReportController extends Controller
         $month_name = date("F", mktime(0, 0, 0, $month, 10));
         $emp_length = count($employees);
 
-        foreach ($employees as $key => $employee) { 
+        foreach ($employees as $key => $employee) {
             $emp_length = $emp_length - 1;
 
             $results = Attendance::where('attendance_month', $month)
                 ->where('attendance_year', $year)
                 ->where('employee_id', $employee->id)
                 ->get();
+
+            $attendance_summary = AttendanceSummary::where('attendance_month', $month)
+                ->where('attendance_year', $year)
+                ->where('employee_id', $employee->id)
+                ->first();
 
             $output .= '<div style="padding: 2rem;">
                 <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
@@ -399,7 +413,7 @@ class HRReportController extends Controller
 
             $output .= '<tbody class="strong">';
 
-            foreach ($results as $key1 => $row) {  
+            foreach ($results as $key1 => $row) {
                 $output .= '<tr>';
                     $output .= '<td>'.$row->attendance_date.'</td>';
                     $output .= '<td>'.$row->in_time.'</td>';
@@ -434,16 +448,16 @@ class HRReportController extends Controller
                             <td width="50%">
                                 <table>
                                     <tr>
-                                        <td width="50%">Present = </td>
-                                        <td width="50%">Absent = </td>
+                                        <td width="50%">Present = '.$attendance_summary->present.'</td>
+                                        <td width="50%">Absent = '.$attendance_summary->absent.'</td>
                                     </tr>
                                     <tr>
-                                        <td width="50%">Late = </td>
-                                        <td width="50%">Weekend = </td>
+                                        <td width="50%">Late = '.$attendance_summary->late.'</td>
+                                        <td width="50%">Weekend = '.$attendance_summary->weekend.'</td>
                                     </tr>
                                     <tr>
-                                        <td width="50%">Holiday = </td>
-                                        <td width="50%">Leave = </td>
+                                        <td width="50%">Holiday = '.$attendance_summary->holiday.'</td>
+                                        <td width="50%">Leave = '.$attendance_summary->leave.'</td>
                                     </tr>
                                 </table>
                             </td>
@@ -469,7 +483,7 @@ class HRReportController extends Controller
      */
     public function monthly_overtime(Request $request)
     {
-    	return view('hr_reports.monthly_overtime');
+        return view('hr_reports.monthly_overtime');
     }
 
     /**
