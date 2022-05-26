@@ -130,4 +130,19 @@ class UserController extends Controller
 
         return view('systems.users.profile', compact('user'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_profile($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('systems.users.profile', compact('user'));
+    }
+
+    
 }
