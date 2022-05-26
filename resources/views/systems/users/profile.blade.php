@@ -54,6 +54,7 @@
                     </div>
 
                     <input type="hidden" name="user_type" value="{{ $user->user_type }}">
+                    <input type="hidden" name="employee_id" value="{{ $user->employee_id }}">
 
                     <div class="form-group mb-0 text-right">
                         <button type="submit" class="btn btn-primary">Save</button>
