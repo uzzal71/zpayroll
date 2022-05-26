@@ -54,6 +54,7 @@ class EmployeeReportController extends Controller
         $attendances  = $attendances->get();
         $attendance_summary  = $attendance_summary->first();
 
+
         return view('employee_reports.employee_attendance', compact('attendances', 'attendance_summary', 'month', 'year'));
     }
 
