@@ -19,7 +19,9 @@ class HRReportController extends Controller
      */
     public function daily_present(Request $request)
     {
-        return view('hr_reports.daily_present');
+        $from_date = date('Y-m-d');
+
+        return view('hr_reports.daily_present', compact('from_date'));
     }
 
     /**
@@ -56,7 +58,9 @@ class HRReportController extends Controller
      */
     public function daily_absent(Request $request)
     {
-        return view('hr_reports.daily_absent');
+        $from_date = date('Y-m-d');
+
+        return view('hr_reports.daily_absent', compact('from_date'));
     }
 
     /**
@@ -94,7 +98,9 @@ class HRReportController extends Controller
      */
     public function daily_late(Request $request)
     {
-        return view('hr_reports.daily_late');
+        $from_date = date('Y-m-d');
+
+        return view('hr_reports.daily_late', compact('from_date'));
     }
 
     /**
@@ -132,7 +138,9 @@ class HRReportController extends Controller
      */
     public function daily_leave(Request $request)
     {
-        return view('hr_reports.daily_leave');
+        $from_date = date('Y-m-d');
+
+        return view('hr_reports.daily_leave', compact('from_date'));
     }
 
     /**
@@ -169,7 +177,9 @@ class HRReportController extends Controller
      */
     public function daily_overtime(Request $request)
     {
-        return view('hr_reports.daily_overtime');
+        $from_date = date('Y-m-d');
+
+        return view('hr_reports.daily_overtime', compact('from_date'));
     }
 
     /**
@@ -206,7 +216,10 @@ class HRReportController extends Controller
      */
     public function range_attendance(Request $request)
     {
-        return view('hr_reports.range_attendance');
+        $from_date = date('Y-m-d');
+        $to_date = date('Y-m-d');
+
+        return view('hr_reports.range_attendance', compact('from_date', 'to_date'));
     }
 
     /**
@@ -245,8 +258,8 @@ class HRReportController extends Controller
                 <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
                 <p class="text-center">'.$company->address.'</p>
                 <h3 class="text-center">'.$from_date.' To '.$to_date.' Attendance Sheet</h3>
-                <div>
-                    <table class="padding text-left small">
+                <div style="margin-bottom: 10px">
+                    <table class="padding text-left small table-border">
                         <tr>
                             <td width="20%">Name: </td>
                             <td width="30%">'.$employee->employee_name.'</td>
@@ -261,7 +274,7 @@ class HRReportController extends Controller
                         </tr>
                     </table>
                 </div>
-                <table class="padding text-left small border-bottom">
+                <table class="padding text-left small table-border">
                     <thead>
                         <tr class="gry-color" style="background: #eceff4;">
                             <th width="15%" class="text-left">Date</th>
@@ -345,7 +358,10 @@ class HRReportController extends Controller
      */
     public function monthly_attendance(Request $request)
     {
-        return view('hr_reports.monthly_attendance');
+        $month = date('m');
+        $year = date('Y');
+
+        return view('hr_reports.monthly_attendance', compact('month', 'year'));
     }
 
     /**
@@ -383,23 +399,24 @@ class HRReportController extends Controller
                 <h2 class="text-center p-0 m-0">'.$company->company_full_name.'</h2>
                 <p class="text-center">'.$company->address.'</p>
                 <h3 class="text-center">'.$month_name.' - '.$year.' Attendance Sheet</h3>
-                <div>
-                    <table class="padding text-left small">
+                <div style="margin-bottom: 10px">
+                    <table class="table-border padding text-left small">
                         <tr>
-                            <td width="20%">Name: </td>
+                            <td width="20%">Name </td>
                             <td width="30%">'.$employee->employee_name.'</td>
-                            <td width="20%">Department: </td>
+                            <td width="20%">Department </td>
                             <td width="30%">'.$employee->department->department_name.'</td>
                         </tr>
                         <tr>
-                            <td width="20%">Card: </td>
+                            <td width="20%">Card </td>
                             <td width="30%">'.$employee->employee_punch_card.'</td>
-                            <td width="20%">Designation: </td>
+                            <td width="20%">Designation </td>
                             <td width="30%">'.$employee->designation->designation_name.'</td>
                         </tr>
                     </table>
                 </div>
-                <table class="padding text-left small border-bottom">
+                
+                <table class="padding text-left small table-border">
                     <thead>
                         <tr class="gry-color" style="background: #eceff4;">
                             <th width="15%" class="text-left">Date</th>
@@ -483,7 +500,10 @@ class HRReportController extends Controller
      */
     public function monthly_overtime(Request $request)
     {
-        return view('hr_reports.monthly_overtime');
+        $month = date('m');
+        $year = date('Y');
+
+        return view('hr_reports.monthly_overtime', compact('month', 'year'));
     }
 
     /**
