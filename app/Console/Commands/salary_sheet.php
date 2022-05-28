@@ -65,8 +65,6 @@ class salary_sheet extends Command
                         // Employee salary information
                         $salary_info = SalaryInformation::where('employee_id', $employee->id)->first();
 
-                        echo $employee->employee_name;
-
                         // Activite Variable
                         $weekend        = 0;
                         $holiday        = 0;
@@ -118,7 +116,7 @@ class salary_sheet extends Command
 
                             // Now Salary Calculation
                             if ($number_of_days != 0) {
-                                $per_day_salary = $salary_info->gross_salary / 30;
+                                $per_day_salary = $salary_info->gross_salary / $number_of_days;
 
                                 // Late deduction
                                 $late_deduction_days = floor($late / 3);
@@ -194,9 +192,9 @@ class salary_sheet extends Command
                                 // Total addition
                                 $total_addition = $transport_bill_addition + $commission_addition + $paid_leave_addition + $others_addition + $festival_bonus_addition + $overtime_addition;
 
-                                $salary_earn = ($total_addition + ($need_to_pay * $per_day_salary));
+                                $salary_earn = $need_to_pay * $per_day_salary;
 
-                                $net_salary = $salary_earn - $total_deduction;
+                                $net_salary = ($salary_info->gross_salary - $total_deduction ) + $total_addition;
                             }
                         }
 
@@ -208,48 +206,50 @@ class salary_sheet extends Command
 
                         if ($salary_exists) { // Exists checking start
 
-                            $salary_exists->employee_id = $employee->id;
-                            $salary_exists->salary_month = $month;
-                            $salary_exists->salary_year = $year;
-                            $salary_exists->employee_name = $employee->employee_name;
-                            $salary_exists->designation = $employee->designation->designation_name;
-                            $salary_exists->department = $employee->department->department_name;
-                            $salary_exists->joining_date = $employee->joining_date;
-                            $salary_exists->gross_salary = $salary_info->gross_salary;
-                            $salary_exists->basic_salary = $salary_info->basic_salary;
-                            $salary_exists->house_allowance = $salary_info->house_rent;
-                            $salary_exists->medical_allowance = $salary_info->medical_allowance;
-                            $salary_exists->transport_allowance = $salary_info->transport_allowance;
-                            $salary_exists->food_allowance = $salary_info->food_allowance;
-                            $salary_exists->number_of_days = $number_of_days;
-                            $salary_exists->weekend = $weekend;
-                            $salary_exists->holiday = $holiday;
-                            $salary_exists->need_to_work = $need_to_work;
-                            $salary_exists->present = $present;
-                            $salary_exists->late = $late;
-                            $salary_exists->absent = $absent;
-                            $salary_exists->unpaid_leave = $unpaid_leave;
-                            $salary_exists->paid_leave = $paid_leave;
-                            $salary_exists->need_to_pay = $need_to_pay;
-                            $salary_exists->late_deduction = $late_deduction;
-                            $salary_exists->absent_deduction = $absent_deduction;
-                            $salary_exists->tax_deduction = $tax_deduction;
-                            $salary_exists->provident_fund_deduction = $provident_fund_deduction;
-                            $salary_exists->advance_salary_deduction = $advance_salary_deduction;
-                            $salary_exists->others_deduction = $others_deduction;
-                            $salary_exists->stamp_deduction = $stamp_deduction;
-                            $salary_exists->total_deduction = $total_deduction;
-                            $salary_exists->commission_addition = $commission_addition;
-                            $salary_exists->transport_bill_addition = $transport_bill_addition;
-                            $salary_exists->paid_leave_addition = $paid_leave_addition;
-                            $salary_exists->overtime_addition = $overtime_addition;
-                            $salary_exists->others_addition = $others_addition;
-                            $salary_exists->festival_bonus_addition = $festival_bonus_addition;
-                            $salary_exists->total_addition = $total_addition;
-                            $salary_exists->salary_earn = $salary_earn;
-                            $salary_exists->net_salary = $net_salary;
+                            $old_salary = SalarySheet::findOrFail($salary_exists->id);
 
-                            $salary_exists->save();
+                            $old_salary->employee_id = $employee->id;
+                            $old_salary->salary_month = $month;
+                            $old_salary->salary_year = $year;
+                            $old_salary->employee_name = $employee->employee_name;
+                            $old_salary->designation = $employee->designation->designation_name;
+                            $old_salary->department = $employee->department->department_name;
+                            $old_salary->joining_date = $employee->joining_date;
+                            $old_salary->gross_salary = $salary_info->gross_salary;
+                            $old_salary->basic_salary = $salary_info->basic_salary;
+                            $old_salary->house_allowance = $salary_info->house_rent;
+                            $old_salary->medical_allowance = $salary_info->medical_allowance;
+                            $old_salary->transport_allowance = $salary_info->transport_allowance;
+                            $old_salary->food_allowance = $salary_info->food_allowance;
+                            $old_salary->number_of_days = $number_of_days;
+                            $old_salary->weekend = $weekend;
+                            $old_salary->holiday = $holiday;
+                            $old_salary->need_to_work = $need_to_work;
+                            $old_salary->present = $present;
+                            $old_salary->late = $late;
+                            $old_salary->absent = $absent;
+                            $old_salary->unpaid_leave = $unpaid_leave;
+                            $old_salary->paid_leave = $paid_leave;
+                            $old_salary->need_to_pay = $need_to_pay;
+                            $old_salary->late_deduction = $late_deduction;
+                            $old_salary->absent_deduction = $absent_deduction;
+                            $old_salary->tax_deduction = $tax_deduction;
+                            $old_salary->provident_fund_deduction = $provident_fund_deduction;
+                            $old_salary->advance_salary_deduction = $advance_salary_deduction;
+                            $old_salary->others_deduction = $others_deduction;
+                            $old_salary->stamp_deduction = $stamp_deduction;
+                            $old_salary->total_deduction = $total_deduction;
+                            $old_salary->commission_addition = $commission_addition;
+                            $old_salary->transport_bill_addition = $transport_bill_addition;
+                            $old_salary->paid_leave_addition = $paid_leave_addition;
+                            $old_salary->overtime_addition = $overtime_addition;
+                            $old_salary->others_addition = $others_addition;
+                            $old_salary->festival_bonus_addition = $festival_bonus_addition;
+                            $old_salary->total_addition = $total_addition;
+                            $old_salary->salary_earn = $salary_earn;
+                            $old_salary->net_salary = $net_salary;
+
+                            $old_salary->save();
 
                         } else {
                             $salary_sheet = new SalarySheet;
