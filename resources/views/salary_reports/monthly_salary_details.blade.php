@@ -11,39 +11,37 @@
             </div>
             <div class="card-body">
 
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Month</label>
-                        <div class="col-md-9">
-                            <select name="month" id="month" required class="form-control aiz-selectpicker mb-2 mb-md-0">
-                                <option value="0">Select Month</option>
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Month</label>
+                    <div class="col-md-9">
+                        <select name="month" id="month" required class="form-control aiz-selectpicker mb-2 mb-md-0">
+                            <option value="01" @if("01" == $month) selected @endif>January</option>
+                            <option value="02" @if("02" == $month) selected @endif>February</option>
+                            <option value="03" @if("03" == $month) selected @endif>March</option>
+                            <option value="04" @if("04" == $month) selected @endif>April</option>
+                            <option value="05" @if("05" == $month) selected @endif>May</option>
+                            <option value="06" @if("06" == $month) selected @endif>June</option>
+                            <option value="07" @if("07" == $month) selected @endif>July</option>
+                            <option value="08" @if("08" == $month) selected @endif>August</option>
+                            <option value="09" @if("09" == $month) selected @endif>September</option>
+                            <option value="10" @if("10" == $month) selected @endif>October</option>
+                            <option value="11" @if("11" == $month) selected @endif>November</option>
+                            <option value="12" @if("12" == $month) selected @endif>December</option>
+                        </select>
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Year</label>
-                        <div class="col-md-9">
-                            <select name="year" id="year" required class="form-control aiz-selectpicker mb-2 mb-md-0">
-                                <option value="0">Select Year</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                            </select>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Year</label>
+                    <div class="col-md-9">
+                        <select name="year" id="year" required class="form-control aiz-selectpicker mb-2 mb-md-0">
+                            <option value="2021" @if("2021" == $year) selected @endif>2021</option>
+                            <option value="2022" @if("2022" == $year) selected @endif>2022</option>
+                            <option value="2023" @if("2023" == $year) selected @endif>2023</option>
+                            <option value="2024" @if("2024" == $year) selected @endif>2024</option>
+                        </select>
                     </div>
+                </div>
 
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Department</label>
