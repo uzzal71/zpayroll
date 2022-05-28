@@ -12,14 +12,17 @@ use PDF;
 
 class SalaryReportController extends Controller
 {
-	/**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function monthly_salary_details(Request $request)
     {
-    	return view('salary_reports.monthly_salary_details');
+        $month = date('m');
+        $year = date('Y');
+
+        return view('salary_reports.monthly_salary_details', compact('month', 'year'));
     }
 
     /**
@@ -44,7 +47,7 @@ class SalaryReportController extends Controller
                 <h3 class="text-center">'.$month_name.' - '.$year.' Salary Sheet</h3>';
 
         $output .= '
-                <table class="padding text-center small border-bottom">
+                <table class="padding text-center small table-bordered">
                     <thead>
                         <tr class="gry-color" style="background: #eceff4;">
                             <th class="text-center" rowspan="2">SL</th>
@@ -54,7 +57,7 @@ class SalaryReportController extends Controller
                             <th class="text-center" colspan="9">Attendance</th>
                             <th class="red-color text-center" colspan="4">Deduction</th>
                             <th class="text-center" colspan="6">Addition</th>
-                            <th class="text-center" rowspan="2">Neet Salary</th>
+                            <th class="text-center" rowspan="2">Net Salary</th>
                         </tr>
                         <tr class="gry-color" style="background: #eceff4;">
                             <th class="text-center">Total Days</th>
@@ -131,7 +134,10 @@ class SalaryReportController extends Controller
      */
     public function monthly_salary_sheet(Request $request)
     {
-        return view('salary_reports.monthly_salary_sheet');
+        $month = date('m');
+        $year = date('Y');
+
+        return view('salary_reports.monthly_salary_sheet', compact('month', 'year'));
     }
 
     /**
@@ -150,6 +156,8 @@ class SalaryReportController extends Controller
 
         $month_name = date("F", mktime(0, 0, 0, $month, 10));
 
+        $output = '';
+
         $output .= '
                 <div><br/>
                 <div class="text-center line-height">
@@ -160,7 +168,7 @@ class SalaryReportController extends Controller
                 ';
 
         $output .= '
-                <table class="padding text-center small border-bottom">
+                <table class="padding text-center small table-bordered">
                     <thead>
                         <tr class="gry-color" style="background: #eceff4;">
                             <th class="text-center" rowspan="2">SL</th>
@@ -172,7 +180,7 @@ class SalaryReportController extends Controller
                             <th class="text-center" colspan="9">Attendance</th>
                             <th class="red-color text-center" colspan="6">Deduction</th>
                             <th class="text-center" colspan="8">Addition</th>
-                            <th class="text-center" rowspan="2">Neet Salary</th>
+                            <th class="text-center" rowspan="2">Net Salary</th>
                         </tr>
                         <tr class="gry-color" style="background: #eceff4;">
                             <th class="text-center">Gross</th>
@@ -269,7 +277,10 @@ class SalaryReportController extends Controller
      */
     public function monthly_payslip(Request $request)
     {
-    	return view('salary_reports.monthly_payslip');
+        $month = date('m');
+        $year = date('Y');
+
+        return view('salary_reports.monthly_payslip', compact('month', 'year'));
     }
 
     /**
@@ -290,7 +301,6 @@ class SalaryReportController extends Controller
 
         $output = '';
         $count = count($employee_id);
-        $lenth = count($employee_id);
 
         foreach ($employees as $key => $employee) { 
             $count = $count - 1;
@@ -445,6 +455,9 @@ class SalaryReportController extends Controller
      */
     public function tax_report(Request $request)
     {
-    	return view('salary_reports.monthly_tax');
+        $month = date('m');
+        $year = date('Y');
+
+        return view('salary_reports.monthly_tax', compact('month', 'year'));
     }
 }
