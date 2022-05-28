@@ -14,7 +14,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Date</label>
                         <div class="col-md-9">
-                            <input type="text" placeholder="xxxx-xx-xx" id="from_date" name="from_date" class="form-control" autocomplete="off" required>
+                            <input type="text" placeholder="xxxx-xx-xx" id="from_date" name="from_date" value="{{ $from_date  }}" class="form-control" autocomplete="off" required>
                         </div>
                     </div>
 
