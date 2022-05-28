@@ -13,7 +13,7 @@
 		}
 		body{
 			font-size: 1rem;
-            font-family: "Times New Roman", Times, serif;
+            font-family: "Times New Roman";
             font-weight: normal;
             direction: '';
             text-align: '';
@@ -41,6 +41,18 @@
 		.border-bottom th{
 			border-bottom:1px solid #000;
 		}
+
+		.table-border {
+			border:1px solid #eceff4;
+			border-collapse: collapse;
+		}
+
+		.table-border td,
+		.table-border th{
+			border:1px solid #eceff4;
+			border-collapse: collapse;
+		}
+
 		.text-left{
 			text-align: '';
 		}
