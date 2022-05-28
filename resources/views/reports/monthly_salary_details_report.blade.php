@@ -13,7 +13,7 @@
 		}
 		body{
 			font-size: 0.875rem;
-            font-family: 'Roboto','sans-serif';
+            font-family: 'Times New Roman';
             font-weight: normal;
             direction: '';
             text-align: '';
@@ -55,6 +55,18 @@
 		.border-bottom th{
 			border-bottom:1px solid #eceff4;
 		}
+
+        .table-border {
+            border:1px solid #eceff4;
+            border-collapse: collapse;
+        }
+
+        .table-border td,
+        .table-border th{
+            border:1px solid #eceff4;
+            border-collapse: collapse;
+        }
+
 		.text-left{
 			text-align: '';
 		}
