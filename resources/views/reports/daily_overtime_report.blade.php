@@ -13,7 +13,7 @@
 		}
 		body{
 			font-size: 0.875rem;
-            font-family: 'Roboto','sans-serif';
+            font-family: 'Times New Roman';
             font-weight: normal;
             direction: '';
             text-align: '';
@@ -43,6 +43,18 @@
 		.border-bottom th{
 			border-bottom:1px solid #eceff4;
 		}
+
+		.table-border {
+			border:1px solid #eceff4;
+			border-collapse: collapse;
+		}
+
+		.table-border td,
+		.table-border th{
+			border:1px solid #eceff4;
+			border-collapse: collapse;
+		}
+
 		.text-left{
 			text-align: '';
 		}
@@ -66,7 +78,7 @@
 	<h2 class="text-center p-0 m-0">{{ $company->company_full_name }}</h2>
 			<p class="text-center">{{ $company->address }}</p>
 	<h3 class="text-center">Daily Overtime</h3>
-	<table class="padding text-left small border-bottom">
+	<table class="padding text-left small table-border">
 		<thead>
 	        <tr class="gry-color" style="background: #eceff4;">
 	            <th width="20%" class="text-left">Name / ID</th>
