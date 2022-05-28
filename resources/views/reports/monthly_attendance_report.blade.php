@@ -13,12 +13,13 @@
 		}
 		body{
 			font-size: 0.875rem;
-            font-family: 'Roboto','sans-serif';
+            font-family: 'Times New Roman';
             font-weight: normal;
             direction: '';
             text-align: '';
 			padding:0;
-			margin:0; 
+			margin:0;
+            font-size: 12px;
 		}
 		.gry-color *,
 		.gry-color{
@@ -51,6 +52,29 @@
 		.border-bottom th{
 			border-bottom:1px solid #eceff4;
 		}
+
+        .table-border {
+            border:1px solid #eceff4;
+            border-collapse: collapse;
+        }
+
+        .table-border td,
+        .table-border th{
+            border:1px solid #eceff4;
+            border-collapse: collapse;
+        }
+
+        .table-border {
+            border:1px solid #eceff4;
+            border-collapse: collapse;
+        }
+
+        .table-border td,
+        .table-border th{
+            border:1px solid #eceff4;
+            border-collapse: collapse;
+        }
+
 		.text-left{
 			text-align: '';
 		}
@@ -78,7 +102,7 @@
 
 
 <htmlpagefooter name="page-footer">
-	<p class="text-center">Page: {PAGENO}</p>
+	<!--<p class="text-center">Page: {PAGENO}</p>-->
 </htmlpagefooter>
 
 </body>
